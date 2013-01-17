@@ -1,0 +1,476 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		74798A9D16A77BF5005FCDD7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74798A9C16A77BF5005FCDD7 /* UIKit.framework */; };
+		74798A9F16A77BF5005FCDD7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74798A9E16A77BF5005FCDD7 /* Foundation.framework */; };
+		74798AA116A77BF5005FCDD7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74798AA016A77BF5005FCDD7 /* CoreGraphics.framework */; };
+		74798AA716A77BF5005FCDD7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 74798AA516A77BF5005FCDD7 /* InfoPlist.strings */; };
+		74798AA916A77BF5005FCDD7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 74798AA816A77BF5005FCDD7 /* main.m */; };
+		74798AAD16A77BF5005FCDD7 /* CINAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74798AAC16A77BF5005FCDD7 /* CINAppDelegate.m */; };
+		74798AAF16A77BF5005FCDD7 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 74798AAE16A77BF5005FCDD7 /* Default.png */; };
+		74798AB116A77BF5005FCDD7 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74798AB016A77BF5005FCDD7 /* Default@2x.png */; };
+		74798AB316A77BF5005FCDD7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74798AB216A77BF5005FCDD7 /* Default-568h@2x.png */; };
+		74798AB616A77BF5005FCDD7 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74798AB416A77BF5005FCDD7 /* MainStoryboard_iPhone.storyboard */; };
+		74798AB916A77BF5005FCDD7 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74798AB716A77BF5005FCDD7 /* MainStoryboard_iPad.storyboard */; };
+		74798ABC16A77BF5005FCDD7 /* CINViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74798ABB16A77BF5005FCDD7 /* CINViewController.m */; };
+		74798AC416A77BF5005FCDD7 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74798AC316A77BF5005FCDD7 /* SenTestingKit.framework */; };
+		74798AC516A77BF5005FCDD7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74798A9C16A77BF5005FCDD7 /* UIKit.framework */; };
+		74798AC616A77BF5005FCDD7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74798A9E16A77BF5005FCDD7 /* Foundation.framework */; };
+		74798ACE16A77BF5005FCDD7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 74798ACC16A77BF5005FCDD7 /* InfoPlist.strings */; };
+		74798AD116A77BF5005FCDD7 /* trendViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 74798AD016A77BF5005FCDD7 /* trendViewTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		74798AC716A77BF5005FCDD7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 74798A8F16A77BF5005FCDD7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 74798A9716A77BF5005FCDD7;
+			remoteInfo = trendView;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		74798A9816A77BF5005FCDD7 /* trendView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = trendView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		74798A9C16A77BF5005FCDD7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		74798A9E16A77BF5005FCDD7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		74798AA016A77BF5005FCDD7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		74798AA416A77BF5005FCDD7 /* trendView-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "trendView-Info.plist"; sourceTree = "<group>"; };
+		74798AA616A77BF5005FCDD7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		74798AA816A77BF5005FCDD7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		74798AAA16A77BF5005FCDD7 /* trendView-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "trendView-Prefix.pch"; sourceTree = "<group>"; };
+		74798AAB16A77BF5005FCDD7 /* CINAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CINAppDelegate.h; sourceTree = "<group>"; };
+		74798AAC16A77BF5005FCDD7 /* CINAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CINAppDelegate.m; sourceTree = "<group>"; };
+		74798AAE16A77BF5005FCDD7 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		74798AB016A77BF5005FCDD7 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		74798AB216A77BF5005FCDD7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		74798AB516A77BF5005FCDD7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		74798AB816A77BF5005FCDD7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		74798ABA16A77BF5005FCDD7 /* CINViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CINViewController.h; sourceTree = "<group>"; };
+		74798ABB16A77BF5005FCDD7 /* CINViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CINViewController.m; sourceTree = "<group>"; };
+		74798AC216A77BF5005FCDD7 /* trendViewTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = trendViewTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		74798AC316A77BF5005FCDD7 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		74798ACB16A77BF5005FCDD7 /* trendViewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "trendViewTests-Info.plist"; sourceTree = "<group>"; };
+		74798ACD16A77BF5005FCDD7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		74798ACF16A77BF5005FCDD7 /* trendViewTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = trendViewTests.h; sourceTree = "<group>"; };
+		74798AD016A77BF5005FCDD7 /* trendViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = trendViewTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		74798A9516A77BF5005FCDD7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74798A9D16A77BF5005FCDD7 /* UIKit.framework in Frameworks */,
+				74798A9F16A77BF5005FCDD7 /* Foundation.framework in Frameworks */,
+				74798AA116A77BF5005FCDD7 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		74798ABE16A77BF5005FCDD7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74798AC416A77BF5005FCDD7 /* SenTestingKit.framework in Frameworks */,
+				74798AC516A77BF5005FCDD7 /* UIKit.framework in Frameworks */,
+				74798AC616A77BF5005FCDD7 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		74798A8D16A77BF5005FCDD7 = {
+			isa = PBXGroup;
+			children = (
+				74798AA216A77BF5005FCDD7 /* trendView */,
+				74798AC916A77BF5005FCDD7 /* trendViewTests */,
+				74798A9B16A77BF5005FCDD7 /* Frameworks */,
+				74798A9916A77BF5005FCDD7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		74798A9916A77BF5005FCDD7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				74798A9816A77BF5005FCDD7 /* trendView.app */,
+				74798AC216A77BF5005FCDD7 /* trendViewTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		74798A9B16A77BF5005FCDD7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				74798A9C16A77BF5005FCDD7 /* UIKit.framework */,
+				74798A9E16A77BF5005FCDD7 /* Foundation.framework */,
+				74798AA016A77BF5005FCDD7 /* CoreGraphics.framework */,
+				74798AC316A77BF5005FCDD7 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		74798AA216A77BF5005FCDD7 /* trendView */ = {
+			isa = PBXGroup;
+			children = (
+				74798AAB16A77BF5005FCDD7 /* CINAppDelegate.h */,
+				74798AAC16A77BF5005FCDD7 /* CINAppDelegate.m */,
+				74798AB416A77BF5005FCDD7 /* MainStoryboard_iPhone.storyboard */,
+				74798AB716A77BF5005FCDD7 /* MainStoryboard_iPad.storyboard */,
+				74798ABA16A77BF5005FCDD7 /* CINViewController.h */,
+				74798ABB16A77BF5005FCDD7 /* CINViewController.m */,
+				74798AA316A77BF5005FCDD7 /* Supporting Files */,
+			);
+			path = trendView;
+			sourceTree = "<group>";
+		};
+		74798AA316A77BF5005FCDD7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				74798AA416A77BF5005FCDD7 /* trendView-Info.plist */,
+				74798AA516A77BF5005FCDD7 /* InfoPlist.strings */,
+				74798AA816A77BF5005FCDD7 /* main.m */,
+				74798AAA16A77BF5005FCDD7 /* trendView-Prefix.pch */,
+				74798AAE16A77BF5005FCDD7 /* Default.png */,
+				74798AB016A77BF5005FCDD7 /* Default@2x.png */,
+				74798AB216A77BF5005FCDD7 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		74798AC916A77BF5005FCDD7 /* trendViewTests */ = {
+			isa = PBXGroup;
+			children = (
+				74798ACF16A77BF5005FCDD7 /* trendViewTests.h */,
+				74798AD016A77BF5005FCDD7 /* trendViewTests.m */,
+				74798ACA16A77BF5005FCDD7 /* Supporting Files */,
+			);
+			path = trendViewTests;
+			sourceTree = "<group>";
+		};
+		74798ACA16A77BF5005FCDD7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				74798ACB16A77BF5005FCDD7 /* trendViewTests-Info.plist */,
+				74798ACC16A77BF5005FCDD7 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		74798A9716A77BF5005FCDD7 /* trendView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 74798AD416A77BF5005FCDD7 /* Build configuration list for PBXNativeTarget "trendView" */;
+			buildPhases = (
+				74798A9416A77BF5005FCDD7 /* Sources */,
+				74798A9516A77BF5005FCDD7 /* Frameworks */,
+				74798A9616A77BF5005FCDD7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = trendView;
+			productName = trendView;
+			productReference = 74798A9816A77BF5005FCDD7 /* trendView.app */;
+			productType = "com.apple.product-type.application";
+		};
+		74798AC116A77BF5005FCDD7 /* trendViewTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 74798AD716A77BF5005FCDD7 /* Build configuration list for PBXNativeTarget "trendViewTests" */;
+			buildPhases = (
+				74798ABD16A77BF5005FCDD7 /* Sources */,
+				74798ABE16A77BF5005FCDD7 /* Frameworks */,
+				74798ABF16A77BF5005FCDD7 /* Resources */,
+				74798AC016A77BF5005FCDD7 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				74798AC816A77BF5005FCDD7 /* PBXTargetDependency */,
+			);
+			name = trendViewTests;
+			productName = trendViewTests;
+			productReference = 74798AC216A77BF5005FCDD7 /* trendViewTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		74798A8F16A77BF5005FCDD7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = CIN;
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Jonathon Rubin";
+			};
+			buildConfigurationList = 74798A9216A77BF5005FCDD7 /* Build configuration list for PBXProject "trendView" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 74798A8D16A77BF5005FCDD7;
+			productRefGroup = 74798A9916A77BF5005FCDD7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				74798A9716A77BF5005FCDD7 /* trendView */,
+				74798AC116A77BF5005FCDD7 /* trendViewTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		74798A9616A77BF5005FCDD7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74798AA716A77BF5005FCDD7 /* InfoPlist.strings in Resources */,
+				74798AAF16A77BF5005FCDD7 /* Default.png in Resources */,
+				74798AB116A77BF5005FCDD7 /* Default@2x.png in Resources */,
+				74798AB316A77BF5005FCDD7 /* Default-568h@2x.png in Resources */,
+				74798AB616A77BF5005FCDD7 /* MainStoryboard_iPhone.storyboard in Resources */,
+				74798AB916A77BF5005FCDD7 /* MainStoryboard_iPad.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		74798ABF16A77BF5005FCDD7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74798ACE16A77BF5005FCDD7 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		74798AC016A77BF5005FCDD7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		74798A9416A77BF5005FCDD7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74798AA916A77BF5005FCDD7 /* main.m in Sources */,
+				74798AAD16A77BF5005FCDD7 /* CINAppDelegate.m in Sources */,
+				74798ABC16A77BF5005FCDD7 /* CINViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		74798ABD16A77BF5005FCDD7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74798AD116A77BF5005FCDD7 /* trendViewTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		74798AC816A77BF5005FCDD7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 74798A9716A77BF5005FCDD7 /* trendView */;
+			targetProxy = 74798AC716A77BF5005FCDD7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		74798AA516A77BF5005FCDD7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				74798AA616A77BF5005FCDD7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		74798AB416A77BF5005FCDD7 /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				74798AB516A77BF5005FCDD7 /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		74798AB716A77BF5005FCDD7 /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				74798AB816A77BF5005FCDD7 /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		74798ACC16A77BF5005FCDD7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				74798ACD16A77BF5005FCDD7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		74798AD216A77BF5005FCDD7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		74798AD316A77BF5005FCDD7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		74798AD516A77BF5005FCDD7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "trendView/trendView-Prefix.pch";
+				INFOPLIST_FILE = "trendView/trendView-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		74798AD616A77BF5005FCDD7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "trendView/trendView-Prefix.pch";
+				INFOPLIST_FILE = "trendView/trendView-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		74798AD816A77BF5005FCDD7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/trendView.app/trendView";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "trendView/trendView-Prefix.pch";
+				INFOPLIST_FILE = "trendViewTests/trendViewTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		74798AD916A77BF5005FCDD7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/trendView.app/trendView";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "trendView/trendView-Prefix.pch";
+				INFOPLIST_FILE = "trendViewTests/trendViewTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		74798A9216A77BF5005FCDD7 /* Build configuration list for PBXProject "trendView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				74798AD216A77BF5005FCDD7 /* Debug */,
+				74798AD316A77BF5005FCDD7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		74798AD416A77BF5005FCDD7 /* Build configuration list for PBXNativeTarget "trendView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				74798AD516A77BF5005FCDD7 /* Debug */,
+				74798AD616A77BF5005FCDD7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		74798AD716A77BF5005FCDD7 /* Build configuration list for PBXNativeTarget "trendViewTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				74798AD816A77BF5005FCDD7 /* Debug */,
+				74798AD916A77BF5005FCDD7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 74798A8F16A77BF5005FCDD7 /* Project object */;
+}
