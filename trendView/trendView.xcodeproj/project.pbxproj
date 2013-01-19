@@ -13,6 +13,8 @@
 		7435025216AB159B00C6C77A /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7435024E16AB159B00C6C77A /* LICENSE */; };
 		7435025516AB172600C6C77A /* weightbot_data.csv in Resources */ = {isa = PBXBuildFile; fileRef = 7435025416AB172600C6C77A /* weightbot_data.csv */; };
 		7435025616AB172600C6C77A /* weightbot_data.csv in Resources */ = {isa = PBXBuildFile; fileRef = 7435025416AB172600C6C77A /* weightbot_data.csv */; };
+		7435025916AB1D8600C6C77A /* CINWeightList.m in Sources */ = {isa = PBXBuildFile; fileRef = 7435025816AB1D8600C6C77A /* CINWeightList.m */; };
+		7435025A16AB1D8600C6C77A /* CINWeightList.m in Sources */ = {isa = PBXBuildFile; fileRef = 7435025816AB1D8600C6C77A /* CINWeightList.m */; };
 		74798A9D16A77BF5005FCDD7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74798A9C16A77BF5005FCDD7 /* UIKit.framework */; };
 		74798A9F16A77BF5005FCDD7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74798A9E16A77BF5005FCDD7 /* Foundation.framework */; };
 		74798AA116A77BF5005FCDD7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74798AA016A77BF5005FCDD7 /* CoreGraphics.framework */; };
@@ -47,6 +49,8 @@
 		7435024D16AB159B00C6C77A /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCSVParser.m; sourceTree = "<group>"; };
 		7435024E16AB159B00C6C77A /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		7435025416AB172600C6C77A /* weightbot_data.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = weightbot_data.csv; path = ../../samples/weightbot_data.csv; sourceTree = "<group>"; };
+		7435025716AB1D8600C6C77A /* CINWeightList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CINWeightList.h; sourceTree = "<group>"; };
+		7435025816AB1D8600C6C77A /* CINWeightList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CINWeightList.m; sourceTree = "<group>"; };
 		74798A9816A77BF5005FCDD7 /* trendView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = trendView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74798A9C16A77BF5005FCDD7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		74798A9E16A77BF5005FCDD7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -147,6 +151,8 @@
 				74798AB716A77BF5005FCDD7 /* MainStoryboard_iPad.storyboard */,
 				74798ABA16A77BF5005FCDD7 /* CINViewController.h */,
 				74798ABB16A77BF5005FCDD7 /* CINViewController.m */,
+				7435025716AB1D8600C6C77A /* CINWeightList.h */,
+				7435025816AB1D8600C6C77A /* CINWeightList.m */,
 				74798AA316A77BF5005FCDD7 /* Supporting Files */,
 			);
 			path = trendView;
@@ -306,6 +312,7 @@
 				74798AAD16A77BF5005FCDD7 /* CINAppDelegate.m in Sources */,
 				74798ABC16A77BF5005FCDD7 /* CINViewController.m in Sources */,
 				7435024F16AB159B00C6C77A /* CHCSVParser.m in Sources */,
+				7435025916AB1D8600C6C77A /* CINWeightList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,6 +322,7 @@
 			files = (
 				74798AD116A77BF5005FCDD7 /* trendViewTests.m in Sources */,
 				7435025016AB159B00C6C77A /* CHCSVParser.m in Sources */,
+				7435025A16AB1D8600C6C77A /* CINWeightList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
