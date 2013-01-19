@@ -11,6 +11,8 @@
 		7435025016AB159B00C6C77A /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7435024D16AB159B00C6C77A /* CHCSVParser.m */; };
 		7435025116AB159B00C6C77A /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7435024E16AB159B00C6C77A /* LICENSE */; };
 		7435025216AB159B00C6C77A /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7435024E16AB159B00C6C77A /* LICENSE */; };
+		7435025516AB172600C6C77A /* weightbot_data.csv in Resources */ = {isa = PBXBuildFile; fileRef = 7435025416AB172600C6C77A /* weightbot_data.csv */; };
+		7435025616AB172600C6C77A /* weightbot_data.csv in Resources */ = {isa = PBXBuildFile; fileRef = 7435025416AB172600C6C77A /* weightbot_data.csv */; };
 		74798A9D16A77BF5005FCDD7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74798A9C16A77BF5005FCDD7 /* UIKit.framework */; };
 		74798A9F16A77BF5005FCDD7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74798A9E16A77BF5005FCDD7 /* Foundation.framework */; };
 		74798AA116A77BF5005FCDD7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74798AA016A77BF5005FCDD7 /* CoreGraphics.framework */; };
@@ -44,6 +46,7 @@
 		7435024C16AB159B00C6C77A /* CHCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCSVParser.h; sourceTree = "<group>"; };
 		7435024D16AB159B00C6C77A /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCSVParser.m; sourceTree = "<group>"; };
 		7435024E16AB159B00C6C77A /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		7435025416AB172600C6C77A /* weightbot_data.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = weightbot_data.csv; path = ../../samples/weightbot_data.csv; sourceTree = "<group>"; };
 		74798A9816A77BF5005FCDD7 /* trendView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = trendView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74798A9C16A77BF5005FCDD7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		74798A9E16A77BF5005FCDD7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -152,6 +155,7 @@
 		74798AA316A77BF5005FCDD7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7435025416AB172600C6C77A /* weightbot_data.csv */,
 				74798AA416A77BF5005FCDD7 /* trendView-Info.plist */,
 				74798AA516A77BF5005FCDD7 /* InfoPlist.strings */,
 				74798AA816A77BF5005FCDD7 /* main.m */,
@@ -261,6 +265,7 @@
 				74798AB616A77BF5005FCDD7 /* MainStoryboard_iPhone.storyboard in Resources */,
 				74798AB916A77BF5005FCDD7 /* MainStoryboard_iPad.storyboard in Resources */,
 				7435025116AB159B00C6C77A /* LICENSE in Resources */,
+				7435025516AB172600C6C77A /* weightbot_data.csv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +275,7 @@
 			files = (
 				74798ACE16A77BF5005FCDD7 /* InfoPlist.strings in Resources */,
 				7435025216AB159B00C6C77A /* LICENSE in Resources */,
+				7435025616AB172600C6C77A /* weightbot_data.csv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
