@@ -14,7 +14,9 @@
 
 #define kScalingFactor 0.10
 
-@interface CINWeightList : NSMutableArray
+@interface CINWeightList : NSObject
+
+@property NSMutableArray* list;
 
 - (void) log:(NSNumber*)weight for:(NSDate*)date;
 

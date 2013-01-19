@@ -18,13 +18,17 @@
         kWeight : weight,
         kTrend : trend
     };
-    [self addObject:weightEntry];
+    
+    if (self.list == nil) {
+        _list = [[NSMutableArray alloc] init];
+    }
+    [self.list addObject:weightEntry];
 }
 
 - (NSNumber*) calculateTrendFor:(NSNumber*)weight {
     float trend_today = 0;
     float weight_today = [weight floatValue];
-    if (self.count == 0) {
+    if (self.list.count == 0) {
         // Trend == weight for first date
         trend_today = weight_today;
     }
@@ -35,7 +39,7 @@
          Add this number to yesterday's trend number and enter in today's trend column.
          */
         
-        NSDictionary * yesterday = self[self.count-1];
+        NSDictionary * yesterday = self.list[self.list.count-1];
         float trend_yesterday = [yesterday[@"Trend"] floatValue];
         trend_today = ( (weight_today - trend_yesterday) * kScalingFactor ) + trend_yesterday;
     }
