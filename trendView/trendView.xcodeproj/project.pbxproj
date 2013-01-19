@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7435024F16AB159B00C6C77A /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7435024D16AB159B00C6C77A /* CHCSVParser.m */; };
+		7435025016AB159B00C6C77A /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7435024D16AB159B00C6C77A /* CHCSVParser.m */; };
+		7435025116AB159B00C6C77A /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7435024E16AB159B00C6C77A /* LICENSE */; };
+		7435025216AB159B00C6C77A /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7435024E16AB159B00C6C77A /* LICENSE */; };
 		74798A9D16A77BF5005FCDD7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74798A9C16A77BF5005FCDD7 /* UIKit.framework */; };
 		74798A9F16A77BF5005FCDD7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74798A9E16A77BF5005FCDD7 /* Foundation.framework */; };
 		74798AA116A77BF5005FCDD7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74798AA016A77BF5005FCDD7 /* CoreGraphics.framework */; };
@@ -37,6 +41,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7435024C16AB159B00C6C77A /* CHCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCSVParser.h; sourceTree = "<group>"; };
+		7435024D16AB159B00C6C77A /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCSVParser.m; sourceTree = "<group>"; };
+		7435024E16AB159B00C6C77A /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		74798A9816A77BF5005FCDD7 /* trendView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = trendView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74798A9C16A77BF5005FCDD7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		74798A9E16A77BF5005FCDD7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -86,6 +93,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7435024B16AB159B00C6C77A /* CHCSVParser */ = {
+			isa = PBXGroup;
+			children = (
+				7435024C16AB159B00C6C77A /* CHCSVParser.h */,
+				7435024D16AB159B00C6C77A /* CHCSVParser.m */,
+				7435024E16AB159B00C6C77A /* LICENSE */,
+			);
+			name = CHCSVParser;
+			path = ../libs/CHCSVParser;
+			sourceTree = "<group>";
+		};
 		74798A8D16A77BF5005FCDD7 = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +126,7 @@
 		74798A9B16A77BF5005FCDD7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7435024B16AB159B00C6C77A /* CHCSVParser */,
 				74798A9C16A77BF5005FCDD7 /* UIKit.framework */,
 				74798A9E16A77BF5005FCDD7 /* Foundation.framework */,
 				74798AA016A77BF5005FCDD7 /* CoreGraphics.framework */,
@@ -241,6 +260,7 @@
 				74798AB316A77BF5005FCDD7 /* Default-568h@2x.png in Resources */,
 				74798AB616A77BF5005FCDD7 /* MainStoryboard_iPhone.storyboard in Resources */,
 				74798AB916A77BF5005FCDD7 /* MainStoryboard_iPad.storyboard in Resources */,
+				7435025116AB159B00C6C77A /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				74798ACE16A77BF5005FCDD7 /* InfoPlist.strings in Resources */,
+				7435025216AB159B00C6C77A /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +299,7 @@
 				74798AA916A77BF5005FCDD7 /* main.m in Sources */,
 				74798AAD16A77BF5005FCDD7 /* CINAppDelegate.m in Sources */,
 				74798ABC16A77BF5005FCDD7 /* CINViewController.m in Sources */,
+				7435024F16AB159B00C6C77A /* CHCSVParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +308,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				74798AD116A77BF5005FCDD7 /* trendViewTests.m in Sources */,
+				7435025016AB159B00C6C77A /* CHCSVParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +484,7 @@
 				74798AD616A77BF5005FCDD7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		74798AD716A77BF5005FCDD7 /* Build configuration list for PBXNativeTarget "trendViewTests" */ = {
 			isa = XCConfigurationList;
@@ -469,6 +493,7 @@
 				74798AD916A77BF5005FCDD7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
