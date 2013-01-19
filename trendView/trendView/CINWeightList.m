@@ -42,6 +42,12 @@
         NSDictionary * yesterday = self.list[self.list.count-1];
         float trend_yesterday = [yesterday[@"Trend"] floatValue];
         trend_today = ( (weight_today - trend_yesterday) * kScalingFactor ) + trend_yesterday;
+        
+        // Correct for gaps in measurement....if today's weight is more than 10 lbs +/ the prev reading, reset the trend
+        float weight_delta = (fabs(trend_yesterday - weight_today));
+        if (weight_delta > 10) {
+            trend_today = weight_today;
+        }
     }
     return [NSNumber numberWithFloat:trend_today];
 }
