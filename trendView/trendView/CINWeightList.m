@@ -7,8 +7,49 @@
 //
 
 #import "CINWeightList.h"
+#import "CHCSVParser.h"
 
 @implementation CINWeightList
+
+- (CINWeightList*) initWith:(NSString *)csvPath {
+    self = [super init];
+    if (self) {
+        [self loadWeightsFrom:csvPath];
+        NSLog(@"%@", self.list);
+
+    }
+    return self;
+}
+
+- (void) loadWeightsFrom:(NSString*)csvPath {
+    NSString *path = [[NSBundle mainBundle] pathForResource:csvPath ofType:@"csv"];
+    
+    NSArray *rows = [NSArray arrayWithContentsOfCSVFile:path];
+    
+    if (rows == nil) {
+        return;
+    }
+    
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"yyyy-MM-dd"];
+    BOOL headerRow = TRUE;
+    for (NSArray * row in rows) {
+        if (headerRow == TRUE) {
+            headerRow = FALSE;
+            continue;
+        }
+        
+        if (row.count != 3) {
+            continue;
+        }
+        
+        NSDate * date = [df dateFromString:row[0]];
+        float weight = [row[2] floatValue];
+        NSNumber * theWeight = [NSNumber numberWithFloat:weight];
+        
+        [self log:theWeight for:date];
+    }
+}
 
 - (void) log:(NSNumber*)weight for:(NSDate*)date {
 

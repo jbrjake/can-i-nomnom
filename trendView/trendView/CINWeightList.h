@@ -18,6 +18,7 @@
 
 @property NSMutableArray* list;
 
+- (CINWeightList*) initWith:(NSString*)csvPath;
 - (void) log:(NSNumber*)weight for:(NSDate*)date;
 
 @end
