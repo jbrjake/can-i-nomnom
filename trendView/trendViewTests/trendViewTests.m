@@ -65,6 +65,19 @@
     
     NSLog(@"%@", list.list);
     STAssertTrue(list.list.count == 178, @"The list only has %i rows while the file has %i", list.list.count, 178);
+
+    float minWeight = [list.minWeight floatValue];
+    STAssertEquals(minWeight, (float)167, @"Min weight is %f not 167", minWeight);
+
+    float maxWeight = [list.maxWeight floatValue];
+    STAssertEquals(maxWeight, (float)220, @"Max weight is %f not 220", minWeight);
+
+    NSDate * minDate = list.minDate;
+    STAssertTrue([minDate.description isEqualToString:@"2012-01-01 05:00:00 +0000"], @"Min date is %@, not 2012-01-01 05:00:00 +0000", minDate.description);
+
+    NSDate * maxDate = list.maxDate;
+    STAssertTrue([maxDate.description isEqualToString:@"2013-01-19 05:00:00 +0000"], @"Max date is %@, not 2013-01-19 05:00:00 +0000", maxDate.description);
+
 }
 
 @end

@@ -18,7 +18,11 @@
 
 @property NSMutableArray* list;
 
+@property NSNumber* minWeight;
+@property NSNumber* maxWeight;
+@property NSDate* minDate;
+@property NSDate* maxDate;
+
 - (CINWeightList*) initWith:(NSString*)csvPath;
 - (void) log:(NSNumber*)weight for:(NSDate*)date;
-
-@end
+ @end

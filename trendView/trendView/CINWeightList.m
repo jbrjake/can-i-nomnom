@@ -14,6 +14,10 @@
 - (CINWeightList*) initWith:(NSString *)csvPath {
     self = [super init];
     if (self) {
+        self.minWeight = @(1000);
+        self.maxWeight = @(0);
+        self.minDate = [NSDate dateWithTimeIntervalSinceNow:0];
+        self.maxDate = [NSDate dateWithTimeIntervalSince1970:0];
         [self loadWeightsFrom:csvPath];
         NSLog(@"%@", self.list);
 
@@ -64,6 +68,22 @@
         _list = [[NSMutableArray alloc] init];
     }
     [self.list addObject:weightEntry];
+    
+    // Update counters
+    // minWeight > weightEntry[kWeight]
+    // maxWeight < weightEntry[kWeight]
+    // minDate > weightEntry[kDate]
+    // maxDate < weightEntry[kdate]
+    
+    if ([self.minWeight floatValue] > [weightEntry[kWeight] floatValue]) {
+        self.minWeight = weightEntry[kWeight];
+    }
+    if ([self.maxWeight floatValue] < [weightEntry[kWeight] floatValue]) {
+        self.maxWeight = weightEntry[kWeight];
+    }
+    
+    self.minDate = [self.minDate earlierDate:weightEntry[kDate]];
+    self.maxDate = [self.maxDate laterDate:weightEntry[kDate]];
 }
 
 - (NSNumber*) calculateTrendFor:(NSNumber*)weight {
