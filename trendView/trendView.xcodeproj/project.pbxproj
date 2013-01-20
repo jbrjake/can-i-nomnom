@@ -36,6 +36,8 @@
 		74DA60FD16ABA3F100E1452B /* License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 74DA60FA16ABA3F100E1452B /* License.txt */; };
 		74DA60FE16ABA3F100E1452B /* License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 74DA60FA16ABA3F100E1452B /* License.txt */; };
 		74DA610116ABA45500E1452B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74DA610016ABA45500E1452B /* QuartzCore.framework */; };
+		74DA610516ABA6D200E1452B /* CINScatterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DA610416ABA6D200E1452B /* CINScatterViewController.m */; };
+		74DA610616ABA6D200E1452B /* CINScatterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DA610416ABA6D200E1452B /* CINScatterViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -155,6 +157,8 @@
 		74DA60F916ABA3F100E1452B /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
 		74DA60FA16ABA3F100E1452B /* License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = License.txt; sourceTree = "<group>"; };
 		74DA610016ABA45500E1452B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		74DA610316ABA6D200E1452B /* CINScatterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CINScatterViewController.h; sourceTree = "<group>"; };
+		74DA610416ABA6D200E1452B /* CINScatterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CINScatterViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +240,8 @@
 				74798AB716A77BF5005FCDD7 /* MainStoryboard_iPad.storyboard */,
 				74798ABA16A77BF5005FCDD7 /* CINViewController.h */,
 				74798ABB16A77BF5005FCDD7 /* CINViewController.m */,
+				74DA610316ABA6D200E1452B /* CINScatterViewController.h */,
+				74DA610416ABA6D200E1452B /* CINScatterViewController.m */,
 				7435025716AB1D8600C6C77A /* CINWeightList.h */,
 				7435025816AB1D8600C6C77A /* CINWeightList.m */,
 				74798AA316A77BF5005FCDD7 /* Supporting Files */,
@@ -500,6 +506,7 @@
 				74798ABC16A77BF5005FCDD7 /* CINViewController.m in Sources */,
 				7435024F16AB159B00C6C77A /* CHCSVParser.m in Sources */,
 				7435025916AB1D8600C6C77A /* CINWeightList.m in Sources */,
+				74DA610516ABA6D200E1452B /* CINScatterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,6 +517,7 @@
 				74798AD116A77BF5005FCDD7 /* trendViewTests.m in Sources */,
 				7435025016AB159B00C6C77A /* CHCSVParser.m in Sources */,
 				7435025A16AB1D8600C6C77A /* CINWeightList.m in Sources */,
+				74DA610616ABA6D200E1452B /* CINScatterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
