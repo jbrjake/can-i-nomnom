@@ -81,8 +81,10 @@
     [xRange expandRangeByFactor:CPTDecimalFromCGFloat(1.1f)];
     plotSpace.xRange = xRange;
     CPTMutablePlotRange *yRange = [plotSpace.yRange mutableCopy];
-    yRange.location = CPTDecimalFromInt(100);
-    yRange.length = CPTDecimalFromInt(120);
+    float minWeight = self.weightList.minWeight.floatValue;
+    float maxWeight = self.weightList.maxWeight.floatValue;
+    yRange.location = CPTDecimalFromFloat(minWeight-5);
+    yRange.length = CPTDecimalFromFloat(maxWeight-minWeight + 5);
     [yRange expandRangeByFactor:CPTDecimalFromCGFloat(1.2f)];
     plotSpace.yRange = yRange;
  
@@ -206,7 +208,7 @@
     y.axisLabels = yLabels;    
     y.majorTickLocations = yMajorLocations;
     y.minorTickLocations = yMinorLocations;
-    y.axisConstraints = [CPTConstraints constraintWithLowerOffset:75.0];
+    y.axisConstraints = [CPTConstraints constraintWithLowerOffset:30.0];
 
     
 
