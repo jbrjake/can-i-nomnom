@@ -18,8 +18,6 @@
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     _weightList = [[CINWeightList alloc] initWith:@"weightbot_data"];
-    // For now limit to this year's dates
-    [self.weightList.list removeObjectsInRange:NSRangeFromString(@"0, 161")];
     [self initPlot];
 }
 

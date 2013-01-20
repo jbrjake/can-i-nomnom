@@ -34,6 +34,11 @@
         return;
     }
     
+    // For now limit to this year's dates
+    NSMutableArray * mutableRows = [rows mutableCopy];
+    [mutableRows removeObjectsInRange:NSRangeFromString(@"0, 159")];
+    rows = mutableRows;
+    
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     [df setDateFormat:@"yyyy-MM-dd"];
     BOOL headerRow = TRUE;
