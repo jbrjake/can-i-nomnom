@@ -22,7 +22,11 @@
 - (void)tearDown
 {
     // Tear-down code here.
-    
+
+    // Hack -- if a unit test ends so quickly the app doesn't launch, it never officially finishes.
+    // http://stackoverflow.com/a/13945200
+    [NSThread sleepForTimeInterval:1.0];
+
     [super tearDown];
 }
 
