@@ -168,7 +168,7 @@
     }
     x.axisLabels = xLabels;
     x.majorTickLocations = xLocations;
-    x.axisConstraints = [CPTConstraints constraintWithLowerOffset:75.0];
+    x.axisConstraints = [CPTConstraints constraintWithLowerOffset:10.0];
 
     // 4 - Configure y-axis
     CPTXYAxis *y = axisSet.yAxis;
