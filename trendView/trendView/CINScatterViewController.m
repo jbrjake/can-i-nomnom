@@ -78,16 +78,17 @@
     // 3 - Set up plot space
     [plotSpace scaleToFitPlots:[NSArray arrayWithObjects:weightPlot, trendPlot, nil]];
     CPTMutablePlotRange *xRange = [plotSpace.xRange mutableCopy];
-    [xRange expandRangeByFactor:CPTDecimalFromCGFloat(1.1f)];
     plotSpace.xRange = xRange;
+    [xRange expandRangeByFactor:CPTDecimalFromCGFloat(1.1f)];
+    plotSpace.globalXRange = xRange;
     CPTMutablePlotRange *yRange = [plotSpace.yRange mutableCopy];
     float minWeight = self.weightList.minWeight.floatValue;
     float maxWeight = self.weightList.maxWeight.floatValue;
     yRange.location = CPTDecimalFromFloat(minWeight-5);
     yRange.length = CPTDecimalFromFloat(maxWeight-minWeight + 5);
-    [yRange expandRangeByFactor:CPTDecimalFromCGFloat(1.2f)];
     plotSpace.yRange = yRange;
- 
+    [yRange expandRangeByFactor:CPTDecimalFromCGFloat(1.2f)];
+    plotSpace.globalYRange = yRange;
     // 4 - Create styles and symbols
     CPTMutableLineStyle *weightLineStyle = [weightPlot.dataLineStyle mutableCopy];
     weightLineStyle.lineWidth = 2.5;
