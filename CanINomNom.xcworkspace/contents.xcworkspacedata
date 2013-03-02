@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:trendData/trendData.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:trendView/trendView.xcodeproj">
    </FileRef>
 </Workspace>
