@@ -28,6 +28,12 @@
 		74478D7616E26645009B6659 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74478D4916E26644009B6659 /* CoreData.framework */; };
 		74478D7E16E26645009B6659 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 74478D7C16E26645009B6659 /* InfoPlist.strings */; };
 		74478D8116E26645009B6659 /* trendDataTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 74478D8016E26645009B6659 /* trendDataTests.m */; };
+		74478D8E16E2703A009B6659 /* CHCSVParser.h in Resources */ = {isa = PBXBuildFile; fileRef = 74478D8A16E2703A009B6659 /* CHCSVParser.h */; };
+		74478D8F16E2703A009B6659 /* CHCSVParser.h in Resources */ = {isa = PBXBuildFile; fileRef = 74478D8A16E2703A009B6659 /* CHCSVParser.h */; };
+		74478D9016E2703A009B6659 /* CHCSVParser.m in Resources */ = {isa = PBXBuildFile; fileRef = 74478D8B16E2703A009B6659 /* CHCSVParser.m */; };
+		74478D9116E2703A009B6659 /* CHCSVParser.m in Resources */ = {isa = PBXBuildFile; fileRef = 74478D8B16E2703A009B6659 /* CHCSVParser.m */; };
+		74478D9216E2703A009B6659 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 74478D8C16E2703A009B6659 /* LICENSE */; };
+		74478D9316E2703A009B6659 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 74478D8C16E2703A009B6659 /* LICENSE */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +74,9 @@
 		74478D7D16E26645009B6659 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		74478D7F16E26645009B6659 /* trendDataTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = trendDataTests.h; sourceTree = "<group>"; };
 		74478D8016E26645009B6659 /* trendDataTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = trendDataTests.m; sourceTree = "<group>"; };
+		74478D8A16E2703A009B6659 /* CHCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = CHCSVParser.h; sourceTree = "<group>"; };
+		74478D8B16E2703A009B6659 /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = CHCSVParser.m; sourceTree = "<group>"; };
+		74478D8C16E2703A009B6659 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +127,7 @@
 		74478D4216E26644009B6659 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				74478D8D16E2703A009B6659 /* CHCSVParser */,
 				74478D4316E26644009B6659 /* UIKit.framework */,
 				74478D4516E26644009B6659 /* Foundation.framework */,
 				74478D4716E26644009B6659 /* CoreGraphics.framework */,
@@ -176,6 +186,17 @@
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
+		};
+		74478D8D16E2703A009B6659 /* CHCSVParser */ = {
+			isa = PBXGroup;
+			children = (
+				74478D8A16E2703A009B6659 /* CHCSVParser.h */,
+				74478D8B16E2703A009B6659 /* CHCSVParser.m */,
+				74478D8C16E2703A009B6659 /* LICENSE */,
+			);
+			name = CHCSVParser;
+			path = "/Users/jonr/Documents/can-i-nomnom/trendView/../libs/CHCSVParser";
+			sourceTree = "<absolute>";
 		};
 /* End PBXGroup section */
 
@@ -255,6 +276,9 @@
 				74478D5C16E26644009B6659 /* Default-568h@2x.png in Resources */,
 				74478D5F16E26644009B6659 /* MainStoryboard_iPhone.storyboard in Resources */,
 				74478D6216E26644009B6659 /* MainStoryboard_iPad.storyboard in Resources */,
+				74478D8E16E2703A009B6659 /* CHCSVParser.h in Resources */,
+				74478D9016E2703A009B6659 /* CHCSVParser.m in Resources */,
+				74478D9216E2703A009B6659 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +287,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				74478D7E16E26645009B6659 /* InfoPlist.strings in Resources */,
+				74478D8F16E2703A009B6659 /* CHCSVParser.h in Resources */,
+				74478D9116E2703A009B6659 /* CHCSVParser.m in Resources */,
+				74478D9316E2703A009B6659 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
