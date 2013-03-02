@@ -233,25 +233,26 @@
 
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index {
     NSInteger valueCount = self.weightList.list.count;
+    NSNumber * ret = [NSDecimalNumber zero];
     switch (fieldEnum) {
         case CPTScatterPlotFieldX:
             if (index < valueCount) {
-                return [NSNumber numberWithUnsignedInteger:index];
+                ret = [NSNumber numberWithUnsignedInteger:index];
             }
             break;
             
         case CPTScatterPlotFieldY:
             if ([plot.identifier isEqual:@"Weight"] == YES) {
                 NSLog(@"%@", self.weightList.list[index][@"Weight"]);
-                return self.weightList.list[index][@"Weight"];
+                ret = self.weightList.list[index][@"Weight"];
             }
             else if ([plot.identifier isEqual:@"Trend"] == YES) {
                 NSLog(@"%@", self.weightList.list[index][@"Trend"]);
-                return self.weightList.list[index][@"Trend"];
+                ret = self.weightList.list[index][@"Trend"];
             }
             break;
     }
-//    return [NSDecimalNumber zero];
+    return ret;
 }
 
 @end
