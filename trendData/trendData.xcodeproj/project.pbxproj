@@ -34,6 +34,9 @@
 		74478D9116E2703A009B6659 /* CHCSVParser.m in Resources */ = {isa = PBXBuildFile; fileRef = 74478D8B16E2703A009B6659 /* CHCSVParser.m */; };
 		74478D9216E2703A009B6659 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 74478D8C16E2703A009B6659 /* LICENSE */; };
 		74478D9316E2703A009B6659 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 74478D8C16E2703A009B6659 /* LICENSE */; };
+		74478D9416E28376009B6659 /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 74478D8B16E2703A009B6659 /* CHCSVParser.m */; };
+		74478D9616E283BB009B6659 /* weightbot_data.csv in Resources */ = {isa = PBXBuildFile; fileRef = 74478D9516E283BB009B6659 /* weightbot_data.csv */; };
+		74478D9716E283BB009B6659 /* weightbot_data.csv in Resources */ = {isa = PBXBuildFile; fileRef = 74478D9516E283BB009B6659 /* weightbot_data.csv */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +80,7 @@
 		74478D8A16E2703A009B6659 /* CHCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = CHCSVParser.h; sourceTree = "<group>"; };
 		74478D8B16E2703A009B6659 /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = CHCSVParser.m; sourceTree = "<group>"; };
 		74478D8C16E2703A009B6659 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = LICENSE; sourceTree = "<group>"; };
+		74478D9516E283BB009B6659 /* weightbot_data.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = weightbot_data.csv; path = "/Users/jonr/Documents/can-i-nomnom/trendView/trendView/../../samples/weightbot_data.csv"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +161,7 @@
 		74478D4C16E26644009B6659 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				74478D9516E283BB009B6659 /* weightbot_data.csv */,
 				74478D4D16E26644009B6659 /* trendData-Info.plist */,
 				74478D4E16E26644009B6659 /* InfoPlist.strings */,
 				74478D5116E26644009B6659 /* main.m */,
@@ -279,6 +284,7 @@
 				74478D8E16E2703A009B6659 /* CHCSVParser.h in Resources */,
 				74478D9016E2703A009B6659 /* CHCSVParser.m in Resources */,
 				74478D9216E2703A009B6659 /* LICENSE in Resources */,
+				74478D9616E283BB009B6659 /* weightbot_data.csv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +296,7 @@
 				74478D8F16E2703A009B6659 /* CHCSVParser.h in Resources */,
 				74478D9116E2703A009B6659 /* CHCSVParser.m in Resources */,
 				74478D9316E2703A009B6659 /* LICENSE in Resources */,
+				74478D9716E283BB009B6659 /* weightbot_data.csv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74478D9416E28376009B6659 /* CHCSVParser.m in Sources */,
 				74478D5216E26644009B6659 /* main.m in Sources */,
 				74478D5616E26644009B6659 /* CINAppDelegate.m in Sources */,
 				74478D6516E26645009B6659 /* trendData.xcdatamodeld in Sources */,
