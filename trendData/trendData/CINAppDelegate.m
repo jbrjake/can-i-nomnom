@@ -32,9 +32,114 @@
         CINMasterViewController *controller = (CINMasterViewController *)navigationController.topViewController;
         controller.managedObjectContext = self.managedObjectContext;
     }
+    
+    // See if we need to restore test data
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"Weight" inManagedObjectContext:self.managedObjectContext]];
+    [request setIncludesSubentities:NO]; //Omit subentities. Default is YES (i.e. include subentities)
+    
+    NSError *err;
+    NSUInteger count = [self.managedObjectContext countForFetchRequest:request error:&err];
+    if(count == 0) {
+        // We need to restore test data
+        [self loadWeightsFrom:@"weightbot_data"];
+    }
+    
     return YES;
 }
-							
+
+-(void) loadWeightsFrom:(NSString*)csvPath {
+    NSString *path = [[NSBundle mainBundle] pathForResource:csvPath ofType:@"csv"];
+    
+    NSArray *rows = [NSArray arrayWithContentsOfCSVFile:path];
+    
+    if (rows == nil) {
+        return;
+    }
+    
+    // For now limit to this year's dates
+    NSMutableArray * mutableRows = [rows mutableCopy];
+    [mutableRows removeObjectsInRange:NSRangeFromString(@"0, 159")];
+    rows = mutableRows;
+    
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"yyyy-MM-dd"];
+    BOOL headerRow = TRUE;
+    for (NSArray * row in rows) {
+        if (headerRow == TRUE) {
+            headerRow = FALSE;
+            continue;
+        }
+        
+        if (row.count != 3) {
+            continue;
+        }
+        
+        NSDate * date = [df dateFromString:row[0]];
+        float weight = [row[2] floatValue];
+        NSNumber * theWeight = [NSNumber numberWithFloat:weight];
+        
+        [self log:theWeight for:date];
+    }
+
+}
+
+- (void) log:(NSNumber*)weight for:(NSDate*)date {
+
+    NSNumber * trend = [self calculateTrendFor:weight];
+    CHCSVParser * parser = [[CHCSVParser alloc] init];
+    NSManagedObject *newWeight = [NSEntityDescription insertNewObjectForEntityForName:@"Weight"
+                                                               inManagedObjectContext:self.managedObjectContext];
+    [newWeight setValue:weight forKey:@"actual"];
+    [newWeight setValue:trend forKey:@"trend"];
+    [newWeight setValue:date forKey:@"date"];
+    // Save the context
+    if (![self.managedObjectContext save:nil])
+    {
+        // error checking
+    }
+}
+
+- (NSNumber*) calculateTrendFor:(NSNumber*)weight {
+    float trend_today = 0;
+    float weight_today = [weight floatValue];
+    // See if we need to restore test data
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    request.fetchLimit = 1;
+    [request setEntity:[NSEntityDescription entityForName:@"Weight" inManagedObjectContext:self.managedObjectContext]];
+    [request setIncludesSubentities:NO]; //Omit subentities. Default is YES (i.e. include subentities)
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO]; // ascending YES = start with earliest date
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    [request setSortDescriptors:sortDescriptors];
+    NSError *err;
+    NSArray *results = [self.managedObjectContext executeFetchRequest:request error:&err];
+
+    if (results.count == 0) {
+        // Trend == weight for first date
+        trend_today = weight_today;
+    }
+    else {
+        /* Per http://www.fourmilab.ch/hackdiet/e4/pencilpaper.html
+         Subtract yesterday's trend from today's weight. Write the result with a minus sign if it's negative.
+         Shift the decimal place in the resulting number one place to the left. Round the number to one decimal place by dropping the second decimal and increasing the first decimal by one if the second decimal place is 5 or greater.
+         Add this number to yesterday's trend number and enter in today's trend column.
+         */
+        
+        NSManagedObject * result = results[0];
+        float trend_yesterday = [[result valueForKey:@"trend"] floatValue];
+        
+        trend_today = ( (weight_today - trend_yesterday) * 0.10 ) + trend_yesterday;
+        
+        // Correct for gaps in measurement....if today's weight is more than 10 lbs +/ the prev reading, reset the trend
+        float weight_delta = (fabs(trend_yesterday - weight_today));
+        if (weight_delta > 10) {
+            trend_today = weight_today;
+        }
+    }
+    return [NSNumber numberWithFloat:trend_today];
+}
+
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
