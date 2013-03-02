@@ -10,7 +10,7 @@
 #import "CorePlot-CocoaTouch.h"
 #import "CINWeightList.h"
 
-@interface CINScatterViewController : UIViewController <CPTPlotDataSource>
+@interface CINScatterViewController : UIViewController <CPTPlotDataSource, CPTPlotSpaceDelegate>
 
 @property (nonatomic, strong) CPTGraphHostingView *hostView;
 @property CINWeightList * weightList;

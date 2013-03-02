@@ -8,6 +8,9 @@
 
 #import "CINScatterViewController.h"
 
+#define kMaxXAxisLabels 7
+#define kMaxYAxisLabels 4
+
 @interface CINScatterViewController ()
 
 @end
@@ -57,6 +60,7 @@
     // 5 - Enable user interactions for plot space
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *) graph.defaultPlotSpace;
     plotSpace.allowsUserInteraction = YES;
+    plotSpace.delegate = self;
 }
 
 -(void)configurePlots {
@@ -254,5 +258,96 @@
     }
     return ret;
 }
+
+#pragma mark Plot Space Delegate
+
+- (CPTPlotRange *) plotSpace:   (CPTPlotSpace *) space
+       willChangePlotRangeTo:   (CPTPlotRange *) newRange
+               forCoordinate:   (CPTCoordinate)  coordinate {
+    CPTXYAxisSet *axisSet = (CPTXYAxisSet *) self.hostView.hostedGraph.axisSet;
+    CPTXYAxis *x = axisSet.xAxis;
+    CPTXYAxis *y = axisSet.yAxis;
+    if (coordinate == CPTCoordinateX) {
+        uint dateCount = 0;
+        uint dateStartIndex = 0;
+        NSMutableSet *xLabels = [NSMutableSet setWithCapacity:dateCount];
+        NSMutableSet *xLocations = [NSMutableSet setWithCapacity:dateCount];
+        double start = newRange.minLimitDouble;
+        double end = newRange.maxLimitDouble;
+        start = start < 0 ? 0 : start;
+        end = end > self.weightList.list.count ? self.weightList.list.count : end;
+        dateCount = end - start;
+        dateStartIndex = start;
+        NSInteger i = 0;
+        NSDateFormatter * df = [[NSDateFormatter alloc] init];
+        df.dateFormat = @"MM/dd/yy";
+        
+        
+        for( i=dateStartIndex; i < end; i++){
+            int entryIndex = i;
+            NSDictionary * entry = self.weightList.list[entryIndex];
+            NSString * date = [df stringFromDate:entry[@"Date"]];
+            CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:date  textStyle:x.labelTextStyle];
+            CGFloat location = entryIndex;
+            
+            if (dateCount > kMaxXAxisLabels) {
+                // Display up to 7 sequential dates
+                if (fmodf(location, 2)) {
+                    // Otherwise always advance 2
+                    continue;
+                }
+            }
+            label.tickLocation = CPTDecimalFromCGFloat(location);
+            label.offset = x.majorTickLength;
+            if (label) {
+                [xLabels addObject:label];
+                [xLocations addObject:[NSNumber numberWithFloat:location]];
+            }
+        }
+        
+        x.axisLabels = xLabels;
+        x.majorTickLocations = xLocations;
+    }
+    else if (coordinate == CPTCoordinateY) {
+        uint weightCount = 0;
+        uint weightStartIndex = 0;
+        NSMutableSet *yLabels = [NSMutableSet setWithCapacity:weightCount];
+        NSMutableSet *yLocations = [NSMutableSet setWithCapacity:weightCount];
+        double start = newRange.minLimitDouble;
+        double end = newRange.maxLimitDouble;
+        start = start < 0 ? 0 : start;
+        weightCount = end - start;
+        weightStartIndex = start;
+        NSInteger i = 0;
+        
+        for( i=weightStartIndex; i < end; i++){
+            int entryIndex = i;
+            NSString * weight = [@(i) stringValue];
+            CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:weight  textStyle:x.labelTextStyle];
+            CGFloat location = entryIndex;
+            
+            if (weightCount > kMaxYAxisLabels) {
+                // Display up to 4 sequential weights
+                if (fmodf(location, 2)) {
+                    // Otherwise always advance 2
+                    continue;
+                }
+            }
+
+            label.tickLocation = CPTDecimalFromCGFloat(location);
+            label.offset = x.majorTickLength;
+            if (label) {
+                [yLabels addObject:label];
+                [yLocations addObject:[NSNumber numberWithFloat:location]];
+            }
+        }
+        
+        y.axisLabels = yLabels;
+        y.majorTickLocations = yLocations;
+    }
+    
+    return newRange;
+}
+
 
 @end
