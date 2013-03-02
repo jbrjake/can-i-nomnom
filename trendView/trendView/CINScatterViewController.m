@@ -111,6 +111,7 @@
     weightSymbol.lineStyle = weightSymbolLineStyle;
     weightSymbol.size = CGSizeMake(6.0f, 6.0f);
     trendPlot.plotSymbol = weightSymbol;
+    trendPlot.interpolation = CPTScatterPlotInterpolationCurved;
 
 }
 
