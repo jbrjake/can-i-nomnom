@@ -37,6 +37,8 @@
 		74478D9416E28376009B6659 /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 74478D8B16E2703A009B6659 /* CHCSVParser.m */; };
 		74478D9616E283BB009B6659 /* weightbot_data.csv in Resources */ = {isa = PBXBuildFile; fileRef = 74478D9516E283BB009B6659 /* weightbot_data.csv */; };
 		74478D9716E283BB009B6659 /* weightbot_data.csv in Resources */ = {isa = PBXBuildFile; fileRef = 74478D9516E283BB009B6659 /* weightbot_data.csv */; };
+		74478D9B16E3D085009B6659 /* CINLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74478D9916E3D085009B6659 /* CINLogViewController.m */; };
+		74478D9C16E3D085009B6659 /* CINLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74478D9916E3D085009B6659 /* CINLogViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,10 +79,12 @@
 		74478D7D16E26645009B6659 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		74478D7F16E26645009B6659 /* trendDataTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = trendDataTests.h; sourceTree = "<group>"; };
 		74478D8016E26645009B6659 /* trendDataTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = trendDataTests.m; sourceTree = "<group>"; };
-		74478D8A16E2703A009B6659 /* CHCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = CHCSVParser.h; sourceTree = "<group>"; };
-		74478D8B16E2703A009B6659 /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = CHCSVParser.m; sourceTree = "<group>"; };
-		74478D8C16E2703A009B6659 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = LICENSE; sourceTree = "<group>"; };
+		74478D8A16E2703A009B6659 /* CHCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCSVParser.h; sourceTree = "<group>"; };
+		74478D8B16E2703A009B6659 /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCSVParser.m; sourceTree = "<group>"; };
+		74478D8C16E2703A009B6659 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		74478D9516E283BB009B6659 /* weightbot_data.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = weightbot_data.csv; path = "/Users/jonr/Documents/can-i-nomnom/trendView/trendView/../../samples/weightbot_data.csv"; sourceTree = "<absolute>"; };
+		74478D9816E3D085009B6659 /* CINLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CINLogViewController.h; path = ../CINLogViewController.h; sourceTree = "<group>"; };
+		74478D9916E3D085009B6659 /* CINLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CINLogViewController.m; path = ../CINLogViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +152,8 @@
 				74478D5516E26644009B6659 /* CINAppDelegate.m */,
 				74478D5D16E26644009B6659 /* MainStoryboard_iPhone.storyboard */,
 				74478D6016E26644009B6659 /* MainStoryboard_iPad.storyboard */,
+				74478D9816E3D085009B6659 /* CINLogViewController.h */,
+				74478D9916E3D085009B6659 /* CINLogViewController.m */,
 				74478D6616E26645009B6659 /* CINMasterViewController.h */,
 				74478D6716E26645009B6659 /* CINMasterViewController.m */,
 				74478D6916E26645009B6659 /* CINDetailViewController.h */,
@@ -329,6 +335,7 @@
 				74478D6516E26645009B6659 /* trendData.xcdatamodeld in Sources */,
 				74478D6816E26645009B6659 /* CINMasterViewController.m in Sources */,
 				74478D6B16E26645009B6659 /* CINDetailViewController.m in Sources */,
+				74478D9B16E3D085009B6659 /* CINLogViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				74478D8116E26645009B6659 /* trendDataTests.m in Sources */,
+				74478D9C16E3D085009B6659 /* CINLogViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,6 +527,7 @@
 				74478D8616E26645009B6659 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		74478D8716E26645009B6659 /* Build configuration list for PBXNativeTarget "trendDataTests" */ = {
 			isa = XCConfigurationList;
@@ -527,6 +536,7 @@
 				74478D8916E26645009B6659 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

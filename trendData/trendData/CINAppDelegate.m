@@ -8,7 +8,7 @@
 
 #import "CINAppDelegate.h"
 
-#import "CINMasterViewController.h"
+#import "CINLogViewController.h"
 
 @implementation CINAppDelegate
 
@@ -25,11 +25,11 @@
         splitViewController.delegate = (id)navigationController.topViewController;
         
         UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
-        CINMasterViewController *controller = (CINMasterViewController *)masterNavigationController.topViewController;
+        CINLogViewController *controller = (CINLogViewController *)masterNavigationController.topViewController;
         controller.managedObjectContext = self.managedObjectContext;
     } else {
         UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-        CINMasterViewController *controller = (CINMasterViewController *)navigationController.topViewController;
+        CINLogViewController *controller = (CINLogViewController *)navigationController.topViewController;
         controller.managedObjectContext = self.managedObjectContext;
     }
     
