@@ -87,7 +87,6 @@
 - (void) log:(NSNumber*)weight for:(NSDate*)date {
 
     NSNumber * trend = [self calculateTrendFor:weight];
-    CHCSVParser * parser = [[CHCSVParser alloc] init];
     NSManagedObject *newWeight = [NSEntityDescription insertNewObjectForEntityForName:@"Weight"
                                                                inManagedObjectContext:self.managedObjectContext];
     [newWeight setValue:weight forKey:@"actual"];
