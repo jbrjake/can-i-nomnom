@@ -128,3 +128,53 @@ Goal: Framework to display weight data trendline
 
 Goal: Complete watch support
 
+Deep Dive: TrendCore 
+--------------------
+
+### Hierarchy ###
+
+* TrendCore Framework
+	* TrendCoreController
+		* DataStoreController
+			* CoreData Stack
+				* WeightModel
+			* DataImportController				
+				* DataImporterFactory
+					* DummyImporter
+					* HealthKitImporter
+					* CSVImporter
+					* FitBitImporter
+					* MyFitnessPalImporter
+
+### Usage ###
+
+The caller is going to have the same concerns as a TrendViewModel:
+
+* It's going to want a collection of weights for a range of dates.
+* It's also going to want a collection of trends for a range of dates.
+* It's also going to need to have a way to tell the code to import from a particular source.
+* And it needs to have a way to list the available ways to import data into the core
+
+So that stuff will form the public api protocol vended by the TrendCore framework.
+
+>var trendCore = TrendCoreController()
+
+>var importers :TrendCoreImporterType = trendCore.importers
+
+>let firstImporterName :String = importers[0].name
+
+>trendCore.import(importers[0], completion:{
+
+>    trendCore.fetchWeights(completion: {
+
+>         fetchedWeights in
+>         doStuffWith(fetchedWeights)
+
+>	 }
+
+>})
+
+
+
+
+
