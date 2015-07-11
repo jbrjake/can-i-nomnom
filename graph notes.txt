@@ -1,0 +1,25 @@
+On scroll I want to update:
+- Y tickmarks
+- X tickmarks
+
+Let's say there should only be 10 tick marks at a time, evenly divided between the range of locations visible on screen. 
+
+So if it's showing y values of 180-170, there should be 10 ticks.
+
+How can this be generalized?
+100 entries:
+mod 10
+50 entries:
+mod 5
+20 entries:
+mod 2
+500 entries:
+
+---------
+
+What should the plot range delegate do? Find the min and max values that will be displayed now, then update the number of tick marks to go evenly through that range.
+
+--------
+
+CorePlot can have multiple plot spaces in the same graph, and switch between them....
+

@@ -1,0 +1,36 @@
+* xLocations simply lists each numerical point being displayed
+
+initial:
+1: go through every weight entry
+2: for every other entry, make a tick mark
+
+generalized:
+for the size of the display, we want entries to be no more than, let's say, 30 pixels from each other.
+this means the max number of entries is constant across all scaling:
+entries = width / (tick + pad)
+
+Then, the entries to display becomes:
+1. go through every entry
+2. keep only entries within range
+3. if entries <= max entries, make tick marks for them all
+4. otherwise....
+
+
+if you have 10 items, and you want 4 evenly spaced, they're:
+2, 4, 6, 8
+
+if you want 6 evenly spaced:
+1, 3, 5, 7, 9
+
+what formula is that?
+
+10 / 4 = 2.5 = 2.5 = 3
+0, 3, 6, 9
+
+10 / 6 = 1.6 = 2
+0, 2, 4, 6, 8
+
+Stackoverflow says it should be:
+1. go through every entry
+2. make a set of items at index * set length / max selection
+
