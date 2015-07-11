@@ -2,12 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:TrendViewController/TrendViewController.xcodeproj">
+      location = "group:TrendCore/TrendCore.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:TrendViewModel/TrendViewModel.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:TrendCore/TrendCore.xcodeproj">
+      location = "group:TrendViewController/TrendViewController.xcodeproj">
    </FileRef>
 </Workspace>
