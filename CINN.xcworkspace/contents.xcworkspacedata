@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:TrendCore/TrendCore.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:TrendViewModel/TrendViewModel.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:TrendViewController/TrendViewController.xcodeproj">
+   </FileRef>
+</Workspace>
