@@ -8,12 +8,16 @@
 
 import UIKit
 import XCTest
+import TrendCore
 
 class TrendCoreTests: XCTestCase {
+    
+    var trendCore :TrendCoreController?
     
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        trendCore = TrendCoreController()
     }
     
     override func tearDown() {
@@ -31,6 +35,10 @@ class TrendCoreTests: XCTestCase {
         self.measureBlock() {
             // Put the code you want to measure the time of here.
         }
+    }
+    
+    func testInit() {
+        XCTAssertNotNil(trendCore, "Init failed")
     }
     
 }
