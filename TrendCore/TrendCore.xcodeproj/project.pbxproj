@@ -12,6 +12,10 @@
 		747D00AE1B5164AB00E6A46A /* TrendCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747D00AD1B5164AB00E6A46A /* TrendCoreTests.swift */; };
 		747D01331B51875A00E6A46A /* TrendCoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747D01321B51875A00E6A46A /* TrendCoreController.swift */; };
 		747D01341B51875A00E6A46A /* TrendCoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747D01321B51875A00E6A46A /* TrendCoreController.swift */; };
+		747D01361B59F04E00E6A46A /* DataImportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747D01351B59F04E00E6A46A /* DataImportController.swift */; };
+		747D01371B59F04E00E6A46A /* DataImportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747D01351B59F04E00E6A46A /* DataImportController.swift */; };
+		747D01391B59F0A500E6A46A /* DataImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747D01381B59F0A500E6A46A /* DataImporter.swift */; };
+		747D013A1B59F0A500E6A46A /* DataImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747D01381B59F0A500E6A46A /* DataImporter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +36,8 @@
 		747D00AC1B5164AB00E6A46A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		747D00AD1B5164AB00E6A46A /* TrendCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendCoreTests.swift; sourceTree = "<group>"; };
 		747D01321B51875A00E6A46A /* TrendCoreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendCoreController.swift; sourceTree = "<group>"; };
+		747D01351B59F04E00E6A46A /* DataImportController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataImportController.swift; path = TrendCore/DataImportController.swift; sourceTree = SOURCE_ROOT; };
+		747D01381B59F0A500E6A46A /* DataImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataImporter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +82,8 @@
 			children = (
 				747D00A01B5164AB00E6A46A /* TrendCore.h */,
 				747D01321B51875A00E6A46A /* TrendCoreController.swift */,
+				747D01351B59F04E00E6A46A /* DataImportController.swift */,
+				747D01381B59F0A500E6A46A /* DataImporter.swift */,
 				747D009E1B5164AB00E6A46A /* Supporting Files */,
 			);
 			path = TrendCore;
@@ -213,6 +221,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				747D01391B59F0A500E6A46A /* DataImporter.swift in Sources */,
+				747D01361B59F04E00E6A46A /* DataImportController.swift in Sources */,
 				747D01331B51875A00E6A46A /* TrendCoreController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -221,6 +231,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				747D01371B59F04E00E6A46A /* DataImportController.swift in Sources */,
+				747D013A1B59F0A500E6A46A /* DataImporter.swift in Sources */,
 				747D01341B51875A00E6A46A /* TrendCoreController.swift in Sources */,
 				747D00AE1B5164AB00E6A46A /* TrendCoreTests.swift in Sources */,
 			);
