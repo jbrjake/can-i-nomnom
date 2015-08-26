@@ -43,7 +43,7 @@ class DataImporterTests: XCTestCase {
     
     func testDummyImporter() {
         let callbackFired = self.expectationWithDescription("Callback for data importer fires")
-        var samples :[ImportedDataSample]? = nil
+        var samples :[DataSample]? = nil
         DataImporterFactory.importerForType(.Dummy).samplesForRangeFromDate(NSDate.distantPast() as! NSDate, toDate: NSDate.distantFuture() as! NSDate) { (importedSamples) -> () in
             samples = importedSamples
             callbackFired.fulfill()
@@ -56,7 +56,7 @@ class DataImporterTests: XCTestCase {
     
     func testDummyImporterRanges() {
         let callbackFired = self.expectationWithDescription("Callback for data importer fires")
-        var samples :[ImportedDataSample]? = nil
+        var samples :[DataSample]? = nil
         let originDate = NSDate.distantPast() as! NSDate
         let day1 = originDate.dateByAddingTimeInterval(24*60*60)
         let day4 = originDate.dateByAddingTimeInterval(24*60*60*4)
@@ -77,7 +77,7 @@ class DataImporterTests: XCTestCase {
     
     func testHealthKitImporter() {
         let callbackFired = self.expectationWithDescription("Callback for data importer fires")
-        var samples :[ImportedDataSample]? = nil
+        var samples :[DataSample]? = nil
         DataImporterFactory.importerForType(.HealthKit).samplesForRangeFromDate(NSDate.distantPast() as! NSDate, toDate: NSDate.distantFuture() as! NSDate) { (importedSamples) -> () in
             samples = importedSamples
             callbackFired.fulfill()

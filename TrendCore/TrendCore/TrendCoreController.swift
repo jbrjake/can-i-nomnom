@@ -7,6 +7,12 @@
 //
 
 import Foundation
-class TrendCoreController :NSObject {
+
+public struct DataSample {
+    var value :Double
+    var dateSampled :NSDate
+    var dateImported :NSDate
+}
+
     
 }

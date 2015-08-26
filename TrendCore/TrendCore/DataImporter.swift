@@ -9,18 +9,13 @@
 import Foundation
 import HealthKit
 
-struct ImportedDataSample {
-    var value :Double
-    var dateSampled :NSDate
-    var dateImported :NSDate
-}
 
 public enum TrendCoreImporterType {
     case Dummy
     case HealthKit
 }
 
-typealias ImporterCallback = (([ImportedDataSample]) -> ())
+typealias ImporterCallback = (([DataSample]) -> ())
 protocol DataImporterProtocol : class {
     func samplesForRangeFromDate(fromDate :NSDate, toDate :NSDate, callback :ImporterCallback)
 }
@@ -44,7 +39,7 @@ class DummyDataImporter :DataImporterProtocol {
     let day3 :NSDate
     let day4 :NSDate
     let day5 :NSDate
-    let samples :[ImportedDataSample]
+    let samples :[DataSample]
     
     init() {
         originDate = NSDate.distantPast() as! NSDate
@@ -54,12 +49,12 @@ class DummyDataImporter :DataImporterProtocol {
         day4 = originDate.dateByAddingTimeInterval(24*60*60*4)
         day5 = originDate.dateByAddingTimeInterval(24*60*60*5)
         samples = [
-            ImportedDataSample(value: 195.0, dateSampled: originDate, dateImported: NSDate()),
-            ImportedDataSample(value: 194.0, dateSampled: day1, dateImported: NSDate()),
-            ImportedDataSample(value: 193.0, dateSampled: day2, dateImported: NSDate()),
-            ImportedDataSample(value: 192.0, dateSampled: day3, dateImported: NSDate()),
-            ImportedDataSample(value: 191.0, dateSampled: day4, dateImported: NSDate()),
-            ImportedDataSample(value: 190.0, dateSampled: day5, dateImported: NSDate())
+            DataSample(value: 195.0, dateSampled: originDate, dateImported: NSDate()),
+            DataSample(value: 194.0, dateSampled: day1, dateImported: NSDate()),
+            DataSample(value: 193.0, dateSampled: day2, dateImported: NSDate()),
+            DataSample(value: 192.0, dateSampled: day3, dateImported: NSDate()),
+            DataSample(value: 191.0, dateSampled: day4, dateImported: NSDate()),
+            DataSample(value: 190.0, dateSampled: day5, dateImported: NSDate())
         ]
         
     }
@@ -101,9 +96,9 @@ class HealthKitDataImporter :DataImporterProtocol {
 */
         let hkSamples :[HKQuantitySample] = healthKitSamplesFromDate(fromDate, toDate:toDate)
         
-        var importedSamples = [ImportedDataSample]()
+        var importedSamples = [DataSample]()
         for sample in hkSamples {
-            let importedSample = ImportedDataSample(value: sample.quantity.doubleValueForUnit(HKUnit.poundUnit()), dateSampled: sample.startDate, dateImported: NSDate())
+            let importedSample = DataSample(value: sample.quantity.doubleValueForUnit(HKUnit.poundUnit()), dateSampled: sample.startDate, dateImported: NSDate())
             importedSamples.append(importedSample)
         }
         
