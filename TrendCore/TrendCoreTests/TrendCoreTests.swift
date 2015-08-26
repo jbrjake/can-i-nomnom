@@ -25,11 +25,6 @@ class TrendCoreTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
-    }
-    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measureBlock() {
@@ -40,5 +35,36 @@ class TrendCoreTests: XCTestCase {
     func testInit() {
         XCTAssertNotNil(trendCore, "Init failed")
     }
+
+    func testImport() {
+        let callbackFired = self.expectationWithDescription("Callback for trend core import triggered")
+            
+        trendCore?.importDataFrom(TrendCoreImporterType.Dummy, completion: { 
+        err in
+            callbackFired.fulfill()            
+        })
+        
+        self.waitForExpectationsWithTimeout(1, handler: { (err) -> Void in
+            XCTAssertNil(err, "TrendCore did not callback from import")
+        })
+        
+    }
     
+    func testFetch() {
+        
+        let hasSamples = self.expectationWithDescription("Samples exist")
+        
+        trendCore?.fetchWeights(NSDate.distantPast() as! NSDate, 
+                         toDate:NSDate.distantFuture() as! NSDate, 
+            callback: { (samples) -> () in
+            if samples.count > 0 {
+                hasSamples.fulfill()
+            }
+        })
+        
+        self.waitForExpectationsWithTimeout(1, handler: { (err) -> Void in
+            XCTAssertNil(err, "TrendCore did not return samples")
+        })
+    }
+
 }

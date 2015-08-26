@@ -157,24 +157,18 @@ The caller is going to have the same concerns as a TrendViewModel:
 
 So that stuff will form the public api protocol vended by the TrendCore framework.
 
->var trendCore = TrendCoreController()
+	var trendCore = TrendCoreController()
 
->var importers :TrendCoreImporterType = trendCore.importers
-
->let firstImporterName :String = importers[0].name
-
->trendCore.import(importers[0], completion:{
-
->    trendCore.fetchWeights(completion: {
-
->         fetchedWeights in
->         doStuffWith(fetchedWeights)
-
->	 }
-
->})
-
-
+	trendCore.import(TrendCoreImporterType.HealthKit, completion: {
+		trendCore.fetchWeights(NSDate.distantPast(),
+						toDate:NSDate.distantFuture(),
+					completion: 
+		{
+		fetchedWeights in
+			doStuffWith(fetchedWeights)
+		}
+	}
+	
 
 
 

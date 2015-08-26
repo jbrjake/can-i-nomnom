@@ -14,5 +14,18 @@ public struct DataSample {
     var dateImported :NSDate
 }
 
+public typealias Completion = ( (NSError?) -> () )
+public typealias FetchWeightsCallback = ( ([DataSample]) -> () )
+
+public class TrendCoreController :NSObject {
+
+    public func importDataFrom(importerType: TrendCoreImporterType, completion: Completion ) {
+        
+    }
+    
+    public func fetchWeights(fromDate :NSDate, toDate :NSDate, callback: FetchWeightsCallback) {
+        
+        
+    }
     
 }
