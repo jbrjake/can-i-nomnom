@@ -108,22 +108,25 @@ class HealthKitDataImporter :DataImporterProtocol {
     
     func healthKitSamplesFromDate(fromDate :NSDate, toDate :NSDate) -> [HKQuantitySample] {
         var samples = [HKQuantitySample]()
-        let dateRangePredicate = HKQuery.predicateForSamplesWithStartDate(fromDate, endDate: toDate, options: .None)
-        let sampleQuery = HKSampleQuery(
-            sampleType: HKSampleType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass), 
-            predicate: dateRangePredicate, 
-            limit: 1000000, 
-            sortDescriptors: []
-            ) { 
-                (query, results, error) -> Void in
-                if let quantitySamples = results as? [HKQuantitySample] {
-                    samples = quantitySamples
-                    
-                }
-                else {
-                    print("error getting samples from healthkit: \(error)")
-                }
+        if let sampleType = HKSampleType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass) {
+            let dateRangePredicate = HKQuery.predicateForSamplesWithStartDate(fromDate, endDate: toDate, options: .None)
+            let sampleQuery = HKSampleQuery(
+                sampleType: sampleType, 
+                predicate: dateRangePredicate, 
+                limit: 1000000, 
+                sortDescriptors: []
+                ) { 
+                    (query, results, error) -> Void in
+                    if let quantitySamples = results as? [HKQuantitySample] {
+                        samples = quantitySamples
+                        
+                    }
+                    else {
+                        print("error getting samples from healthkit: \(error)")
+                    }
+            }
         }
+        
         return samples
     }
     
@@ -135,9 +138,11 @@ class HealthKitDataImporter :DataImporterProtocol {
             return
         }
         
-        let healthKitTypesToReadAndWrite = Set([HKQuantityTypeIdentifierBodyMass])
-        healthKitStore.requestAuthorizationToShareTypes(healthKitTypesToReadAndWrite, readTypes: healthKitTypesToReadAndWrite) { (success, error) -> Void in
-            callback(success: success, error: error)
+        if let bodyMassQuantity = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass) {
+            let healthKitTypesToReadAndWrite = Set(arrayLiteral: bodyMassQuantity)
+            healthKitStore.requestAuthorizationToShareTypes(healthKitTypesToReadAndWrite, readTypes: healthKitTypesToReadAndWrite) { (success, error) -> Void in
+                callback(success: success, error: error)
+            }
         }
     }
     
