@@ -42,7 +42,7 @@ class DummyDataImporter :DataImporterProtocol {
     let samples :[DataSample]
     
     init() {
-        originDate = NSDate.distantPast() as! NSDate
+        originDate = NSDate.distantPast() 
         day1 = originDate.dateByAddingTimeInterval(24*60*60)
         day2 = originDate.dateByAddingTimeInterval(24*60*60*2)
         day3 = originDate.dateByAddingTimeInterval(24*60*60*3)
@@ -121,7 +121,7 @@ class HealthKitDataImporter :DataImporterProtocol {
                     
                 }
                 else {
-                    println("error getting samples from healthkit: \(error)")
+                    print("error getting samples from healthkit: \(error)")
                 }
         }
         return samples

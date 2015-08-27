@@ -54,8 +54,8 @@ class TrendCoreTests: XCTestCase {
         
         let hasSamples = self.expectationWithDescription("Samples exist")
         
-        trendCore?.fetchWeights(NSDate.distantPast() as! NSDate, 
-                         toDate:NSDate.distantFuture() as! NSDate, 
+        trendCore?.fetchWeights(NSDate.distantPast() , 
+                         toDate:NSDate.distantFuture() , 
             callback: { (samples) -> () in
             if samples.count > 0 {
                 hasSamples.fulfill()
