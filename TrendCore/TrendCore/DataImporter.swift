@@ -94,23 +94,24 @@ class HealthKitDataImporter :DataImporterProtocol {
             }
         }     
 */
-        let hkSamples :[HKQuantitySample] = healthKitSamplesFromDate(fromDate, toDate:toDate)
         
-        var importedSamples = [DataSample]()
-        for sample in hkSamples {
-            let importedSample = DataSample(value: sample.quantity.doubleValueForUnit(HKUnit.poundUnit()), dateSampled: sample.startDate, dateImported: NSDate())
-            importedSamples.append(importedSample)
+        healthKitSamplesFromDate(fromDate, toDate: toDate) { (hkSamples) -> () in
+            var importedSamples = [DataSample]()
+            for sample in hkSamples {
+                let importedSample = DataSample(value: sample.quantity.doubleValueForUnit(HKUnit.poundUnit()), dateSampled: sample.startDate, dateImported: NSDate())
+                importedSamples.append(importedSample)
+            }
+            
+            callback(importedSamples)
         }
-        
-                
-        callback(importedSamples)
+
     }
     
-    func healthKitSamplesFromDate(fromDate :NSDate, toDate :NSDate) -> [HKQuantitySample] {
-        var samples = [HKQuantitySample]()
+    func healthKitSamplesFromDate(fromDate :NSDate, toDate :NSDate, completion:([HKQuantitySample]) -> () ) {
         if let sampleType = HKSampleType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass) {
             let dateRangePredicate = HKQuery.predicateForSamplesWithStartDate(fromDate, endDate: toDate, options: .None)
-            let sampleQuery = HKSampleQuery(
+        
+           let healthKitQuery = HKSampleQuery(
                 sampleType: sampleType, 
                 predicate: dateRangePredicate, 
                 limit: 1000000, 
@@ -118,23 +119,22 @@ class HealthKitDataImporter :DataImporterProtocol {
                 ) { 
                     (query, results, error) -> Void in
                     if let quantitySamples = results as? [HKQuantitySample] {
-                        samples = quantitySamples
-                        
+                        completion(quantitySamples)                        
                     }
                     else {
                         print("error getting samples from healthkit: \(error)")
                     }
             }
+            healthKitStore.executeQuery(healthKitQuery)
         }
         
-        return samples
     }
     
     func authorizeHealthKitAccess(callback:((success:Bool, error:NSError!) -> Void)) {
         
         if !HKHealthStore.isHealthDataAvailable() {
              let error = NSError(domain: "com.caninomnom.healthkit", code: 1, userInfo: [NSLocalizedDescriptionKey:"HealthKit data is not available"])
-            callback(success: false, error: nil)
+            callback(success: false, error: error)
             return
         }
         
