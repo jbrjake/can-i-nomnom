@@ -169,6 +169,29 @@ So that stuff will form the public api protocol vended by the TrendCore framewor
 		}
 	}
 	
+### Behind the Scenes ###
 
+While this won't be visible in the public api, internally the core data stack is accessed through a certain protocol to do specific things:
 
+* Add samples to core data
+* Reads samples from core data
+* Deletes samples from core data
+
+It interfaces with the rest of TrendCore through DataSamples. No NSManagedObject leaves its DataStoreController ghetto. It uniques on dates.
+
+	var dataStore = DataStoreController()
+	dataStore.addSamples([DataSample]()) {
+		// Samples added
+		
+		dataStore.fetchSamples(fromDate :NSDate, toDate :NSDate, completion: {
+			samples in
+			// we've got data back
+			dataStore.deleteSamples(samples) {
+				// Samples gone			
+			}
+		})
+	})
+		
+	}
+	
 

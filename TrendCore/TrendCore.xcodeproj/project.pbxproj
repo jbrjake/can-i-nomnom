@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		744BB9981B9019E400DEE3FD /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744BB9971B9019E400DEE3FD /* DataStore.swift */; settings = {ASSET_TAGS = (); }; };
+		744BB9991B9019E400DEE3FD /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744BB9971B9019E400DEE3FD /* DataStore.swift */; settings = {ASSET_TAGS = (); }; };
+		744BB99B1B916B3E00DEE3FD /* DataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744BB99A1B916B3E00DEE3FD /* DataStoreTests.swift */; settings = {ASSET_TAGS = (); }; };
 		747D00A11B5164AB00E6A46A /* TrendCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 747D00A01B5164AB00E6A46A /* TrendCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		747D00A71B5164AB00E6A46A /* TrendCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 747D009B1B5164AB00E6A46A /* TrendCore.framework */; };
 		747D00AE1B5164AB00E6A46A /* TrendCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747D00AD1B5164AB00E6A46A /* TrendCoreTests.swift */; };
@@ -28,6 +31,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		744BB9971B9019E400DEE3FD /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		744BB99A1B916B3E00DEE3FD /* DataStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStoreTests.swift; sourceTree = "<group>"; };
 		747D009B1B5164AB00E6A46A /* TrendCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrendCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		747D009F1B5164AB00E6A46A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		747D00A01B5164AB00E6A46A /* TrendCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrendCore.h; sourceTree = "<group>"; };
@@ -81,6 +86,7 @@
 			children = (
 				747D00A01B5164AB00E6A46A /* TrendCore.h */,
 				747D01321B51875A00E6A46A /* TrendCoreController.swift */,
+				744BB9971B9019E400DEE3FD /* DataStore.swift */,
 				747D01381B59F0A500E6A46A /* DataImporter.swift */,
 				747D009E1B5164AB00E6A46A /* Supporting Files */,
 			);
@@ -100,6 +106,7 @@
 			children = (
 				747D00AD1B5164AB00E6A46A /* TrendCoreTests.swift */,
 				747D013B1B5B4F1200E6A46A /* DataImporterTests.swift */,
+				744BB99A1B916B3E00DEE3FD /* DataStoreTests.swift */,
 				747D00AB1B5164AB00E6A46A /* Supporting Files */,
 			);
 			path = TrendCoreTests;
@@ -223,6 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				747D01391B59F0A500E6A46A /* DataImporter.swift in Sources */,
+				744BB9981B9019E400DEE3FD /* DataStore.swift in Sources */,
 				747D01331B51875A00E6A46A /* TrendCoreController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -234,7 +242,9 @@
 				747D013A1B59F0A500E6A46A /* DataImporter.swift in Sources */,
 				747D013C1B5B4F1200E6A46A /* DataImporterTests.swift in Sources */,
 				747D01341B51875A00E6A46A /* TrendCoreController.swift in Sources */,
+				744BB9991B9019E400DEE3FD /* DataStore.swift in Sources */,
 				747D00AE1B5164AB00E6A46A /* TrendCoreTests.swift in Sources */,
+				744BB99B1B916B3E00DEE3FD /* DataStoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
