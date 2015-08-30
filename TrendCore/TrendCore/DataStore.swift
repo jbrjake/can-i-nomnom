@@ -103,17 +103,17 @@ internal class DataStore :DataStoreProtocol {
         }        
     }
     
-// MARK: Public DataStore Protocol Implementation
+// MARK: Internal DataStore Protocol Implementation
     
-    func add(samples :[DataSample], completion: Completion) {
+    internal func add(samples :[DataSample], completion: Completion) {
         
     }
     
-    func fetch(fromDate :NSDate, toDate :NSDate, callback: FetchWeightsCallback) {
+    internal func fetch(fromDate :NSDate, toDate :NSDate, callback: FetchWeightsCallback) {
         
     }
     
-    func remove(samples :[DataSample], completion: Completion) {
+    internal func remove(samples :[DataSample], completion: Completion) {
         
     }
     

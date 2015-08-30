@@ -15,12 +15,12 @@ public enum TrendCoreImporterType :String {
     case HealthKit  = "HealthKit"
 }
 
-typealias ImporterCallback = (([DataSample]) -> ())
+internal typealias ImporterCallback = (([DataSample]) -> ())
 protocol DataImporterProtocol : class {
     func samplesForRangeFromDate(fromDate :NSDate, toDate :NSDate, callback :ImporterCallback)
 }
 
-class DataImporterFactory {
+internal class DataImporterFactory {
     class func importerForType(importerType :TrendCoreImporterType) -> DataImporterProtocol {
         switch importerType {
         case .Dummy:
@@ -31,7 +31,7 @@ class DataImporterFactory {
     }
 }
 
-class DummyDataImporter :DataImporterProtocol {
+private class DummyDataImporter :DataImporterProtocol {
 
     let originDate :NSDate
     let day1 :NSDate
@@ -59,7 +59,7 @@ class DummyDataImporter :DataImporterProtocol {
         
     }
     
-    func samplesForRangeFromDate(fromDate :NSDate, toDate :NSDate, callback :ImporterCallback) {
+    private func samplesForRangeFromDate(fromDate :NSDate, toDate :NSDate, callback :ImporterCallback) {
         let filteredSamples = samples.filter() {
             let sample = $0
             let fromComparison = sample.dateSampled.compare(fromDate)
@@ -78,11 +78,11 @@ class DummyDataImporter :DataImporterProtocol {
     }
 }
 
-class HealthKitDataImporter :DataImporterProtocol {
+private class HealthKitDataImporter :DataImporterProtocol {
     
     let healthKitStore = HKHealthStore()
     
-    func samplesForRangeFromDate(fromDate :NSDate, toDate :NSDate, callback :ImporterCallback) {
+    private func samplesForRangeFromDate(fromDate :NSDate, toDate :NSDate, callback :ImporterCallback) {
         // Authorization can't happen in the framework, it gets all messed up when it tries to use HealthKit
 /*        authorizeHealthKitAccess { (success, error) -> Void in
             if success == true && error == nil {                
@@ -107,7 +107,7 @@ class HealthKitDataImporter :DataImporterProtocol {
 
     }
     
-    func healthKitSamplesFromDate(fromDate :NSDate, toDate :NSDate, completion:([HKQuantitySample]) -> () ) {
+    private func healthKitSamplesFromDate(fromDate :NSDate, toDate :NSDate, completion:([HKQuantitySample]) -> () ) {
         if let sampleType = HKSampleType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass) {
             let dateRangePredicate = HKQuery.predicateForSamplesWithStartDate(fromDate, endDate: toDate, options: .None)
         
@@ -130,7 +130,7 @@ class HealthKitDataImporter :DataImporterProtocol {
         
     }
     
-    func authorizeHealthKitAccess(callback:((success:Bool, error:NSError!) -> Void)) {
+    private func authorizeHealthKitAccess(callback:((success:Bool, error:NSError!) -> Void)) {
         
         if !HKHealthStore.isHealthDataAvailable() {
              let error = NSError(domain: "com.caninomnom.healthkit", code: 1, userInfo: [NSLocalizedDescriptionKey:"HealthKit data is not available"])
