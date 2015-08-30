@@ -62,9 +62,16 @@ private class ManagedSample: NSManagedObject {
 }
 
 internal protocol DataStoreProtocol {
-    func add(samples :[DataSample], completion: Completion)
-    func remove(samples :[DataSample], completion: Completion)
-    func fetch(fromDate :NSDate, toDate :NSDate, callback: FetchWeightsCallback)
+    func add (
+        samples :[DataSample], 
+        completion: Completion )
+    func remove (
+        samples :[DataSample], 
+        completion: Completion )
+    func fetch (
+        fromDate :NSDate, 
+        toDate :NSDate, 
+        callback: FetchWeightsCallback )
 }
 
 internal class DataStore :DataStoreProtocol {
@@ -101,7 +108,10 @@ internal class DataStore :DataStoreProtocol {
         
         
         let fileManager = NSFileManager.defaultManager()
-        let docsURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last
+        let docsURL = fileManager.URLsForDirectory (
+            .DocumentDirectory, 
+            inDomains: .UserDomainMask )
+            .last
         let storeURL = docsURL?.URLByAppendingPathComponent("TrendCore.sqlite")
         let options = 
         [
@@ -111,11 +121,11 @@ internal class DataStore :DataStoreProtocol {
         ]
 
         do {
-            try self.store?.addPersistentStoreWithType(
+            try self.store?.addPersistentStoreWithType (
                 NSSQLiteStoreType, 
                 configuration: nil, 
                 URL: storeURL, 
-                options: options)
+                options: options )
         }
         catch { print("Error reading store \(error)") }
 
