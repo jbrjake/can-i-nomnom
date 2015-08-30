@@ -81,7 +81,12 @@ internal class DataStore :DataStoreProtocol {
     private var privateMoc  :NSManagedObjectContext?        = nil
 
     init() {
-        guard let modelURL = NSBundle.mainBundle().URLForResource("TrendCore", withExtension: "mom") 
+        guard 
+            let modelURL = NSBundle (
+                forClass: TrendCoreController.self )
+                .URLForResource (
+                    "TrendCoreModel", 
+                    withExtension: "momd" ) 
         else {
             print("Couldn't build model URL")
             return
