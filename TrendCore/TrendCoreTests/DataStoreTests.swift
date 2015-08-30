@@ -12,8 +12,8 @@ class DataStoreTests: XCTestCase {
     
     var dataStore :DataStore?
     let samples = [
-        DataSample(value: 195.0, dateSampled: NSDate(), dateImported: NSDate(), source: .Dummy),
-        DataSample(value: 196.0, dateSampled: NSDate(), dateImported: NSDate(), source: .Dummy)
+        DataSample(value: 195.0, trend: nil, dateSampled: NSDate(), dateImported: NSDate(), source: .Dummy),
+        DataSample(value: 196.0, trend: nil, dateSampled: NSDate(), dateImported: NSDate(), source: .Dummy)
     ]
     
     override func setUp() {

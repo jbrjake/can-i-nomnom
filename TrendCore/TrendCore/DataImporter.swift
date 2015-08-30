@@ -49,12 +49,12 @@ class DummyDataImporter :DataImporterProtocol {
         day4 = originDate.dateByAddingTimeInterval(24*60*60*4)
         day5 = originDate.dateByAddingTimeInterval(24*60*60*5)
         samples = [
-            DataSample(value: 195.0, dateSampled: originDate, dateImported: NSDate(), source: .Dummy),
-            DataSample(value: 194.0, dateSampled: day1, dateImported: NSDate(), source: .Dummy),
-            DataSample(value: 193.0, dateSampled: day2, dateImported: NSDate(), source: .Dummy),
-            DataSample(value: 192.0, dateSampled: day3, dateImported: NSDate(), source: .Dummy),
-            DataSample(value: 191.0, dateSampled: day4, dateImported: NSDate(), source: .Dummy),
-            DataSample(value: 190.0, dateSampled: day5, dateImported: NSDate(), source: .Dummy)
+            DataSample(value: 195.0, trend: nil, dateSampled: originDate, dateImported: NSDate(), source: .Dummy),
+            DataSample(value: 194.0, trend: nil, dateSampled: day1, dateImported: NSDate(), source: .Dummy),
+            DataSample(value: 193.0, trend: nil, dateSampled: day2, dateImported: NSDate(), source: .Dummy),
+            DataSample(value: 192.0, trend: nil, dateSampled: day3, dateImported: NSDate(), source: .Dummy),
+            DataSample(value: 191.0, trend: nil, dateSampled: day4, dateImported: NSDate(), source: .Dummy),
+            DataSample(value: 190.0, trend: nil, dateSampled: day5, dateImported: NSDate(), source: .Dummy)
         ]
         
     }
@@ -98,7 +98,7 @@ class HealthKitDataImporter :DataImporterProtocol {
         healthKitSamplesFromDate(fromDate, toDate: toDate) { (hkSamples) -> () in
             var importedSamples = [DataSample]()
             for sample in hkSamples {
-                let importedSample = DataSample(value: sample.quantity.doubleValueForUnit(HKUnit.poundUnit()), dateSampled: sample.startDate, dateImported: NSDate(), source: .Dummy)
+                let importedSample = DataSample(value: sample.quantity.doubleValueForUnit(HKUnit.poundUnit()), trend: nil, dateSampled: sample.startDate, dateImported: NSDate(), source: .Dummy)
                 importedSamples.append(importedSample)
             }
             
