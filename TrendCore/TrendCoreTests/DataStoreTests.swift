@@ -10,30 +10,81 @@ import XCTest
 
 class DataStoreTests: XCTestCase {
     
+    var dataStore :DataStore?
+    let samples = [
+        DataSample(value: 195.0, dateSampled: NSDate(), dateImported: NSDate(), source: .Dummy),
+        DataSample(value: 196.0, dateSampled: NSDate(), dateImported: NSDate(), source: .Dummy)
+    ]
+    
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        self.dataStore = DataStore()        
     }
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
+        self.dataStore = nil
     }
     
     func testInit() {
-        XCTAssertNotNil(DataStore(), "Data store could not be inited")
+        XCTAssertNotNil(self.dataStore, "Data store could not be inited")
+    }
+    
+    func testPurge() {
+        // Purge the data store
+        let purgeExpectation = self.expectationWithDescription("Purge calls back")
+        self.dataStore?.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture(), callback: { (records) -> () in
+            self.dataStore?.remove(records, completion: { (err) -> () in
+                XCTAssertNil(err, "Error removing all records")
+                
+                let fetchExpectation = self.expectationWithDescription("Fetch returns")
+                self.dataStore?.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture(), callback: { (remainingRecords) -> () in
+                    XCTAssertTrue(remainingRecords.count == 0, "Purge left \(remainingRecords.count ) records behind")
+                    fetchExpectation.fulfill()
+                })
+                
+                self.waitForExpectationsWithTimeout(10, handler: { (err) -> Void in
+                    print("Fetch never returned: \(err)")
+                })
+                
+                
+                purgeExpectation.fulfill()
+            })
+        })
+        
+        self.waitForExpectationsWithTimeout(10) { (err) -> Void in
+            print("Purge never called back: \(err)")
+        }
+    }
+    
+    func testAddAndFetch() {
+        self.testPurge()
+
+        let addExpectation = self.expectationWithDescription("Add to data store calls back")
+        self.dataStore?.add(samples, completion: { (err) -> () in
+            addExpectation.fulfill()
+        })
+        self.waitForExpectationsWithTimeout(10) { (err) -> Void in
+            print("No callback for add to data store: \(err)")
+        }
+
+        let fetchExpectation = self.expectationWithDescription("Fetch returns")
+        self.dataStore?.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture(), callback: { (fetchedSamples) -> () in
+            
+            XCTAssertTrue(fetchedSamples.count == self.samples.count, "Expected \(self.samples.count) samples, got \(fetchedSamples.count)")
+            for (index, fetchedSample) in fetchedSamples.enumerate() {
+                let addedSample = self.samples[index]
+                XCTAssertTrue(addedSample == fetchedSample, "Samples did not match: (\(addedSample),\(fetchedSample))")
+            }
+            
+            fetchExpectation.fulfill()
+        })
+        
+        self.waitForExpectationsWithTimeout(10) { (err) -> Void in
+            print("Fetch didn't return: \(err)")
+        }
+
     }
     
 }
