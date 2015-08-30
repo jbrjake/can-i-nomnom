@@ -29,6 +29,36 @@ private class ManagedSample: NSManagedObject {
     @NSManaged var dateSampled  :NSDate
     @NSManaged var dateImported :NSDate
     @NSManaged var source       :String
+    
+    private init (
+        sample  :DataSample,
+        entity  :NSEntityDescription,
+        context :NSManagedObjectContext ) 
+    {
+        super.init (
+            entity: entity, 
+            insertIntoManagedObjectContext: context )
+        self.sampledValue   = sample.value
+        self.dateSampled    = sample.dateSampled
+        self.dateImported   = sample.dateImported
+        self.source         = sample.source.rawValue
+    }
+    
+    private class func add (
+        sample :DataSample, 
+        context: NSManagedObjectContext ) 
+    {
+        guard
+            let entity = NSEntityDescription.entityForName( 
+                "ManagedSample", 
+                inManagedObjectContext: context ) 
+        else {
+            print("Could not find build entity description")
+            return
+        }
+        
+        _ = ManagedSample.init(sample: sample, entity: entity, context: context)        
+    }
 }
 
 internal protocol DataStoreProtocol {
