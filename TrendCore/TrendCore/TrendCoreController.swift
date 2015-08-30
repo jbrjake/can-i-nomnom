@@ -34,6 +34,15 @@ public class TrendCoreController :NSObject {
               toDate: NSDate, 
           completion: Completion ) 
     {
+        DataImporterFactory
+        .importerForType(.Dummy)
+        .samplesForRangeFromDate(fromDate, toDate: toDate) 
+        { 
+            (importedSamples) -> () in
+            
+            // Do stuff here to import data
+            completion(nil)
+        }
     }
     
     public func fetchWeightsFrom (
