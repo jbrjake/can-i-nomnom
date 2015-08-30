@@ -63,9 +63,8 @@ class TrendCoreTests: XCTestCase {
             toDate:NSDate.distantFuture(), 
             callback: { 
                 (samples) -> () in
-                if samples.count > 0 {
-                    hasSamples.fulfill()
-                }
+                hasSamples.fulfill()
+                
             }
         )
         
