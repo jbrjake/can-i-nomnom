@@ -202,20 +202,20 @@ internal class DataStore :DataStoreProtocol {
         for sample in samples {
             let fetch = NSFetchRequest(entityName: "ManagedSample")
             fetch.predicate = NSPredicate(format: "dateSampled = %@ AND sampledValue = %@ AND source = %@",
-                sample.dateSampled, sample.value, sample.source.rawValue
+                sample.dateSampled,  NSNumber(double:sample.value), sample.source.rawValue
             )
             do {
                 if let results = try self.mainMoc?.executeFetchRequest(fetch) as? [NSManagedObject] {
                     for result in results {
                         self.mainMoc?.deleteObject(result)
                     }
-                    self.save()
                 }
             }
             catch {
                 print("Error fetching objects to remove: \(error)")
             }
         }
+        self.save()
         completion(nil)
     }
     
