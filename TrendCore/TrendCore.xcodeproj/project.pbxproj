@@ -63,6 +63,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		744BB99C1B937E0300DEE3FD /* Data Importer */ = {
+			isa = PBXGroup;
+			children = (
+				747D01381B59F0A500E6A46A /* DataImporter.swift */,
+			);
+			name = "Data Importer";
+			sourceTree = "<group>";
+		};
+		744BB99D1B937E1400DEE3FD /* Data Store */ = {
+			isa = PBXGroup;
+			children = (
+				744BB9971B9019E400DEE3FD /* DataStore.swift */,
+			);
+			name = "Data Store";
+			sourceTree = "<group>";
+		};
 		747D00911B5164AB00E6A46A = {
 			isa = PBXGroup;
 			children = (
@@ -86,8 +102,8 @@
 			children = (
 				747D00A01B5164AB00E6A46A /* TrendCore.h */,
 				747D01321B51875A00E6A46A /* TrendCoreController.swift */,
-				744BB9971B9019E400DEE3FD /* DataStore.swift */,
-				747D01381B59F0A500E6A46A /* DataImporter.swift */,
+				744BB99D1B937E1400DEE3FD /* Data Store */,
+				744BB99C1B937E0300DEE3FD /* Data Importer */,
 				747D009E1B5164AB00E6A46A /* Supporting Files */,
 			);
 			path = TrendCore;
