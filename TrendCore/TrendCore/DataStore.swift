@@ -133,8 +133,9 @@ internal class DataStore :DataStoreProtocol {
     
     private func save() {
         guard
-            let mainMoc     = self.mainMoc      where      mainMoc.hasChanges == true, 
-            let privateMoc  = self.privateMoc   where   privateMoc.hasChanges == true 
+            let mainMoc     = self.mainMoc, 
+            let privateMoc  = self.privateMoc
+            where ( (mainMoc.hasChanges == true) || (privateMoc.hasChanges == true) )
         else { return }
         
         mainMoc.performBlockAndWait() {
