@@ -33,28 +33,24 @@ class DataStoreTests: XCTestCase {
     
     func testPurge() {
         // Purge the data store
+        let fetchExpectation = self.expectationWithDescription("Fetch returns")
         let purgeExpectation = self.expectationWithDescription("Purge calls back")
+
         self.dataStore?.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture(), callback: { (records) -> () in
             self.dataStore?.remove(records, completion: { (err) -> () in
-                XCTAssertNil(err, "Error removing all records")
+                XCTAssertNil(err, "Error fetching all records")
                 
-                let fetchExpectation = self.expectationWithDescription("Fetch returns")
                 self.dataStore?.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture(), callback: { (remainingRecords) -> () in
                     XCTAssertTrue(remainingRecords.count == 0, "Purge left \(remainingRecords.count ) records behind")
                     fetchExpectation.fulfill()
                 })
-                
-                self.waitForExpectationsWithTimeout(10, handler: { (err) -> Void in
-                    print("Fetch never returned: \(err)")
-                })
-                
                 
                 purgeExpectation.fulfill()
             })
         })
         
         self.waitForExpectationsWithTimeout(10) { (err) -> Void in
-            print("Purge never called back: \(err)")
+            XCTAssertNil(err, "Purge or fetch never called back: \(err)")
         }
     }
     
