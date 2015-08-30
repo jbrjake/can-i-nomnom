@@ -150,16 +150,73 @@ internal class DataStore :DataStoreProtocol {
     
 // MARK: Internal DataStore Protocol Implementation
     
-    internal func add(samples :[DataSample], completion: Completion) {
+    internal func add (
+        samples     :[DataSample], 
+        completion  :Completion ) 
+    {
+        if let mainMoc = self.mainMoc {
+            mainMoc.performBlockAndWait() {
+                for sample in samples {
+                    ManagedSample.add(sample, context: mainMoc)
+                }
+            }
+            self.save()
+            completion(nil)
+        }
+    }
+    
+    internal func fetch (
+        fromDate    :NSDate, 
+        toDate      :NSDate, 
+        callback    :FetchWeightsCallback ) 
+    {
+        let fetch = NSFetchRequest(entityName: "ManagedSample")
+        fetch.predicate = NSPredicate(format: "(dateSampled >= %@) AND (dateSampled <= %@)", fromDate, toDate)
+        fetch.sortDescriptors = [ NSSortDescriptor(key: "dateSampled", ascending: true)]
+
+        do {
+            if let managedSamples = try self.mainMoc?.executeFetchRequest(fetch) {
+                var samples = [DataSample]()
+                for managedSample in managedSamples {
+                    let sample = DataSample(value: (managedSample.sampledValue?.doubleValue)!, trend: nil, dateSampled: managedSample.dateSampled, dateImported: managedSample.dateImported, source: TrendCoreImporterType(rawValue: managedSample.source)!)
+                    samples.append(sample)
+                }
+                callback(samples)
+            }
+            else {
+                print("Nil samples returned")
+                callback([DataSample]())
+            }
+        }
+        catch {
+            print("Error getting samples: \(error)")
+            callback([DataSample]())
+        }
         
     }
     
-    internal func fetch(fromDate :NSDate, toDate :NSDate, callback: FetchWeightsCallback) {
-        
-    }
-    
-    internal func remove(samples :[DataSample], completion: Completion) {
-        
+    internal func remove (
+        samples     :[DataSample], 
+        completion  :Completion ) 
+    {
+        for sample in samples {
+            let fetch = NSFetchRequest(entityName: "ManagedSample")
+            fetch.predicate = NSPredicate(format: "dateSampled = %@ AND sampledValue = %@ AND source = %@",
+                sample.dateSampled, sample.value, sample.source.rawValue
+            )
+            do {
+                if let results = try self.mainMoc?.executeFetchRequest(fetch) as? [NSManagedObject] {
+                    for result in results {
+                        self.mainMoc?.deleteObject(result)
+                    }
+                    self.save()
+                }
+            }
+            catch {
+                print("Error fetching objects to remove: \(error)")
+            }
+        }
+        completion(nil)
     }
     
 }
