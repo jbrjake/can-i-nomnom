@@ -25,7 +25,7 @@ public func == (lhs: DataSample, rhs: DataSample) -> Bool {
 }
 
 private class ManagedSample: NSManagedObject {
-    @NSManaged var value        :Double
+    @NSManaged var sampledValue :NSNumber
     @NSManaged var dateSampled  :NSDate
     @NSManaged var dateImported :NSDate
     @NSManaged var source       :String
