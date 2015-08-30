@@ -28,11 +28,19 @@ public typealias FetchWeightsCallback = ( ([DataSample]) -> () )
 
 public class TrendCoreController :NSObject {
 
-    public func importDataFrom(importerType: TrendCoreImporterType, completion: Completion ) {
-        
+    public func importDataFrom (
+        importerType: TrendCoreImporterType, 
+            fromDate: NSDate, 
+              toDate: NSDate, 
+          completion: Completion ) 
+    {
     }
     
-    public func fetchWeights(fromDate :NSDate, toDate :NSDate, callback: FetchWeightsCallback) {
+    public func fetchWeightsFrom (
+        fromDate: NSDate, 
+          toDate: NSDate, 
+        callback: FetchWeightsCallback ) 
+    {
         
         
     }

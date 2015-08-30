@@ -38,11 +38,15 @@ class TrendCoreTests: XCTestCase {
 
     func testImport() {
         let callbackFired = self.expectationWithDescription("Callback for trend core import triggered")
-            
-        trendCore?.importDataFrom(TrendCoreImporterType.Dummy, completion: { 
-        err in
-            callbackFired.fulfill()            
-        })
+        trendCore?.importDataFrom(
+            TrendCoreImporterType.Dummy, 
+            fromDate: NSDate.distantPast(), 
+            toDate: NSDate.distantFuture(), 
+            completion: { 
+                err in
+                callbackFired.fulfill()
+            }
+        )
         
         self.waitForExpectationsWithTimeout(1, handler: { (err) -> Void in
             XCTAssertNil(err, "TrendCore did not callback from import")
@@ -54,13 +58,16 @@ class TrendCoreTests: XCTestCase {
         
         let hasSamples = self.expectationWithDescription("Samples exist")
         
-        trendCore?.fetchWeights(NSDate.distantPast() , 
-                         toDate:NSDate.distantFuture() , 
-            callback: { (samples) -> () in
-            if samples.count > 0 {
-                hasSamples.fulfill()
+        trendCore?.fetchWeightsFrom(
+            NSDate.distantPast() , 
+            toDate:NSDate.distantFuture(), 
+            callback: { 
+                (samples) -> () in
+                if samples.count > 0 {
+                    hasSamples.fulfill()
+                }
             }
-        })
+        )
         
         self.waitForExpectationsWithTimeout(1, handler: { (err) -> Void in
             XCTAssertNil(err, "TrendCore did not return samples")
