@@ -10,9 +10,9 @@ import Foundation
 import HealthKit
 
 
-public enum TrendCoreImporterType {
-    case Dummy
-    case HealthKit
+public enum TrendCoreImporterType :String {
+    case Dummy      = "Dummy"
+    case HealthKit  = "HealthKit"
 }
 
 typealias ImporterCallback = (([DataSample]) -> ())

@@ -9,6 +9,13 @@
 import Foundation
 import CoreData
 
+private class ManagedSample: NSManagedObject {
+    @NSManaged var value        :Double
+    @NSManaged var dateSampled  :NSDate
+    @NSManaged var dateImported :NSDate
+    @NSManaged var source       :String
+}
+
 internal protocol DataStoreProtocol {
     func add(samples :[DataSample], completion: Completion)
     func remove(samples :[DataSample], completion: Completion)

@@ -10,6 +10,8 @@
 		744BB9981B9019E400DEE3FD /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744BB9971B9019E400DEE3FD /* DataStore.swift */; settings = {ASSET_TAGS = (); }; };
 		744BB9991B9019E400DEE3FD /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744BB9971B9019E400DEE3FD /* DataStore.swift */; settings = {ASSET_TAGS = (); }; };
 		744BB99B1B916B3E00DEE3FD /* DataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744BB99A1B916B3E00DEE3FD /* DataStoreTests.swift */; settings = {ASSET_TAGS = (); }; };
+		744BB9A01B937F1C00DEE3FD /* TrendCoreModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 744BB99E1B937F1C00DEE3FD /* TrendCoreModel.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
+		744BB9A11B937F1C00DEE3FD /* TrendCoreModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 744BB99E1B937F1C00DEE3FD /* TrendCoreModel.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
 		747D00A11B5164AB00E6A46A /* TrendCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 747D00A01B5164AB00E6A46A /* TrendCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		747D00A71B5164AB00E6A46A /* TrendCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 747D009B1B5164AB00E6A46A /* TrendCore.framework */; };
 		747D00AE1B5164AB00E6A46A /* TrendCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747D00AD1B5164AB00E6A46A /* TrendCoreTests.swift */; };
@@ -33,6 +35,7 @@
 /* Begin PBXFileReference section */
 		744BB9971B9019E400DEE3FD /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		744BB99A1B916B3E00DEE3FD /* DataStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStoreTests.swift; sourceTree = "<group>"; };
+		744BB99F1B937F1C00DEE3FD /* TrendCoreModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TrendCoreModel.xcdatamodel; sourceTree = "<group>"; };
 		747D009B1B5164AB00E6A46A /* TrendCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrendCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		747D009F1B5164AB00E6A46A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		747D00A01B5164AB00E6A46A /* TrendCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrendCore.h; sourceTree = "<group>"; };
@@ -75,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				744BB9971B9019E400DEE3FD /* DataStore.swift */,
+				744BB99E1B937F1C00DEE3FD /* TrendCoreModel.xcdatamodeld */,
 			);
 			name = "Data Store";
 			sourceTree = "<group>";
@@ -248,6 +252,7 @@
 				747D01391B59F0A500E6A46A /* DataImporter.swift in Sources */,
 				744BB9981B9019E400DEE3FD /* DataStore.swift in Sources */,
 				747D01331B51875A00E6A46A /* TrendCoreController.swift in Sources */,
+				744BB9A01B937F1C00DEE3FD /* TrendCoreModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +263,7 @@
 				747D013A1B59F0A500E6A46A /* DataImporter.swift in Sources */,
 				747D013C1B5B4F1200E6A46A /* DataImporterTests.swift in Sources */,
 				747D01341B51875A00E6A46A /* TrendCoreController.swift in Sources */,
+				744BB9A11B937F1C00DEE3FD /* TrendCoreModel.xcdatamodeld in Sources */,
 				744BB9991B9019E400DEE3FD /* DataStore.swift in Sources */,
 				747D00AE1B5164AB00E6A46A /* TrendCoreTests.swift in Sources */,
 				744BB99B1B916B3E00DEE3FD /* DataStoreTests.swift in Sources */,
@@ -463,6 +469,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		744BB99E1B937F1C00DEE3FD /* TrendCoreModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				744BB99F1B937F1C00DEE3FD /* TrendCoreModel.xcdatamodel */,
+			);
+			currentVersion = 744BB99F1B937F1C00DEE3FD /* TrendCoreModel.xcdatamodel */;
+			path = TrendCoreModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 747D00921B5164AB00E6A46A /* Project object */;
 }
