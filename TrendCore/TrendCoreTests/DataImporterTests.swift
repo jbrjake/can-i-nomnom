@@ -8,6 +8,7 @@
 
 import UIKit
 import XCTest
+@testable import TrendCore
 
 class DataImporterTests: XCTestCase {
 
