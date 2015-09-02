@@ -56,6 +56,9 @@ class TrendCoreTests: XCTestCase {
     
     func testFetch() {
         
+        // The DataStore tests can run in parallel with the TrendCore tests, leaving the DB purged between calls
+        testImport()
+        
         let hasSamples = self.expectationWithDescription("Samples exist")
         
         trendCore?.fetchWeightsFrom(
