@@ -30,7 +30,9 @@ public class TrendCoreController {
             (importedSamples) -> () in
             
             // Do stuff here to import data
-            completion(nil)
+            self.dataStore.add(importedSamples, completion: { (err) -> () in
+                completion(err)
+            })
         }
     }
     
@@ -39,7 +41,9 @@ public class TrendCoreController {
           toDate: NSDate, 
         callback: FetchWeightsCallback ) 
     {
-        
+        self.dataStore.fetch(fromDate, toDate: toDate) { (results) -> () in
+            callback(results)
+        }
         
     }
     

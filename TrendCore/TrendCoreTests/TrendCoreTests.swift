@@ -63,8 +63,9 @@ class TrendCoreTests: XCTestCase {
             toDate:NSDate.distantFuture(), 
             callback: { 
                 (samples) -> () in
-                hasSamples.fulfill()
                 
+                XCTAssertEqual(samples.count, 6, "The dummy importer gives 6 samples, not \(samples.count)")
+                hasSamples.fulfill()
             }
         )
         
