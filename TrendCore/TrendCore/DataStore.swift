@@ -24,7 +24,7 @@ public func == (lhs: DataSample, rhs: DataSample) -> Bool {
         lhs.source == rhs.source
 }
 
-private class ManagedSample: NSManagedObject {
+internal class ManagedSample: NSManagedObject {
     @NSManaged var sampledValue :NSNumber
     @NSManaged var dateSampled  :NSDate
     @NSManaged var dateImported :NSDate
@@ -42,6 +42,10 @@ private class ManagedSample: NSManagedObject {
         self.dateSampled    = sample.dateSampled
         self.dateImported   = sample.dateImported
         self.source         = sample.source.rawValue
+    }
+    
+    override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
     }
     
     private class func add (
