@@ -159,14 +159,33 @@ internal class DataStore :DataStoreProtocol {
         samples     :[DataSample], 
         completion  :Completion ) 
     {
-        if let mainMoc = self.mainMoc {
-            mainMoc.performBlockAndWait() {
-                for sample in samples {
-                    ManagedSample.add(sample, context: mainMoc)
+        let datedSamples = samples.sort { (sampleA, sampleB) -> Bool in
+            sampleA.dateSampled.compare(sampleB.dateSampled) == .OrderedSame
+        }
+        self.fetch(
+            datedSamples.first?.dateSampled ?? NSDate.distantPast(), 
+            toDate: datedSamples.last?.dateSampled ?? NSDate.distantFuture() ) 
+        { 
+            (existingRecords) -> () in
+            if let mainMoc = self.mainMoc {
+                mainMoc.performBlockAndWait() {
+                    for sample in samples {
+                        var exists = false
+                        for existingSample in existingRecords {
+                            if existingSample == sample {
+                                exists = true
+                                break
+                            }
+                        }
+                        
+                        if exists == false {
+                            ManagedSample.add(sample, context: mainMoc)
+                        }
+                    }
                 }
+                self.save()
+                completion(nil)
             }
-            self.save()
-            completion(nil)
         }
     }
     
