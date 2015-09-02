@@ -183,8 +183,19 @@ internal class DataStore :DataStoreProtocol {
             if let managedSamples = try self.mainMoc?.executeFetchRequest(fetch) {
                 var samples = [DataSample]()
                 for managedSample in managedSamples {
-                    let sample = DataSample(value: (managedSample.sampledValue?.doubleValue)!, trend: nil, dateSampled: managedSample.dateSampled, dateImported: managedSample.dateImported, source: TrendCoreImporterType(rawValue: managedSample.source)!)
-                    samples.append(sample)
+                    if let 
+                        sampledValue = managedSample.sampledValue?.doubleValue,
+                        source = TrendCoreImporterType(rawValue: managedSample.source) 
+                    {
+                        let sample = DataSample (
+                            value: sampledValue, 
+                            trend: nil, 
+                            dateSampled: managedSample.dateSampled, 
+                            dateImported: managedSample.dateImported, 
+                            source:source )
+                        
+                        samples.append(sample)
+                    }
                 }
                 callback(samples)
             }
