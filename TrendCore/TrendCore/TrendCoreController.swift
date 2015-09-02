@@ -11,8 +11,12 @@ import Foundation
 public typealias Completion = ( (NSError?) -> () )
 public typealias FetchWeightsCallback = ( ([DataSample]) -> () )
 
-public class TrendCoreController :NSObject {
+public class TrendCoreController {
 
+    let dataStore :DataStoreProtocol = DataStore()
+
+    public init() {}
+    
     public func importDataFrom (
         importerType: TrendCoreImporterType, 
             fromDate: NSDate, 
