@@ -128,3 +128,70 @@ Goal: Framework to display weight data trendline
 
 Goal: Complete watch support
 
+Deep Dive: TrendCore 
+--------------------
+
+### Hierarchy ###
+
+* TrendCore Framework
+	* TrendCoreController
+		* DataStoreController
+			* CoreData Stack
+				* WeightModel
+			* DataImportController				
+				* DataImporterFactory
+					* DummyImporter
+					* HealthKitImporter
+					* CSVImporter
+					* FitBitImporter
+					* MyFitnessPalImporter
+
+### Usage ###
+
+The caller is going to have the same concerns as a TrendViewModel:
+
+* It's going to want a collection of weights for a range of dates.
+* It's also going to want a collection of trends for a range of dates.
+* It's also going to need to have a way to tell the code to import from a particular source.
+* And it needs to have a way to list the available ways to import data into the core
+
+So that stuff will form the public api protocol vended by the TrendCore framework.
+
+	var trendCore = TrendCoreController()
+
+	trendCore.import(TrendCoreImporterType.HealthKit, completion: {
+		trendCore.fetchWeights(NSDate.distantPast(),
+						toDate:NSDate.distantFuture(),
+					completion: 
+		{
+		fetchedWeights in
+			doStuffWith(fetchedWeights)
+		}
+	}
+	
+### Behind the Scenes ###
+
+While this won't be visible in the public api, internally the core data stack is accessed through a certain protocol to do specific things:
+
+* Add samples to core data
+* Reads samples from core data
+* Deletes samples from core data
+
+It interfaces with the rest of TrendCore through DataSamples. No NSManagedObject leaves its DataStoreController ghetto. It uniques on dates.
+
+	var dataStore = DataStoreController()
+	dataStore.addSamples([DataSample]()) {
+		// Samples added
+		
+		dataStore.fetchSamples(fromDate :NSDate, toDate :NSDate, completion: {
+			samples in
+			// we've got data back
+			dataStore.deleteSamples(samples) {
+				// Samples gone			
+			}
+		})
+	})
+		
+	}
+	
+

@@ -158,6 +158,7 @@
 		747D00E71B51654E00E6A46A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "Jonathon Rubin";
 				TargetAttributes = {
@@ -399,6 +400,7 @@
 				747D01081B51654E00E6A46A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		747D01091B51654E00E6A46A /* Build configuration list for PBXNativeTarget "TrendViewModelTests" */ = {
 			isa = XCConfigurationList;
@@ -407,6 +409,7 @@
 				747D010B1B51654E00E6A46A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

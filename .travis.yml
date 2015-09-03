@@ -1,0 +1,6 @@
+osx_image: xcode7
+language: objective-c
+script:
+  - xcodebuild -workspace CINN.xcworkspace -scheme TrendCore -sdk iphonesimulator test
+  - xcodebuild -workspace CINN.xcworkspace -scheme TrendViewModel -sdk iphonesimulator test
+  - xcodebuild -workspace CINN.xcworkspace -scheme TrendViewController -sdk iphonesimulator test

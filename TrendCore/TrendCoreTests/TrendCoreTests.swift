@@ -8,22 +8,21 @@
 
 import UIKit
 import XCTest
+import TrendCore
 
 class TrendCoreTests: XCTestCase {
+    
+    var trendCore :TrendCoreController?
     
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        trendCore = TrendCoreController()
     }
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
     }
     
     func testPerformanceExample() {
@@ -33,4 +32,49 @@ class TrendCoreTests: XCTestCase {
         }
     }
     
+    func testInit() {
+        XCTAssertNotNil(trendCore, "Init failed")
+    }
+
+    func testImport() {
+        let callbackFired = self.expectationWithDescription("Callback for trend core import triggered")
+        trendCore?.importDataFrom(
+            TrendCoreImporterType.Dummy, 
+            fromDate: NSDate.distantPast(), 
+            toDate: NSDate.distantFuture(), 
+            completion: { 
+                err in
+                callbackFired.fulfill()
+            }
+        )
+        
+        self.waitForExpectationsWithTimeout(1, handler: { (err) -> Void in
+            XCTAssertNil(err, "TrendCore did not callback from import")
+        })
+        
+    }
+    
+    func testFetch() {
+        
+        // The DataStore tests can run in parallel with the TrendCore tests, leaving the DB purged between calls
+        testImport()
+        
+        let hasSamples = self.expectationWithDescription("Samples exist")
+        
+        trendCore?.fetchWeightsFrom(
+            NSDate.distantPast() , 
+            toDate:NSDate.distantFuture(), 
+            callback: { 
+                (samples) -> () in
+                
+                XCTAssertEqual(samples.count, 6, "The dummy importer gives 6 samples, not \(samples.count)")
+                hasSamples.fulfill()
+            }
+        )
+        
+        self.waitForExpectationsWithTimeout(1, handler: { (err) -> Void in
+            XCTAssertNil(err, "TrendCore did not return samples")
+        })
+    }
+
 }
