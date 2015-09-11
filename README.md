@@ -194,4 +194,22 @@ It interfaces with the rest of TrendCore through DataSamples. No NSManagedObject
 		
 	}
 	
+----
+
+Once the controller has used the importer to feed samples into the data store, it will then run the filter over the data store. The filter does a few things to clean the data:
+* Inserts interpolated weights for any missing days, using the .Dummy type
+* Deletes any interpolated weights on days that have other import sources.
+* Applies a 10-day moving average to the weights to populate the trend.
+
+The filter has to run every time the data store add or remove operations are performed.
+
+The external API will be dead simple:
+* filterDataStore(dataStore, callback)
+
+Internally, we'll have a structure like this:
+* FilterController
+	* Pipeline
+	* Filters
+		* Filter: (DataStore, callback) -> ()
+	
 

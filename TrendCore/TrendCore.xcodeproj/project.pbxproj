@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		743077FD1B97EE4000558A3E /* DataFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743077FC1B97EE4000558A3E /* DataFilter.swift */; settings = {ASSET_TAGS = (); }; };
+		743077FF1B97F95200558A3E /* DataFilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743077FE1B97F95200558A3E /* DataFilterTests.swift */; settings = {ASSET_TAGS = (); }; };
 		744BB9981B9019E400DEE3FD /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744BB9971B9019E400DEE3FD /* DataStore.swift */; settings = {ASSET_TAGS = (); }; };
 		744BB99B1B916B3E00DEE3FD /* DataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744BB99A1B916B3E00DEE3FD /* DataStoreTests.swift */; settings = {ASSET_TAGS = (); }; };
 		744BB9A01B937F1C00DEE3FD /* TrendCoreModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 744BB99E1B937F1C00DEE3FD /* TrendCoreModel.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
@@ -29,6 +31,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		743077FC1B97EE4000558A3E /* DataFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataFilter.swift; sourceTree = "<group>"; };
+		743077FE1B97F95200558A3E /* DataFilterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataFilterTests.swift; sourceTree = "<group>"; };
 		744BB9971B9019E400DEE3FD /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		744BB99A1B916B3E00DEE3FD /* DataStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStoreTests.swift; sourceTree = "<group>"; };
 		744BB99F1B937F1C00DEE3FD /* TrendCoreModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TrendCoreModel.xcdatamodel; sourceTree = "<group>"; };
@@ -62,6 +66,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		743077FB1B97EE1400558A3E /* Data Filter */ = {
+			isa = PBXGroup;
+			children = (
+				743077FC1B97EE4000558A3E /* DataFilter.swift */,
+			);
+			name = "Data Filter";
+			sourceTree = "<group>";
+		};
 		744BB99C1B937E0300DEE3FD /* Data Importer */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +116,7 @@
 				747D01321B51875A00E6A46A /* TrendCoreController.swift */,
 				744BB99D1B937E1400DEE3FD /* Data Store */,
 				744BB99C1B937E0300DEE3FD /* Data Importer */,
+				743077FB1B97EE1400558A3E /* Data Filter */,
 				747D009E1B5164AB00E6A46A /* Supporting Files */,
 			);
 			path = TrendCore;
@@ -123,6 +136,7 @@
 				747D00AD1B5164AB00E6A46A /* TrendCoreTests.swift */,
 				747D013B1B5B4F1200E6A46A /* DataImporterTests.swift */,
 				744BB99A1B916B3E00DEE3FD /* DataStoreTests.swift */,
+				743077FE1B97F95200558A3E /* DataFilterTests.swift */,
 				747D00AB1B5164AB00E6A46A /* Supporting Files */,
 			);
 			path = TrendCoreTests;
@@ -245,6 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				743077FD1B97EE4000558A3E /* DataFilter.swift in Sources */,
 				747D01391B59F0A500E6A46A /* DataImporter.swift in Sources */,
 				744BB9981B9019E400DEE3FD /* DataStore.swift in Sources */,
 				747D01331B51875A00E6A46A /* TrendCoreController.swift in Sources */,
@@ -259,6 +274,7 @@
 				747D013C1B5B4F1200E6A46A /* DataImporterTests.swift in Sources */,
 				747D00AE1B5164AB00E6A46A /* TrendCoreTests.swift in Sources */,
 				744BB99B1B916B3E00DEE3FD /* DataStoreTests.swift in Sources */,
+				743077FF1B97F95200558A3E /* DataFilterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

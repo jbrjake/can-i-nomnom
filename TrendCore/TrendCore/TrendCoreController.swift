@@ -13,8 +13,9 @@ public typealias FetchWeightsCallback = ( ([DataSample]) -> () )
 
 public class TrendCoreController {
 
-    let dataStore :DataStoreProtocol = DataStore()
-
+    internal let dataStore   :DataStoreProtocol  = DataStore()
+    internal let dataFilter  :DataFilterProtocol = TrendFilter()
+    
     public init() {}
     
     public func importDataFrom (
