@@ -43,7 +43,9 @@ public class TrendCoreController {
         callback: FetchWeightsCallback ) 
     {
         self.dataStore.fetch(fromDate, toDate: toDate) { (results) -> () in
-            callback(results)
+            self.dataFilter.filter(results, callback: { (filteredResults) -> () in
+                callback(filteredResults)
+            })
         }
         
     }
