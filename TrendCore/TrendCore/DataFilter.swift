@@ -46,7 +46,6 @@ internal class TrendFilter :FilterController {
     override init() {
         super.init()
         self.filters.append(self.dateInterpolator)
-        self.filters.append(self.dummySweeper)
         self.filters.append(self.weightTrender)
     }
 
