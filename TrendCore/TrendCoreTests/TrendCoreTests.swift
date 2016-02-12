@@ -8,7 +8,7 @@
 
 import UIKit
 import XCTest
-import TrendCore
+@testable import TrendCore
 
 class TrendCoreTests: XCTestCase {
     
@@ -34,6 +34,8 @@ class TrendCoreTests: XCTestCase {
     
     func testInit() {
         XCTAssertNotNil(trendCore, "Init failed")
+        XCTAssertNotNil(trendCore?.dataStore, "Data store init failed")
+        XCTAssertNotNil(trendCore?.dataFilter, "Data filter init failed")
     }
 
     func testImport() {
