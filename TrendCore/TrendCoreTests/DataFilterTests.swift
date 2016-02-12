@@ -30,14 +30,28 @@ class DataFilterTests: XCTestCase {
     }
     
     func testFilter() {
-        DataStoreTests().testPurge()
-        TrendCoreController().importDataFrom(.Dummy, fromDate: NSDate.distantPast(), toDate: NSDate.distantFuture()) { (err) -> () in
-            // Now we have data to work with
-            filter?.filter(DataStore(), callback: { (err) -> () in
-                // Now check the samples
+        
+        let testExpectation = self.expectationWithDescription("Waiting for filtered data")
+        //Purge
+        let dataStore = DataStore()
+        dataStore.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture(), callback: { (records) -> () in
+            dataStore.remove(records, completion: { (err) -> () in
+                TrendCoreController().importDataFrom(.Dummy, fromDate: NSDate.distantPast(), toDate: NSDate.distantFuture()) { (err) -> () in
+                    // Now we have data to work with
+                    filter?.filter(dataStore, callback: { (records) -> () in
+                        // Now check the samples
+                        let record = records[5]
+                        XCTAssertNotNil(record.trend)
+                        XCTAssert(String(format: "%.1f", record.trend!) == "193.7")
+                        testExpectation.fulfill()
+                    })
+                }
             })
+        })
+        self.waitForExpectationsWithTimeout(10) { (err) -> Void in
+            XCTAssertNil(err, "There was an error: \(err)")
         }
-
     }
+    
         
 }

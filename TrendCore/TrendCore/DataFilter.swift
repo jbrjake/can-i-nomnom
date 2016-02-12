@@ -9,24 +9,25 @@
 import Foundation
 
 internal protocol DataFilterProtocol {
-    func filter(dataStore :DataStore, callback :Completion)
+    func filter(dataStore :DataStore, callback :FilterCallback)
 }
 
+internal typealias FilterCallback = ([DataSample]) -> ()
 internal class FilterController :DataFilterProtocol {
     
-    internal func filter(dataStore :DataStore, callback :Completion) {
-        for filter in self.filters {
-            self.pipeline.addOperationWithBlock({ () -> Void in
-                let semaphore = dispatch_semaphore_create(0)
-                filter(dataStore) {
-                    err in 
-                    dispatch_semaphore_signal(semaphore)
-                }
-                dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
-            })
-        }
-        pipeline.waitUntilAllOperationsAreFinished()
-        callback(nil)
+    internal func filter(dataStore :DataStore, callback :FilterCallback) {
+        
+        dataStore.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture(), callback: { (records) -> () in
+            var newRecords :[DataSample]? = nil
+            for filterLayer in self.filters {
+                self.pipeline.addOperationWithBlock({ () -> Void in
+                    newRecords = filterLayer(newRecords ?? records)
+                })
+            }
+            self.pipeline.waitUntilAllOperationsAreFinished()
+            callback(newRecords ?? [DataSample]() )
+        })
+
     }
 
     private let pipeline :NSOperationQueue = {
@@ -36,7 +37,7 @@ internal class FilterController :DataFilterProtocol {
         return pipeline
     }()
     
-    private typealias FilterLayer = ( (DataStore, Completion) -> () )
+    private typealias FilterLayer = (([DataSample]) -> [DataSample])
     private var filters = [FilterLayer]()
     
 }
@@ -50,22 +51,51 @@ internal class TrendFilter :FilterController {
     }
 
     private let dateInterpolator :FilterLayer = {
-        dataStore, completion in
+        records in
+
         
-        
-        completion(nil)
-    }
-    
-    private let dummySweeper :FilterLayer = {
-        dataStore, completion in
-        
-        completion(nil)
+        return records
     }
     
     private let weightTrender :FilterLayer = {
-        dataStore, completion in
+        records in
         
-        completion(nil)
-    }
+        var lastSample :DataSample? = nil
+        var currentSample :DataSample? = nil
+        var isFirst = true
+        var newRecords = [DataSample]()
+        
+        for sample in records {
+            currentSample = sample
+            
+            if isFirst == true {
+                currentSample?.trend = currentSample?.value
+                lastSample = currentSample
+                if let currentSample = currentSample {
+                    newRecords.append(currentSample)
+                }
+                isFirst = false
+                continue
+            }
+            else {
+                var newTrend = currentSample?.value
+                if let lastSample = lastSample, currentSample = currentSample, lastTrend = lastSample.trend {
+                    var diff = currentSample.value - lastTrend
+                    diff = diff / Double(10)
+                    newTrend = lastTrend + diff                    
+                }
+                currentSample?.trend = newTrend
+            }
+            
+            if let currentSample = currentSample {
+                newRecords.append(currentSample)
+            }
+            lastSample = currentSample
+        }
 
+        return newRecords
+    }
+    
+        
+    }
 }
