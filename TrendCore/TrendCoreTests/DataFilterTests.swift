@@ -37,13 +37,15 @@ class DataFilterTests: XCTestCase {
         dataStore.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture(), callback: { (records) -> () in
             dataStore.remove(records, completion: { (err) -> () in
                 TrendCoreController().importDataFrom(.Dummy, fromDate: NSDate.distantPast(), toDate: NSDate.distantFuture()) { (err) -> () in
-                    // Now we have data to work with
-                    filter?.filter(dataStore, callback: { (records) -> () in
-                        // Now check the samples
-                        let record = records[5]
-                        XCTAssertNotNil(record.trend)
-                        XCTAssert(String(format: "%.1f", record.trend!) == "193.7")
-                        testExpectation.fulfill()
+                    dataStore.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture(), callback: { (records) -> () in
+                        // Now we have data to work with
+                        filter?.filter(records, callback: { (records) -> () in
+                            // Now check the samples
+                            let record = records[5]
+                            XCTAssertNotNil(record.trend)
+                            XCTAssert(String(format: "%.1f", record.trend!) == "193.7")
+                            testExpectation.fulfill()
+                        })
                     })
                 }
             })
@@ -67,18 +69,22 @@ class DataFilterTests: XCTestCase {
                     // Now we have data to work with, but we want to create a gap in the middle
                     dataStore.remove([recordC, recordD], completion: { (err) -> () in
                     
-                        filter?.filter(dataStore, callback: { (filteredRecords) -> () in
-                            // Now check samples 2 and 3
-                            let filteredRecordC = filteredRecords[2]
-                            let filteredRecordD = filteredRecords[3]
-                            // Original values were:
-                            // A: 195 B: 194 C: 193 D: 192 E: 191 F: 190
-                            XCTAssertEqual(filteredRecordC.value, recordC.value)
-                            XCTAssertEqual(filteredRecordC.dateSampled, recordC.dateSampled)
-                            XCTAssertEqual(filteredRecordD.value, recordD.value)
-                            XCTAssertEqual(filteredRecordD.dateSampled, recordD.dateSampled)
-                            testExpectation.fulfill()
+                        // Re-fetch
+                        dataStore.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture(), callback: { (records) -> () in
+                            filter?.filter(records, callback: { (filteredRecords) -> () in
+                                // Now check samples 2 and 3
+                                let filteredRecordC = filteredRecords[2]
+                                let filteredRecordD = filteredRecords[3]
+                                // Original values were:
+                                // A: 195 B: 194 C: 193 D: 192 E: 191 F: 190
+                                XCTAssertEqual(filteredRecordC.value, recordC.value)
+                                XCTAssertEqual(filteredRecordC.dateSampled, recordC.dateSampled)
+                                XCTAssertEqual(filteredRecordD.value, recordD.value)
+                                XCTAssertEqual(filteredRecordD.dateSampled, recordD.dateSampled)
+                                testExpectation.fulfill()
+                            })
                         })
+
                         
                     })
                     

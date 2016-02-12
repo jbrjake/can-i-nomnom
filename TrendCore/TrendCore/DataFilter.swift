@@ -9,24 +9,22 @@
 import Foundation
 
 internal protocol DataFilterProtocol {
-    func filter(dataStore :DataStore, callback :FilterCallback)
+    func filter(records :[DataSample], callback :FilterCallback)
 }
 
 internal typealias FilterCallback = ([DataSample]) -> ()
 internal class FilterController :DataFilterProtocol {
     
-    internal func filter(dataStore :DataStore, callback :FilterCallback) {
+    internal func filter(records :[DataSample], callback :FilterCallback) {
         
-        dataStore.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture(), callback: { (records) -> () in
-            var newRecords :[DataSample]? = nil
-            for filterLayer in self.filters {
-                self.pipeline.addOperationWithBlock({ () -> Void in
-                    newRecords = filterLayer(newRecords ?? records)
-                })
-            }
-            self.pipeline.waitUntilAllOperationsAreFinished()
-            callback(newRecords ?? [DataSample]() )
-        })
+        var newRecords :[DataSample]? = nil
+        for filterLayer in self.filters {
+            self.pipeline.addOperationWithBlock({ () -> Void in
+                newRecords = filterLayer(newRecords ?? records)
+            })
+        }
+        self.pipeline.waitUntilAllOperationsAreFinished()
+        callback(newRecords ?? [DataSample]() )
 
     }
 
