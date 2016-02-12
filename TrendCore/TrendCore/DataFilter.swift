@@ -8,35 +8,43 @@
 
 import Foundation
 
+internal typealias FilterCallback = ([DataSample]) -> ()
+
 internal protocol DataFilterProtocol {
     func filter(records :[DataSample], callback :FilterCallback)
 }
 
-internal typealias FilterCallback = ([DataSample]) -> ()
-internal class FilterController :DataFilterProtocol {
+internal class FilterController {
+    
+    private let pipeline :NSOperationQueue = {
+        let pipeline = NSOperationQueue()
+        
+        pipeline.name = "TrendCore.DataFilter Pipeline"
+        pipeline.maxConcurrentOperationCount = 1
+
+        return pipeline
+        }()
+    private typealias FilterLayer = (([DataSample]) -> [DataSample])
+    private var filters = [FilterLayer]()
+        
+}
+
+extension FilterController :DataFilterProtocol {
     
     internal func filter(records :[DataSample], callback :FilterCallback) {
         
         var newRecords :[DataSample]? = nil
+     
         for filterLayer in self.filters {
-            self.pipeline.addOperationWithBlock({ () -> Void in
+            self.pipeline.addOperationWithBlock() {
                 newRecords = filterLayer(newRecords ?? records)
-            })
+            }
         }
         self.pipeline.waitUntilAllOperationsAreFinished()
+        
         callback(newRecords ?? [DataSample]() )
-
+        
     }
-
-    private let pipeline :NSOperationQueue = {
-        let pipeline = NSOperationQueue()
-        pipeline.name = "TrendCore.DataFilter Pipeline"
-        pipeline.maxConcurrentOperationCount = 1
-        return pipeline
-    }()
-    
-    private typealias FilterLayer = (([DataSample]) -> [DataSample])
-    private var filters = [FilterLayer]()
     
 }
 
@@ -51,8 +59,9 @@ internal class TrendFilter :FilterController {
     private let dateInterpolator :FilterLayer = {
         records in
 
-        var lastSample :DataSample? = nil
-        var currentSample :DataSample? = nil
+        var lastSample      :DataSample? = nil
+        var currentSample   :DataSample? = nil
+
         var newRecords = [DataSample]()
         
         for record in records {
@@ -60,7 +69,10 @@ internal class TrendFilter :FilterController {
             
             // Get calendar days since last sample
             var calendarDays = 0
-            if let lastSample = lastSample, currentSample = currentSample {
+            if let 
+                lastSample = lastSample, 
+                currentSample = currentSample 
+            {
                 calendarDays = lastSample.dateSampled.numberOfDaysUntilDateTime(currentSample.dateSampled)
                 if calendarDays > 1 {
                     
@@ -68,22 +80,25 @@ internal class TrendFilter :FilterController {
                     diff = diff / Double(calendarDays)
                     var newWeight = lastSample.value + diff
                     
-                    // for each day, we need to make a new day adding on a spread between dates
                     let components = NSDateComponents()
                     components.day = 1
                     
+                    // for each day, we need to make a new day adding on a spread between dates
                     for day in 1...calendarDays-1 {
                         components.day = day
                         if let 
-                            newDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: lastSample.dateSampled, options: [])
+                            newDate = NSCalendar.currentCalendar().dateByAddingComponents(
+                                components, 
+                                toDate: lastSample.dateSampled, 
+                                options: [] )
                         {
-
                             let newSample = DataSample (
-                                value: newWeight, 
-                                trend: nil, 
-                                dateSampled: newDate, 
-                                dateImported: NSDate(), 
-                                source:.Dummy )
+                                value:          newWeight, 
+                                trend:          nil, 
+                                dateSampled:    newDate, 
+                                dateImported:   NSDate(), 
+                                source:         .Dummy )
+                            
                             newRecords.append(newSample)
                         }
                         newWeight += diff
@@ -104,10 +119,11 @@ internal class TrendFilter :FilterController {
     private let weightTrender :FilterLayer = {
         records in
         
-        var lastSample :DataSample? = nil
-        var currentSample :DataSample? = nil
-        var isFirst = true
-        var newRecords = [DataSample]()
+        var lastSample      :DataSample? = nil
+        var currentSample   :DataSample? = nil
+
+        var isFirst     = true
+        var newRecords  = [DataSample]()
         
         for sample in records {
             currentSample = sample
@@ -115,25 +131,34 @@ internal class TrendFilter :FilterController {
             if isFirst == true {
                 currentSample?.trend = currentSample?.value
                 lastSample = currentSample
+                
                 if let currentSample = currentSample {
                     newRecords.append(currentSample)
                 }
+                
                 isFirst = false
                 continue
             }
             else {
                 var newTrend = currentSample?.value
-                if let lastSample = lastSample, currentSample = currentSample, lastTrend = lastSample.trend {
+
+                if let 
+                    lastSample = lastSample, 
+                    currentSample = currentSample, 
+                    lastTrend = lastSample.trend 
+                {
                     var diff = currentSample.value - lastTrend
                     diff = diff / Double(10)
                     newTrend = lastTrend + diff                    
                 }
+                
                 currentSample?.trend = newTrend
             }
             
             if let currentSample = currentSample {
                 newRecords.append(currentSample)
             }
+            
             lastSample = currentSample
         }
 
