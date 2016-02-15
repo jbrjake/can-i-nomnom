@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import PromiseKit
 
 public struct DataSample {
     var value :Double
@@ -66,9 +67,7 @@ internal class ManagedSample: NSManagedObject {
 }
 
 internal protocol DataStoreProtocol {
-    func add (
-        samples :[DataSample], 
-        completion: Completion )
+    func add ( samples :[DataSample] ) -> Promise< () >
     func remove (
         samples :[DataSample], 
         completion: Completion )
@@ -155,38 +154,38 @@ internal class DataStore :DataStoreProtocol {
     
 // MARK: Internal DataStore Protocol Implementation
     
-    internal func add (
-        samples     :[DataSample], 
-        completion  :Completion ) 
-    {
-        let datedSamples = samples.sort { (sampleA, sampleB) -> Bool in
-            sampleA.dateSampled.compare(sampleB.dateSampled) == .OrderedSame
-        }
-        self.fetch(
-            datedSamples.first?.dateSampled ?? NSDate.distantPast(), 
-            toDate: datedSamples.last?.dateSampled ?? NSDate.distantFuture() ) 
-        { 
-            (existingRecords) -> () in
-            if let mainMoc = self.mainMoc {
-                mainMoc.performBlockAndWait() {
-                    for sample in samples {
-                        var exists = false
-                        for existingSample in existingRecords {
-                            if existingSample == sample {
-                                exists = true
-                                break
+    internal func add( samples:[DataSample] ) -> Promise<()> {
+        return Promise { fulfill, reject in
+            
+            let datedSamples = samples.sort { (sampleA, sampleB) -> Bool in
+                sampleA.dateSampled.compare(sampleB.dateSampled) == .OrderedSame
+            }
+            self.fetch(
+                datedSamples.first?.dateSampled ?? NSDate.distantPast(), 
+                toDate: datedSamples.last?.dateSampled ?? NSDate.distantFuture() ) 
+                { 
+                    (existingRecords) -> () in
+                    if let mainMoc = self.mainMoc {
+                        mainMoc.performBlockAndWait() {
+                            for sample in samples {
+                                var exists = false
+                                for existingSample in existingRecords {
+                                    if existingSample == sample {
+                                        exists = true
+                                        break
+                                    }
+                                }
+                                
+                                if exists == false {
+                                    ManagedSample.add(sample, context: mainMoc)
+                                }
                             }
                         }
-                        
-                        if exists == false {
-                            ManagedSample.add(sample, context: mainMoc)
-                        }
+                        self.save()
+                        fulfill()
                     }
                 }
-                self.save()
-                completion(nil)
             }
-        }
     }
     
     internal func fetch (

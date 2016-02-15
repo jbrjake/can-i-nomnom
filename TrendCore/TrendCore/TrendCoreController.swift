@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PromiseKit
 
 public typealias Completion = ( (NSError?) -> () )
 public typealias FetchWeightsCallback = ( ([DataSample]) -> () )
@@ -30,10 +31,16 @@ public class TrendCoreController {
         { 
             (importedSamples) -> () in
             
-            // Do stuff here to import data
-            self.dataStore.add(importedSamples, completion: { (err) -> () in
-                completion(err)
-            })
+            firstly{
+                self.dataStore.add(importedSamples)
+            }
+            .then {            
+                completion(nil)
+            }
+            .error {
+                err in
+                completion(err as NSError)
+            }
         }
     }
     

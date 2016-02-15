@@ -8,6 +8,7 @@
 
 import XCTest
 @testable import TrendCore
+import PromiseKit
 
 class DataStoreTests: XCTestCase {
     
@@ -59,9 +60,9 @@ class DataStoreTests: XCTestCase {
         self.testPurge()
 
         let addExpectation = self.expectationWithDescription("Add to data store calls back")
-        self.dataStore?.add(samples, completion: { (err) -> () in
+        self.dataStore?.add(samples).then {
             addExpectation.fulfill()
-        })
+        }
         self.waitForExpectationsWithTimeout(10) { (err) -> Void in
             print("No callback for add to data store: \(err)")
         }
@@ -88,15 +89,26 @@ class DataStoreTests: XCTestCase {
     func testNoDupes() {
         
         self.testPurge()
-        self.dataStore?.add(samples, completion: { (err) -> () in
-            self.dataStore?.add(self.samples, completion: { (err2) -> () in
-                self.dataStore?.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture(), callback: { (samples) -> () in
-                    let noDupesExpectation = self.expectationWithDescription("Dupes completed")
-                    XCTAssertEqual(self.samples.count, samples.count, "Dupes entered multiple times")
+        
+        guard let dataStore = self.dataStore else {
+            XCTAssertNotNil(self.dataStore)
+            return
+        }
+
+        let noDupesExpectation = self.expectationWithDescription("Dupes completed")
+
+        firstly {
+            dataStore.add(self.samples)
+        }
+        .then {
+            dataStore.add(self.samples)
+        }
+        .then {
+            dataStore.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture(), callback: { (samples) -> () in
+                XCTAssertEqual(self.samples.count, samples.count, "Dupes entered multiple times")
                     noDupesExpectation.fulfill()
-                })
             })
-        })
+        }
         
         self.waitForExpectationsWithTimeout(10) { (err) -> Void in
             XCTAssertNil(err, "Error waiting for dupes")
