@@ -38,17 +38,29 @@ class DataStoreTests: XCTestCase {
         let fetchExpectation = self.expectationWithDescription("Fetch returns")
         let purgeExpectation = self.expectationWithDescription("Purge calls back")
 
-        self.dataStore?.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture(), callback: { (records) -> () in
-            self.dataStore?.remove(records, completion: { (err) -> () in
-                XCTAssertNil(err, "Error fetching all records")
-                
+        guard let dataStore = dataStore else {
+            XCTAssertNotNil(self.dataStore)
+            return
+        }
+        
+        dataStore.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture(), callback: { (records) -> () in
+            firstly {
+                dataStore.remove(records)
+            }
+            .then {
                 self.dataStore?.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture(), callback: { (remainingRecords) -> () in
                     XCTAssertTrue(remainingRecords.count == 0, "Purge left \(remainingRecords.count ) records behind")
                     fetchExpectation.fulfill()
                 })
-                
-                purgeExpectation.fulfill()
-            })
+            }
+            .always {
+                purgeExpectation.fulfill()                        
+            }
+            .error {
+                err in
+                XCTAssertNil(err, "Error fetching all records")
+            }
+            
         })
         
         self.waitForExpectationsWithTimeout(10) { (err) -> Void in

@@ -67,10 +67,8 @@ internal class ManagedSample: NSManagedObject {
 }
 
 internal protocol DataStoreProtocol {
-    func add ( samples :[DataSample] ) -> Promise< () >
-    func remove (
-        samples :[DataSample], 
-        completion: Completion )
+    func add    ( samples :[DataSample] ) -> Promise< () >
+    func remove ( samples :[DataSample] ) -> Promise< () >
     func fetch (
         fromDate :NSDate, 
         toDate :NSDate, 
@@ -229,28 +227,28 @@ internal class DataStore :DataStoreProtocol {
         
     }
     
-    internal func remove (
-        samples     :[DataSample], 
-        completion  :Completion ) 
+    internal func remove ( samples :[DataSample] ) -> Promise< () >
     {
-        for sample in samples {
-            let fetch = NSFetchRequest(entityName: "ManagedSample")
-            fetch.predicate = NSPredicate(format: "dateSampled = %@ AND sampledValue = %@ AND source = %@",
-                sample.dateSampled,  NSNumber(double:sample.value), sample.source.rawValue
-            )
-            do {
-                if let results = try self.mainMoc?.executeFetchRequest(fetch) as? [NSManagedObject] {
-                    for result in results {
-                        self.mainMoc?.deleteObject(result)
+        return Promise { fulfill, reject in
+            for sample in samples {
+                let fetch = NSFetchRequest(entityName: "ManagedSample")
+                fetch.predicate = NSPredicate(format: "dateSampled = %@ AND sampledValue = %@ AND source = %@",
+                    sample.dateSampled,  NSNumber(double:sample.value), sample.source.rawValue
+                )
+                do {
+                    if let results = try self.mainMoc?.executeFetchRequest(fetch) as? [NSManagedObject] {
+                        for result in results {
+                            self.mainMoc?.deleteObject(result)
+                        }
                     }
                 }
+                catch {
+                    print("Error fetching objects to remove: \(error)")
+                }
             }
-            catch {
-                print("Error fetching objects to remove: \(error)")
-            }
+            self.save()
+            fulfill()
         }
-        self.save()
-        completion(nil)
     }
     
 }
