@@ -71,7 +71,16 @@ class DataStoreTests: XCTestCase {
         self.testPurge()
 
         let addExpectation = self.expectationWithDescription("Add to data store calls back")
-        self.dataStore?.add(samples).then {
+        
+        guard let dataStore = self.dataStore else {
+            XCTAssertNotNil(self.dataStore)
+            return
+        }
+        
+        firstly {
+            dataStore.add(samples)
+        }
+        .then {
             addExpectation.fulfill()
         }
         self.waitForExpectationsWithTimeout(10) { (err) -> Void in
@@ -80,12 +89,9 @@ class DataStoreTests: XCTestCase {
 
         let fetchExpectation = self.expectationWithDescription("Fetch returns")
         
-        guard let dataStore = self.dataStore else {
-            XCTAssertNotNil(self.dataStore)
-            return
+        firstly {
+            dataStore.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture())
         }
-        
-        dataStore.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture())
         .then { fetchedSamples -> Void in
             XCTAssertTrue(fetchedSamples.count == self.samples.count, "Expected \(self.samples.count) samples, got \(fetchedSamples.count)")
             for (index, fetchedSample) in fetchedSamples.enumerate() {

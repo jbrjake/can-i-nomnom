@@ -158,8 +158,7 @@ internal class DataStore :DataStoreProtocol {
         return self.fetch(
             datedSamples.first?.dateSampled ?? NSDate.distantPast(), 
             toDate: datedSamples.last?.dateSampled ?? NSDate.distantFuture() ) 
-        .then { 
-            (existingRecords) -> () in
+        .then { existingRecords -> Void in
             if let mainMoc = self.mainMoc {
                 mainMoc.performBlockAndWait() {
                     for sample in samples {

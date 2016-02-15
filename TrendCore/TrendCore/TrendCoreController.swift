@@ -37,8 +37,7 @@ public class TrendCoreController {
             .then {            
                 completion(nil)
             }
-            .error {
-                err in
+            .error { err in
                 completion(err as NSError)
             }
         }
@@ -49,9 +48,10 @@ public class TrendCoreController {
           toDate: NSDate, 
         callback: FetchWeightsCallback ) 
     {
-        self.dataStore.fetch(fromDate, toDate: toDate)
-        .then {
-            results in
+        firstly {
+            self.dataStore.fetch(fromDate, toDate: toDate)
+        }
+        .then { results in
             self.dataFilter.filter(results, callback: { (filteredResults) -> () in
                 callback(filteredResults)
             })
