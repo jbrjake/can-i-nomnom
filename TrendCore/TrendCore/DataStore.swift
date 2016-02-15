@@ -69,10 +69,7 @@ internal class ManagedSample: NSManagedObject {
 internal protocol DataStoreProtocol {
     func add    ( samples :[DataSample] ) -> Promise< () >
     func remove ( samples :[DataSample] ) -> Promise< () >
-    func fetch (
-        fromDate :NSDate, 
-        toDate :NSDate, 
-        callback: FetchWeightsCallback )
+    func fetch  ( fromDate :NSDate, toDate :NSDate ) -> Promise< [DataSample] >
 }
 
 internal class DataStore :DataStoreProtocol {
@@ -153,78 +150,76 @@ internal class DataStore :DataStoreProtocol {
 // MARK: Internal DataStore Protocol Implementation
     
     internal func add( samples:[DataSample] ) -> Promise<()> {
-        return Promise { fulfill, reject in
-            
-            let datedSamples = samples.sort { (sampleA, sampleB) -> Bool in
-                sampleA.dateSampled.compare(sampleB.dateSampled) == .OrderedSame
-            }
-            self.fetch(
-                datedSamples.first?.dateSampled ?? NSDate.distantPast(), 
-                toDate: datedSamples.last?.dateSampled ?? NSDate.distantFuture() ) 
-                { 
-                    (existingRecords) -> () in
-                    if let mainMoc = self.mainMoc {
-                        mainMoc.performBlockAndWait() {
-                            for sample in samples {
-                                var exists = false
-                                for existingSample in existingRecords {
-                                    if existingSample == sample {
-                                        exists = true
-                                        break
-                                    }
-                                }
-                                
-                                if exists == false {
-                                    ManagedSample.add(sample, context: mainMoc)
-                                }
+        
+        let datedSamples = samples.sort { (sampleA, sampleB) -> Bool in
+            sampleA.dateSampled.compare(sampleB.dateSampled) == .OrderedSame
+        }
+        
+        return self.fetch(
+            datedSamples.first?.dateSampled ?? NSDate.distantPast(), 
+            toDate: datedSamples.last?.dateSampled ?? NSDate.distantFuture() ) 
+        .then { 
+            (existingRecords) -> () in
+            if let mainMoc = self.mainMoc {
+                mainMoc.performBlockAndWait() {
+                    for sample in samples {
+                        var exists = false
+                        for existingSample in existingRecords {
+                            if existingSample == sample {
+                                exists = true
+                                break
                             }
                         }
-                        self.save()
-                        fulfill()
+                        
+                        if exists == false {
+                            ManagedSample.add(sample, context: mainMoc)
+                        }
                     }
                 }
+                self.save()
             }
+        }
     }
     
     internal func fetch (
         fromDate    :NSDate, 
-        toDate      :NSDate, 
-        callback    :FetchWeightsCallback ) 
+        toDate      :NSDate ) -> Promise < [DataSample] > 
     {
-        let fetch = NSFetchRequest(entityName: "ManagedSample")
-        fetch.predicate = NSPredicate(format: "(dateSampled >= %@) AND (dateSampled <= %@)", fromDate, toDate)
-        fetch.sortDescriptors = [ NSSortDescriptor(key: "dateSampled", ascending: true)]
-
-        do {
-            if let managedSamples = try self.mainMoc?.executeFetchRequest(fetch) {
-                var samples = [DataSample]()
-                for managedSample in managedSamples {
-                    if let 
-                        sampledValue = managedSample.sampledValue?.doubleValue,
-                        source = TrendCoreImporterType(rawValue: managedSample.source) 
-                    {
-                        let sample = DataSample (
-                            value: sampledValue, 
-                            trend: nil, 
-                            dateSampled: managedSample.dateSampled, 
-                            dateImported: managedSample.dateImported, 
-                            source:source )
-                        
-                        samples.append(sample)
+        return Promise< [DataSample] > { fulfill, reject in
+            let fetch = NSFetchRequest(entityName: "ManagedSample")
+            fetch.predicate = NSPredicate(format: "(dateSampled >= %@) AND (dateSampled <= %@)", fromDate, toDate)
+            fetch.sortDescriptors = [ NSSortDescriptor(key: "dateSampled", ascending: true)]
+            
+            do {
+                if let managedSamples = try self.mainMoc?.executeFetchRequest(fetch) {
+                    var samples = [DataSample]()
+                    for managedSample in managedSamples {
+                        if let 
+                            sampledValue = managedSample.sampledValue?.doubleValue,
+                            source = TrendCoreImporterType(rawValue: managedSample.source) 
+                        {
+                            let sample = DataSample (
+                                value: sampledValue, 
+                                trend: nil, 
+                                dateSampled: managedSample.dateSampled, 
+                                dateImported: managedSample.dateImported, 
+                                source:source )
+                            
+                            samples.append(sample)
+                        }
                     }
+                    fulfill(samples)
                 }
-                callback(samples)
+                else {
+                    print("Nil samples returned")
+                    fulfill([DataSample]())
+                }
             }
-            else {
-                print("Nil samples returned")
-                callback([DataSample]())
+            catch {
+                print("Error getting samples: \(error)")
+                fulfill([DataSample]())
             }
-        }
-        catch {
-            print("Error getting samples: \(error)")
-            callback([DataSample]())
-        }
-        
+        }        
     }
     
     internal func remove ( samples :[DataSample] ) -> Promise< () >

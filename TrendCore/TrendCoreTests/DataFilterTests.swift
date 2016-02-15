@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import PromiseKit
 
 @testable import TrendCore
 
@@ -34,32 +35,37 @@ class DataFilterTests: XCTestCase {
         let testExpectation = self.expectationWithDescription("Waiting for filtered data")
 
         let dataStore = DataStore()
-        dataStore.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture(), callback: { (records) -> () in
         
+        firstly {
+            dataStore.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture())
+        }
+        .then {
+            records in
+            
             //Purge
             dataStore.remove(records)
-            .then {
-                // Load dummy data
-                TrendCoreController().importDataFrom(.Dummy, fromDate: NSDate.distantPast(), toDate: NSDate.distantFuture()) { (err) -> () in
-                    dataStore.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture(), callback: { (records) -> () in
+        }
+       .then {
+           // Load dummy data
+           TrendCoreController().importDataFrom(.Dummy, fromDate: NSDate.distantPast(), toDate: NSDate.distantFuture()) { (err) -> () in
+               dataStore.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture())
+                .then {
+                    records in
+                    // Filter
+                    self.filter?.filter(records, callback: { (records) -> () in
                         
-                        // Filter
-                        self.filter?.filter(records, callback: { (records) -> () in
-                            
-                            // Now check the samples
-                            let record = records[5]
-                            XCTAssertNotNil(record.trend)
-                            XCTAssert(String(format: "%.1f", record.trend!) == "193.7")
-                            testExpectation.fulfill()
-                            
-                        })
+                        // Now check the samples
+                        let record = records[5]
+                        XCTAssertNotNil(record.trend)
+                        XCTAssert(String(format: "%.1f", record.trend!) == "193.7")
+                        testExpectation.fulfill()
                         
                     })
-                }
-            }
-            
-        })
-        
+               }
+           }
+        }
+
+                
         self.waitForExpectationsWithTimeout(10) { (err) -> Void in
             XCTAssertNil(err, "There was an error: \(err)")
         }
@@ -69,8 +75,10 @@ class DataFilterTests: XCTestCase {
         let testExpectation = self.expectationWithDescription("Waiting for filtered data")
 
         let dataStore = DataStore()
-        dataStore.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture(), callback: { (records) -> () in
-
+        dataStore.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture())
+        .then {
+            records in
+            
             //Purge
             dataStore.remove(records)
             .then {
@@ -84,7 +92,9 @@ class DataFilterTests: XCTestCase {
                     dataStore.remove([recordC, recordD])
                     .then {
                         // Re-fetch
-                        dataStore.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture(), callback: { (records) -> () in
+                        dataStore.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture())
+                        .then {
+                            records in
                             
                             // Filter
                             self.filter?.filter(records, callback: { (filteredRecords) -> () in
@@ -101,11 +111,11 @@ class DataFilterTests: XCTestCase {
                                 
                                 testExpectation.fulfill()
                             })
-                        })
+                        }
                     }
                 }
             }
-        })
+        }
         
         self.waitForExpectationsWithTimeout(10) { (err) -> Void in
             XCTAssertNil(err, "There was an error: \(err)")
