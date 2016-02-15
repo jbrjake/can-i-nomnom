@@ -44,7 +44,7 @@ class DataFilterTests: XCTestCase {
                     dataStore.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture(), callback: { (records) -> () in
 
                         // Filter
-                        filter?.filter(records, callback: { (records) -> () in
+                        self.filter?.filter(records, callback: { (records) -> () in
                             
                             // Now check the samples
                             let record = records[5]
@@ -87,7 +87,7 @@ class DataFilterTests: XCTestCase {
                         dataStore.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture(), callback: { (records) -> () in
                             
                             // Filter
-                            filter?.filter(records, callback: { (filteredRecords) -> () in
+                            self.filter?.filter(records, callback: { (filteredRecords) -> () in
                                 
                                 // Now check samples 2 and 3
                                 let filteredRecordC = filteredRecords[2]

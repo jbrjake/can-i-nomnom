@@ -89,7 +89,7 @@ class DataStoreTests: XCTestCase {
         
         self.testPurge()
         self.dataStore?.add(samples, completion: { (err) -> () in
-            self.dataStore?.add(samples, completion: { (err2) -> () in
+            self.dataStore?.add(self.samples, completion: { (err2) -> () in
                 self.dataStore?.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture(), callback: { (samples) -> () in
                     let noDupesExpectation = self.expectationWithDescription("Dupes completed")
                     XCTAssertEqual(self.samples.count, samples.count, "Dupes entered multiple times")
