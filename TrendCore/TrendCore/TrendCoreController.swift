@@ -18,14 +18,14 @@ public class TrendCoreController {
     
     public func importDataFrom (
         importerType: TrendCoreImporterType, 
-        fromDate: NSDate, 
-        toDate: NSDate ) -> Promise< () >
+            fromDate: NSDate, 
+              toDate: NSDate ) -> Promise< () >
     {
         return DataImporterFactory
-        .importerForType(.Dummy)
-        .samplesForRangeFromDate(fromDate, toDate: toDate)
+        .importerForType( .Dummy )
+        .samplesForRangeFromDate( fromDate, toDate: toDate )
         .then { importedSamples in
-            return self.dataStore.add(importedSamples)
+            return self.dataStore.add( importedSamples )
         }
     }
 
