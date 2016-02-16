@@ -21,24 +21,12 @@ public class TrendCoreController {
         fromDate: NSDate, 
         toDate: NSDate ) -> Promise< () >
     {
-        return Promise< () >( resolvers: { (fulfill, reject) -> Void in
-            DataImporterFactory
-            .importerForType(.Dummy)
-            .samplesForRangeFromDate(fromDate, toDate: toDate) 
-            { (importedSamples) -> () in
-                
-                firstly{
-                    self.dataStore.add(importedSamples)
-                }
-                .then {    
-                    fulfill()
-                }
-                .error { err in
-                    reject(err)
-                }
-                
-            }
-        })
+        return DataImporterFactory
+        .importerForType(.Dummy)
+        .samplesForRangeFromDate(fromDate, toDate: toDate)
+        .then { importedSamples in
+            return self.dataStore.add(importedSamples)
+        }
     }
 
     public func fetchWeightsFrom (

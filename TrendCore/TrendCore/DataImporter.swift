@@ -8,7 +8,7 @@
 
 import Foundation
 import HealthKit
-
+import PromiseKit
 
 public enum TrendCoreImporterType :String {
     case Dummy      = "Dummy"
@@ -17,7 +17,7 @@ public enum TrendCoreImporterType :String {
 
 internal typealias ImporterCallback = (([DataSample]) -> ())
 protocol DataImporterProtocol : class {
-    func samplesForRangeFromDate(fromDate :NSDate, toDate :NSDate, callback :ImporterCallback)
+    func samplesForRangeFromDate(fromDate :NSDate, toDate :NSDate) -> Promise< [DataSample] >
 }
 
 internal class DataImporterFactory {
@@ -59,29 +59,40 @@ private class DummyDataImporter :DataImporterProtocol {
         
     }
     
-    private func samplesForRangeFromDate(fromDate :NSDate, toDate :NSDate, callback :ImporterCallback) {
-        let filteredSamples = samples.filter() {
-            let sample = $0
-            let fromComparison = sample.dateSampled.compare(fromDate)
-            let toComparison = sample.dateSampled.compare(toDate)
-            
-            if (fromComparison == .OrderedDescending || fromComparison == .OrderedSame) &&
-               (  toComparison == .OrderedAscending  ||   toComparison == .OrderedSame)
-            {
-                return true
+    private func samplesForRangeFromDate(fromDate :NSDate, toDate :NSDate) -> Promise< [DataSample] > {
+        return Promise< [DataSample] >(resolvers: { (fulfill, reject) -> Void in
+            let filteredSamples = samples.filter() {
+                let sample = $0
+                let fromComparison = sample.dateSampled.compare(fromDate)
+                let toComparison = sample.dateSampled.compare(toDate)
+                
+                if (fromComparison == .OrderedDescending || fromComparison == .OrderedSame) &&
+                    (  toComparison == .OrderedAscending  ||   toComparison == .OrderedSame)
+                {
+                    return true
+                }
+                else {
+                    return false
+                }
             }
-            else {
-                return false
-            }
-        }
-        callback(filteredSamples)
-    }
+            fulfill(filteredSamples)
+        })
+     }
+
 }
 
 private class HealthKitDataImporter :DataImporterProtocol {
     
     let healthKitStore = HKHealthStore()
     
+    private func samplesForRangeFromDate(fromDate :NSDate, toDate :NSDate) -> Promise< [DataSample] > {
+        return Promise< [DataSample] >(resolvers: { (fulfill, reject) -> Void in
+            self.samplesForRangeFromDate(fromDate, toDate: toDate, callback: { (samples) -> () in
+                fulfill(samples)
+            })
+        })
+    }
+
     private func samplesForRangeFromDate(fromDate :NSDate, toDate :NSDate, callback :ImporterCallback) {
         // Authorization can't happen in the framework, it gets all messed up when it tries to use HealthKit
 /*        authorizeHealthKitAccess { (success, error) -> Void in
