@@ -15,7 +15,6 @@ public enum TrendCoreImporterType :String {
     case HealthKit  = "HealthKit"
 }
 
-internal typealias ImporterCallback = (([DataSample]) -> ())
 protocol DataImporterProtocol : class {
     func samplesForRangeFromDate(fromDate :NSDate, toDate :NSDate) -> Promise< [DataSample] >
 }
@@ -87,37 +86,30 @@ private class HealthKitDataImporter :DataImporterProtocol {
     
     private func samplesForRangeFromDate(fromDate :NSDate, toDate :NSDate) -> Promise< [DataSample] > {
         return Promise< [DataSample] >(resolvers: { (fulfill, reject) -> Void in
-            self.samplesForRangeFromDate(fromDate, toDate: toDate, callback: { (samples) -> () in
-                fulfill(samples)
-            })
+            // Authorization can't happen in the framework, it gets all messed up when it tries to use HealthKit
+            /* authorizeHealthKitAccess { (success, error) -> Void in
+                    if success == true && error == nil {                
+                        callback([ImportedDataSample]())
+                    }
+                    else {
+                        println("HK authorization error: \(error)")
+                        callback([ImportedDataSample]())
+                    }
+                }     
+            */
+            
+            healthKitSamplesFromDate(fromDate, toDate: toDate) { (hkSamples) -> () in
+                var importedSamples = [DataSample]()
+                for sample in hkSamples {
+                    let importedSample = DataSample(value: sample.quantity.doubleValueForUnit(HKUnit.poundUnit()), trend: nil, dateSampled: sample.startDate, dateImported: NSDate(), source: .Dummy)
+                    importedSamples.append(importedSample)
+                }
+                
+                fulfill(importedSamples)
+            }
         })
     }
 
-    private func samplesForRangeFromDate(fromDate :NSDate, toDate :NSDate, callback :ImporterCallback) {
-        // Authorization can't happen in the framework, it gets all messed up when it tries to use HealthKit
-/*        authorizeHealthKitAccess { (success, error) -> Void in
-            if success == true && error == nil {                
-                callback([ImportedDataSample]())
-            }
-            else {
-                println("HK authorization error: \(error)")
-                callback([ImportedDataSample]())
-            }
-        }     
-*/
-        
-        healthKitSamplesFromDate(fromDate, toDate: toDate) { (hkSamples) -> () in
-            var importedSamples = [DataSample]()
-            for sample in hkSamples {
-                let importedSample = DataSample(value: sample.quantity.doubleValueForUnit(HKUnit.poundUnit()), trend: nil, dateSampled: sample.startDate, dateImported: NSDate(), source: .Dummy)
-                importedSamples.append(importedSample)
-            }
-            
-            callback(importedSamples)
-        }
-
-    }
-    
     private func healthKitSamplesFromDate(fromDate :NSDate, toDate :NSDate, completion:([HKQuantitySample]) -> () ) {
         if let sampleType = HKSampleType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass) {
             let dateRangePredicate = HKQuery.predicateForSamplesWithStartDate(fromDate, endDate: toDate, options: .None)
