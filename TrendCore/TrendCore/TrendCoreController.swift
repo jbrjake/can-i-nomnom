@@ -9,9 +9,6 @@
 import Foundation
 import PromiseKit
 
-public typealias Completion = ( (NSError?) -> () )
-public typealias FetchWeightsCallback = ( ([DataSample]) -> () )
-
 public class TrendCoreController {
 
     internal let dataStore   :DataStoreProtocol  = DataStore()
