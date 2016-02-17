@@ -31,18 +31,14 @@ public class TrendCoreController {
 
     public func fetchWeightsFrom (
         fromDate: NSDate, 
-        toDate: NSDate ) -> Promise< [DataSample] >
+          toDate: NSDate ) -> Promise< [DataSample] >
     {
-        return Promise< [DataSample] >(resolvers: { (fulfill, reject) -> Void in
-            firstly {
-                self.dataStore.fetch(fromDate, toDate: toDate)
-            }
-            .then { results in
-                self.dataFilter.filter(results, callback: { (filteredResults) -> () in
-                    fulfill(filteredResults)
-                })
-            }
-        })
+        return firstly {
+            self.dataStore.fetch( fromDate, toDate: toDate )
+        }
+        .then { results in
+            self.dataFilter.filter( results )
+        }
     }
     
 }

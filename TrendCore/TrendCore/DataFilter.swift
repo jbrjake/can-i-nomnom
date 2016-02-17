@@ -7,11 +7,12 @@
 //
 
 import Foundation
+import PromiseKit
 
 internal typealias FilterCallback = ([DataSample]) -> ()
 
 internal protocol DataFilterProtocol {
-    func filter(records :[DataSample], callback :FilterCallback)
+    func filter(records :[DataSample]) -> Promise< [DataSample] >
 }
 
 internal class FilterController {
@@ -31,18 +32,20 @@ internal class FilterController {
 
 extension FilterController :DataFilterProtocol {
     
-    internal func filter(records :[DataSample], callback :FilterCallback) {
+    internal func filter(records :[DataSample]) -> Promise< [DataSample] > {
         
-        var newRecords :[DataSample]? = nil
-     
-        for filterLayer in self.filters {
-            self.pipeline.addOperationWithBlock() {
-                newRecords = filterLayer(newRecords ?? records)
+        return Promise<[DataSample]>(resolvers: { (fulfill, reject) -> Void in
+            var newRecords :[DataSample]? = nil
+            
+            for filterLayer in self.filters {
+                self.pipeline.addOperationWithBlock() {
+                    newRecords = filterLayer(newRecords ?? records)
+                }
             }
-        }
-        self.pipeline.waitUntilAllOperationsAreFinished()
-        
-        callback(newRecords ?? [DataSample]() )
+            self.pipeline.waitUntilAllOperationsAreFinished()
+            
+            fulfill( newRecords ?? [DataSample]() )
+        })
         
     }
     
