@@ -8,16 +8,15 @@
 
 import Foundation
 import HealthKit
-
+import PromiseKit
 
 public enum TrendCoreImporterType :String {
     case Dummy      = "Dummy"
     case HealthKit  = "HealthKit"
 }
 
-internal typealias ImporterCallback = (([DataSample]) -> ())
 protocol DataImporterProtocol : class {
-    func samplesForRangeFromDate(fromDate :NSDate, toDate :NSDate, callback :ImporterCallback)
+    func samplesForRangeFromDate(fromDate :NSDate, toDate :NSDate) -> Promise< [DataSample] >
 }
 
 internal class DataImporterFactory {
@@ -59,54 +58,58 @@ private class DummyDataImporter :DataImporterProtocol {
         
     }
     
-    private func samplesForRangeFromDate(fromDate :NSDate, toDate :NSDate, callback :ImporterCallback) {
-        let filteredSamples = samples.filter() {
-            let sample = $0
-            let fromComparison = sample.dateSampled.compare(fromDate)
-            let toComparison = sample.dateSampled.compare(toDate)
-            
-            if (fromComparison == .OrderedDescending || fromComparison == .OrderedSame) &&
-               (  toComparison == .OrderedAscending  ||   toComparison == .OrderedSame)
-            {
-                return true
+    private func samplesForRangeFromDate(fromDate :NSDate, toDate :NSDate) -> Promise< [DataSample] > {
+        return Promise< [DataSample] >(resolvers: { (fulfill, reject) -> Void in
+            let filteredSamples = samples.filter() {
+                let sample = $0
+                let fromComparison = sample.dateSampled.compare(fromDate)
+                let toComparison = sample.dateSampled.compare(toDate)
+                
+                if (fromComparison == .OrderedDescending || fromComparison == .OrderedSame) &&
+                    (  toComparison == .OrderedAscending  ||   toComparison == .OrderedSame)
+                {
+                    return true
+                }
+                else {
+                    return false
+                }
             }
-            else {
-                return false
-            }
-        }
-        callback(filteredSamples)
-    }
+            fulfill(filteredSamples)
+        })
+     }
+
 }
 
 private class HealthKitDataImporter :DataImporterProtocol {
     
     let healthKitStore = HKHealthStore()
     
-    private func samplesForRangeFromDate(fromDate :NSDate, toDate :NSDate, callback :ImporterCallback) {
-        // Authorization can't happen in the framework, it gets all messed up when it tries to use HealthKit
-/*        authorizeHealthKitAccess { (success, error) -> Void in
-            if success == true && error == nil {                
-                callback([ImportedDataSample]())
-            }
-            else {
-                println("HK authorization error: \(error)")
-                callback([ImportedDataSample]())
-            }
-        }     
-*/
-        
-        healthKitSamplesFromDate(fromDate, toDate: toDate) { (hkSamples) -> () in
-            var importedSamples = [DataSample]()
-            for sample in hkSamples {
-                let importedSample = DataSample(value: sample.quantity.doubleValueForUnit(HKUnit.poundUnit()), trend: nil, dateSampled: sample.startDate, dateImported: NSDate(), source: .Dummy)
-                importedSamples.append(importedSample)
-            }
+    private func samplesForRangeFromDate(fromDate :NSDate, toDate :NSDate) -> Promise< [DataSample] > {
+        return Promise< [DataSample] >(resolvers: { (fulfill, reject) -> Void in
+            // Authorization can't happen in the framework, it gets all messed up when it tries to use HealthKit
+            /* authorizeHealthKitAccess { (success, error) -> Void in
+                    if success == true && error == nil {                
+                        callback([ImportedDataSample]())
+                    }
+                    else {
+                        println("HK authorization error: \(error)")
+                        callback([ImportedDataSample]())
+                    }
+                }     
+            */
             
-            callback(importedSamples)
-        }
-
+            healthKitSamplesFromDate(fromDate, toDate: toDate) { (hkSamples) -> () in
+                var importedSamples = [DataSample]()
+                for sample in hkSamples {
+                    let importedSample = DataSample(value: sample.quantity.doubleValueForUnit(HKUnit.poundUnit()), trend: nil, dateSampled: sample.startDate, dateImported: NSDate(), source: .Dummy)
+                    importedSamples.append(importedSample)
+                }
+                
+                fulfill(importedSamples)
+            }
+        })
     }
-    
+
     private func healthKitSamplesFromDate(fromDate :NSDate, toDate :NSDate, completion:([HKQuantitySample]) -> () ) {
         if let sampleType = HKSampleType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass) {
             let dateRangePredicate = HKQuery.predicateForSamplesWithStartDate(fromDate, endDate: toDate, options: .None)

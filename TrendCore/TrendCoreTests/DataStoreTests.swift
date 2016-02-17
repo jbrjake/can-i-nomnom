@@ -8,6 +8,7 @@
 
 import XCTest
 @testable import TrendCore
+import PromiseKit
 
 class DataStoreTests: XCTestCase {
     
@@ -34,24 +35,35 @@ class DataStoreTests: XCTestCase {
     
     func testPurge() {
         // Purge the data store
-        let fetchExpectation = self.expectationWithDescription("Fetch returns")
         let purgeExpectation = self.expectationWithDescription("Purge calls back")
 
-        self.dataStore?.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture(), callback: { (records) -> () in
-            self.dataStore?.remove(records, completion: { (err) -> () in
-                XCTAssertNil(err, "Error fetching all records")
-                
-                self.dataStore?.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture(), callback: { (remainingRecords) -> () in
-                    XCTAssertTrue(remainingRecords.count == 0, "Purge left \(remainingRecords.count ) records behind")
-                    fetchExpectation.fulfill()
-                })
-                
-                purgeExpectation.fulfill()
-            })
-        })
+        guard let dataStore = dataStore else {
+            XCTAssertNotNil(self.dataStore)
+            return
+        }
+        
+        firstly {
+            dataStore.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture())
+        }
+        .then { records in
+            dataStore.remove(records)
+        }
+        .then {
+            dataStore.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture())
+        }
+        .then { remainingRecords in
+            XCTAssertTrue(remainingRecords.count == 0, "Purge left \(remainingRecords.count ) records behind")
+            
+        }
+        .always {
+            purgeExpectation.fulfill()                        
+        }
+        .error { err in
+            XCTAssertNil(err, "Error purging records")
+        }
         
         self.waitForExpectationsWithTimeout(10) { (err) -> Void in
-            XCTAssertNil(err, "Purge or fetch never called back: \(err)")
+            XCTAssertNil(err, "Purge never called back: \(err)")
         }
     }
     
@@ -59,25 +71,38 @@ class DataStoreTests: XCTestCase {
         self.testPurge()
 
         let addExpectation = self.expectationWithDescription("Add to data store calls back")
-        self.dataStore?.add(samples, completion: { (err) -> () in
+        
+        guard let dataStore = self.dataStore else {
+            XCTAssertNotNil(self.dataStore)
+            return
+        }
+        
+        firstly {
+            dataStore.add(samples)
+        }
+        .then {
             addExpectation.fulfill()
-        })
+        }
         self.waitForExpectationsWithTimeout(10) { (err) -> Void in
             print("No callback for add to data store: \(err)")
         }
 
         let fetchExpectation = self.expectationWithDescription("Fetch returns")
-        self.dataStore?.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture(), callback: { (fetchedSamples) -> () in
-            
+        
+        firstly {
+            dataStore.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture())
+        }
+        .then { fetchedSamples -> Void in
             XCTAssertTrue(fetchedSamples.count == self.samples.count, "Expected \(self.samples.count) samples, got \(fetchedSamples.count)")
             for (index, fetchedSample) in fetchedSamples.enumerate() {
                 let addedSample = self.samples[index]
                 XCTAssertTrue(addedSample == fetchedSample, "Samples did not match: (\(addedSample),\(fetchedSample))")
             }
+        }
+        .always {
+            fetchExpectation.fulfill()                                
+        }
             
-            fetchExpectation.fulfill()
-        })
-        
         self.waitForExpectationsWithTimeout(10) { (err) -> Void in
             print("Fetch didn't return: \(err)")
         }
@@ -88,16 +113,29 @@ class DataStoreTests: XCTestCase {
     func testNoDupes() {
         
         self.testPurge()
-        self.dataStore?.add(samples, completion: { (err) -> () in
-            self.dataStore?.add(samples, completion: { (err2) -> () in
-                self.dataStore?.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture(), callback: { (samples) -> () in
-                    let noDupesExpectation = self.expectationWithDescription("Dupes completed")
-                    XCTAssertEqual(self.samples.count, samples.count, "Dupes entered multiple times")
-                    noDupesExpectation.fulfill()
-                })
-            })
-        })
         
+        guard let dataStore = self.dataStore else {
+            XCTAssertNotNil(self.dataStore)
+            return
+        }
+
+        let noDupesExpectation = self.expectationWithDescription("Dupes completed")
+
+        firstly {
+            dataStore.add(self.samples)
+        }
+        .then {
+            dataStore.add(self.samples)
+        }
+        .then {
+            dataStore.fetch(NSDate.distantPast(), toDate: NSDate.distantFuture())
+        }
+        .then { samples in
+            XCTAssertEqual(self.samples.count, samples.count, "Dupes entered multiple times")
+        } 
+        .always {
+            noDupesExpectation.fulfill()            
+        }
         self.waitForExpectationsWithTimeout(10) { (err) -> Void in
             XCTAssertNil(err, "Error waiting for dupes")
         }

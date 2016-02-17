@@ -45,10 +45,15 @@ class DataImporterTests: XCTestCase {
     func testDummyImporter() {
         let callbackFired = self.expectationWithDescription("Callback for data importer fires")
         var samples :[DataSample]? = nil
-        DataImporterFactory.importerForType(.Dummy).samplesForRangeFromDate(NSDate.distantPast() , toDate: NSDate.distantFuture() ) { (importedSamples) -> () in
+        
+        DataImporterFactory
+        .importerForType(.Dummy)
+        .samplesForRangeFromDate(NSDate.distantPast(), toDate: NSDate.distantFuture())
+        .then { importedSamples -> Void in
             samples = importedSamples
             callbackFired.fulfill()
         }
+        
         self.waitForExpectationsWithTimeout(100, handler: { (err) -> Void in
             XCTAssertNil(err, "Dummy importer did not callback")
             XCTAssertTrue(samples?.count == 6, "Dummy importer did not provide all 6 dummy samples")
@@ -62,7 +67,10 @@ class DataImporterTests: XCTestCase {
         let day1 = originDate.dateByAddingTimeInterval(24*60*60)
         let day4 = originDate.dateByAddingTimeInterval(24*60*60*4)
 
-        DataImporterFactory.importerForType(.Dummy).samplesForRangeFromDate(day1, toDate: day4) { (importedSamples) -> () in
+        DataImporterFactory
+        .importerForType(.Dummy)
+        .samplesForRangeFromDate(day1, toDate: day4)
+        .then { importedSamples -> Void in
             samples = importedSamples
             callbackFired.fulfill()
         }
@@ -80,10 +88,14 @@ class DataImporterTests: XCTestCase {
     func testHealthKitImporter() {
         //let callbackFired = self.expectationWithDescription("Callback for data importer fires")
         var samples :[DataSample]? = nil
-        DataImporterFactory.importerForType(.HealthKit).samplesForRangeFromDate(NSDate.distantPast() , toDate: NSDate.distantFuture() ) { (importedSamples) -> () in
+        DataImporterFactory
+        .importerForType(.HealthKit)
+        .samplesForRangeFromDate(NSDate.distantPast() , toDate: NSDate.distantFuture() )
+        .then { importedSamples -> Void in
             samples = importedSamples
             //callbackFired.fulfill()
         }
+        
 /*        self.waitForExpectationsWithTimeout(100, handler: { (err) -> Void in
             XCTAssertNil(err, "HealthKit importer did not callback")
         })*/

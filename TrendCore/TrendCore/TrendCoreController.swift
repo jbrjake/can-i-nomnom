@@ -7,9 +7,7 @@
 //
 
 import Foundation
-
-public typealias Completion = ( (NSError?) -> () )
-public typealias FetchWeightsCallback = ( ([DataSample]) -> () )
+import PromiseKit
 
 public class TrendCoreController {
 
@@ -21,33 +19,26 @@ public class TrendCoreController {
     public func importDataFrom (
         importerType: TrendCoreImporterType, 
             fromDate: NSDate, 
-              toDate: NSDate, 
-          completion: Completion ) 
+              toDate: NSDate ) -> Promise< () >
     {
-        DataImporterFactory
-        .importerForType(.Dummy)
-        .samplesForRangeFromDate(fromDate, toDate: toDate) 
-        { 
-            (importedSamples) -> () in
-            
-            // Do stuff here to import data
-            self.dataStore.add(importedSamples, completion: { (err) -> () in
-                completion(err)
-            })
+        return DataImporterFactory
+        .importerForType( .Dummy )
+        .samplesForRangeFromDate( fromDate, toDate: toDate )
+        .then { importedSamples in
+            return self.dataStore.add( importedSamples )
         }
     }
-    
+
     public func fetchWeightsFrom (
         fromDate: NSDate, 
-          toDate: NSDate, 
-        callback: FetchWeightsCallback ) 
+          toDate: NSDate ) -> Promise< [DataSample] >
     {
-        self.dataStore.fetch(fromDate, toDate: toDate) { (results) -> () in
-            self.dataFilter.filter(results, callback: { (filteredResults) -> () in
-                callback(filteredResults)
-            })
+        return firstly {
+            self.dataStore.fetch( fromDate, toDate: toDate )
         }
-        
+        .then { results in
+            self.dataFilter.filter( results )
+        }
     }
     
 }

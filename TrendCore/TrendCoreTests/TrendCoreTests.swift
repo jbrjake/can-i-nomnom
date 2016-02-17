@@ -8,6 +8,8 @@
 
 import UIKit
 import XCTest
+import PromiseKit
+
 @testable import TrendCore
 
 class TrendCoreTests: XCTestCase {
@@ -39,17 +41,25 @@ class TrendCoreTests: XCTestCase {
     }
 
     func testImport() {
-        let callbackFired = self.expectationWithDescription("Callback for trend core import triggered")
-        trendCore?.importDataFrom(
-            TrendCoreImporterType.Dummy, 
-            fromDate: NSDate.distantPast(), 
-            toDate: NSDate.distantFuture(), 
-            completion: { 
-                err in
-                callbackFired.fulfill()
-            }
-        )
         
+        guard let trendCore = trendCore else {
+            XCTAssertNotNil(self.trendCore)
+            return
+        }
+        
+        let callbackFired = self.expectationWithDescription("Callback for trend core import triggered")
+
+        firstly {
+            trendCore.importDataFrom(
+                TrendCoreImporterType.Dummy, 
+                fromDate: NSDate.distantPast(), 
+                toDate: NSDate.distantFuture()
+            )
+        }
+        .then {
+            callbackFired.fulfill()
+        }
+
         self.waitForExpectationsWithTimeout(1, handler: { (err) -> Void in
             XCTAssertNil(err, "TrendCore did not callback from import")
         })
@@ -61,18 +71,20 @@ class TrendCoreTests: XCTestCase {
         // The DataStore tests can run in parallel with the TrendCore tests, leaving the DB purged between calls
         testImport()
         
+        guard let trendCore = trendCore else { 
+            XCTAssertNotNil(self.trendCore)
+            return
+        }
+        
         let hasSamples = self.expectationWithDescription("Samples exist")
         
-        trendCore?.fetchWeightsFrom(
-            NSDate.distantPast() , 
-            toDate:NSDate.distantFuture(), 
-            callback: { 
-                (samples) -> () in
-                
-                XCTAssertEqual(samples.count, 6, "The dummy importer gives 6 samples, not \(samples.count)")
-                hasSamples.fulfill()
-            }
-        )
+        firstly {
+            trendCore.fetchWeightsFrom( NSDate.distantPast(), toDate:NSDate.distantFuture() )
+        }
+        .then { samples -> Void in
+            XCTAssertEqual(samples.count, 6, "The dummy importer gives 6 samples, not \(samples.count)")
+            hasSamples.fulfill()            
+        }
         
         self.waitForExpectationsWithTimeout(1, handler: { (err) -> Void in
             XCTAssertNil(err, "TrendCore did not return samples")

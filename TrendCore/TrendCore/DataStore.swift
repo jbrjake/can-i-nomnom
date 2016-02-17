@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import PromiseKit
 
 public struct DataSample {
     var value :Double
@@ -66,16 +67,9 @@ internal class ManagedSample: NSManagedObject {
 }
 
 internal protocol DataStoreProtocol {
-    func add (
-        samples :[DataSample], 
-        completion: Completion )
-    func remove (
-        samples :[DataSample], 
-        completion: Completion )
-    func fetch (
-        fromDate :NSDate, 
-        toDate :NSDate, 
-        callback: FetchWeightsCallback )
+    func add    ( samples :[DataSample] ) -> Promise< () >
+    func remove ( samples :[DataSample] ) -> Promise< () >
+    func fetch  ( fromDate :NSDate, toDate :NSDate ) -> Promise< [DataSample] >
 }
 
 internal class DataStore :DataStoreProtocol {
@@ -155,18 +149,16 @@ internal class DataStore :DataStoreProtocol {
     
 // MARK: Internal DataStore Protocol Implementation
     
-    internal func add (
-        samples     :[DataSample], 
-        completion  :Completion ) 
-    {
+    internal func add( samples:[DataSample] ) -> Promise<()> {
+        
         let datedSamples = samples.sort { (sampleA, sampleB) -> Bool in
             sampleA.dateSampled.compare(sampleB.dateSampled) == .OrderedSame
         }
-        self.fetch(
+        
+        return self.fetch(
             datedSamples.first?.dateSampled ?? NSDate.distantPast(), 
             toDate: datedSamples.last?.dateSampled ?? NSDate.distantFuture() ) 
-        { 
-            (existingRecords) -> () in
+        .then { existingRecords -> Void in
             if let mainMoc = self.mainMoc {
                 mainMoc.performBlockAndWait() {
                     for sample in samples {
@@ -184,74 +176,73 @@ internal class DataStore :DataStoreProtocol {
                     }
                 }
                 self.save()
-                completion(nil)
             }
         }
     }
     
     internal func fetch (
         fromDate    :NSDate, 
-        toDate      :NSDate, 
-        callback    :FetchWeightsCallback ) 
+        toDate      :NSDate ) -> Promise < [DataSample] > 
     {
-        let fetch = NSFetchRequest(entityName: "ManagedSample")
-        fetch.predicate = NSPredicate(format: "(dateSampled >= %@) AND (dateSampled <= %@)", fromDate, toDate)
-        fetch.sortDescriptors = [ NSSortDescriptor(key: "dateSampled", ascending: true)]
-
-        do {
-            if let managedSamples = try self.mainMoc?.executeFetchRequest(fetch) {
-                var samples = [DataSample]()
-                for managedSample in managedSamples {
-                    if let 
-                        sampledValue = managedSample.sampledValue?.doubleValue,
-                        source = TrendCoreImporterType(rawValue: managedSample.source) 
-                    {
-                        let sample = DataSample (
-                            value: sampledValue, 
-                            trend: nil, 
-                            dateSampled: managedSample.dateSampled, 
-                            dateImported: managedSample.dateImported, 
-                            source:source )
-                        
-                        samples.append(sample)
-                    }
-                }
-                callback(samples)
-            }
-            else {
-                print("Nil samples returned")
-                callback([DataSample]())
-            }
-        }
-        catch {
-            print("Error getting samples: \(error)")
-            callback([DataSample]())
-        }
-        
-    }
-    
-    internal func remove (
-        samples     :[DataSample], 
-        completion  :Completion ) 
-    {
-        for sample in samples {
+        return Promise< [DataSample] > { fulfill, reject in
             let fetch = NSFetchRequest(entityName: "ManagedSample")
-            fetch.predicate = NSPredicate(format: "dateSampled = %@ AND sampledValue = %@ AND source = %@",
-                sample.dateSampled,  NSNumber(double:sample.value), sample.source.rawValue
-            )
+            fetch.predicate = NSPredicate(format: "(dateSampled >= %@) AND (dateSampled <= %@)", fromDate, toDate)
+            fetch.sortDescriptors = [ NSSortDescriptor(key: "dateSampled", ascending: true)]
+            
             do {
-                if let results = try self.mainMoc?.executeFetchRequest(fetch) as? [NSManagedObject] {
-                    for result in results {
-                        self.mainMoc?.deleteObject(result)
+                if let managedSamples = try self.mainMoc?.executeFetchRequest(fetch) {
+                    var samples = [DataSample]()
+                    for managedSample in managedSamples {
+                        if let 
+                            sampledValue = managedSample.sampledValue?.doubleValue,
+                            source = TrendCoreImporterType(rawValue: managedSample.source) 
+                        {
+                            let sample = DataSample (
+                                value: sampledValue, 
+                                trend: nil, 
+                                dateSampled: managedSample.dateSampled, 
+                                dateImported: managedSample.dateImported, 
+                                source:source )
+                            
+                            samples.append(sample)
+                        }
                     }
+                    fulfill(samples)
+                }
+                else {
+                    print("Nil samples returned")
+                    fulfill([DataSample]())
                 }
             }
             catch {
-                print("Error fetching objects to remove: \(error)")
+                print("Error getting samples: \(error)")
+                fulfill([DataSample]())
             }
+        }        
+    }
+    
+    internal func remove ( samples :[DataSample] ) -> Promise< () >
+    {
+        return Promise { fulfill, reject in
+            for sample in samples {
+                let fetch = NSFetchRequest(entityName: "ManagedSample")
+                fetch.predicate = NSPredicate(format: "dateSampled = %@ AND sampledValue = %@ AND source = %@",
+                    sample.dateSampled,  NSNumber(double:sample.value), sample.source.rawValue
+                )
+                do {
+                    if let results = try self.mainMoc?.executeFetchRequest(fetch) as? [NSManagedObject] {
+                        for result in results {
+                            self.mainMoc?.deleteObject(result)
+                        }
+                    }
+                }
+                catch {
+                    print("Error fetching objects to remove: \(error)")
+                }
+            }
+            self.save()
+            fulfill()
         }
-        self.save()
-        completion(nil)
     }
     
 }
