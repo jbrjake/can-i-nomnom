@@ -9,8 +9,6 @@
 import Foundation
 import PromiseKit
 
-internal typealias FilterCallback = ([DataSample]) -> ()
-
 internal protocol DataFilterProtocol {
     func filter(records :[DataSample]) -> Promise< [DataSample] >
 }
