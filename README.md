@@ -3,36 +3,71 @@ Can I Nom Nom?
 
 Cinn cuts through the noise and lets you see how your diet is doing. It strips away all the day-to-day fluctuations in your weight and just shows your progress over time. Cinn lets you know at a glance if it's time to get serious or a good day to indulge.
 
-Features
---------
+Roadmap 
+-------
 
-### Version 0.5 (iPhone-only) ###
+### 0.1 Complete ###
 
-#### Model ####
+* Framework to read data from a dummy importer, store it in Core Data
+	* TrendCore framework with API to fetch weights for date ranges and add dates from an import source
+	* Dummy importer for testing
+	* Core Data persistence for imported data
+* Filtering on the data
+	* Fill in gaps with interpolated values
+	* Calculate trend weights for the data
+* Code coverage
 
-* Read daily averages from HealthKit
-* Import weight to CoreData
-* Fill in gaps with a simple interpolation
-* Calculate 10-day moving averages
+### 0.2 ###
 
-#### UI ####
+* Display the weight trendline on a UIView
+	* View model that takes in data samples for a range of dates and outputs arrays of x and y samples from dates and trend values respectively.
+	* View whose controller requests samples from all dates and plots them
 
-* See a progress trendline on the phone app
-* See a yes/no progress indicator on the phone app
+### 0.3 ###
 
-### Version 1 (includes Watch) ###
+* Assessor to determine whether the trend is good or bad
+	* Owned by trend core
+	* New public api to get its decision
+* UI to display whether the trend is good or bad
+	* View model that takes in an assessment for a range of dates
+	* View whose controller requests samples from all dates and plots them
 
-#### UI ####
+### 0.4 ###
 
-* See a progress trendline on the watch app
-* See a yes/no progress indicator on a watch glance
+* Reading from HealthKit
+
+### 0.5 ###
+
+* Publish phone app:
+	* See a progress trendline for the past month
+	* See a yes/no progress indicator
+
+### 0.6 ###
+
+* Publish watch app
+	* See a progress trendline on a glance
+	* See a yes/no progress indicator on a complication
+	
+### 0.7 ###
+
+* Enter your weight from your watch
+
+### 0.8 ###
+
+* Touch gestures on the phone to scale the date range
+	* "Snap" to week, month, year, and all-time views
+
+### 0.9 ###
+
+* Share trend lines on Twitter
+
+### 1.0 ###
+
+* Polish
 
 ### Long-Term ###
 
-* Enter your weight from your watch.
-* Share trend lines on Twitter
 * Predict future weight based on trend
-* Switch between week, month, year, and all-time views for trendline
 
 Concept
 -------
@@ -63,9 +98,8 @@ I want this project to be as modular and testable as possible. That means using 
 #### Data Import Controller ####
 
 * Reads data using an importer.
-	* Importers provide 1 weight value for each date.
-	* Reads across ranges of dates
-	
+	* Importers provide <= 1 weight value for each date.
+	* Reads across ranges of dates	
 * Feeds data to the data store controller
 
 #### Data Store Controller ####
@@ -74,15 +108,13 @@ I want this project to be as modular and testable as possible. That means using 
 * Provides CRUD for reading, writing, and transforming weights
 	* Transformations include trend calculations
 
-##### WeightModel #####
+##### DataSample #####
 
 The data model used by the data store controller for representing weights:
 
 * Weight
 * Date
-* Trend transformation
-	* Interpolation of missing dates will occur here
-	* Trends will not be stored, trading cpu efficiency for less state to manage
+* Trend
 
 ### TrendViewModel ###
 
@@ -92,41 +124,6 @@ The data model used by the data store controller for representing weights:
 
 * Displays a line chart, drawing data from the view model.
 * Sends UI events to the view model
-
-Milestones
-----------
-
-### 0.1 ###
-
-Goal: Framework to read data from a dummy importer, store it in Core Data
-
-1. TrendCore framework and classes stubbed out, with methods
-2. Unit tests for methods
-3. Build a dummy importer
-4. Get the data import controller to read from the importer
-5. Set up Core Data, except the trend transformation
-6. Get the data store controller to write from the import controller to CD
-7. Test the public api for the controller by returning weights for date ranges
-
-### 0.2 ###
-
-Goals: Reading from HealthKit and trending
-
-### 0.3 ###
-
-Goal: figure out yes/no stuff. who owns that, trend core? does it return a bool or a value? What is that value?
-
-### 0.4 ###
-
-Goal: Framework to display yes/no progress indicator data
-
-### 0.5 ###
-
-Goal: Framework to display weight data trendline
-
-### 1.0 ###
-
-Goal: Complete watch support
 
 Deep Dive: TrendCore 
 --------------------
@@ -173,7 +170,7 @@ So that stuff will form the public api protocol vended by the TrendCore framewor
 
 While this won't be visible in the public api, internally the core data stack is accessed through a certain protocol to do specific things:
 
-* Add samples to core data
+* Add samples from a source to core data
 * Reads samples from core data
 * Deletes samples from core data
 
