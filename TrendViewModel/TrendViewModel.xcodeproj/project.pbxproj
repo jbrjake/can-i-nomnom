@@ -10,6 +10,7 @@
 		747D00F61B51654E00E6A46A /* TrendViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 747D00F51B51654E00E6A46A /* TrendViewModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		747D00FC1B51654E00E6A46A /* TrendViewModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 747D00F01B51654E00E6A46A /* TrendViewModel.framework */; };
 		747D01031B51654E00E6A46A /* TrendViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747D01021B51654E00E6A46A /* TrendViewModelTests.swift */; };
+		74BFE5B41C78222E001560A7 /* TrendCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74BFE5AF1C78221F001560A7 /* TrendCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -20,6 +21,27 @@
 			remoteGlobalIDString = 747D00EF1B51654E00E6A46A;
 			remoteInfo = TrendViewModel;
 		};
+		74BFE5AE1C78221F001560A7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 74BFE5A91C78221F001560A7 /* TrendCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 747D009B1B5164AB00E6A46A;
+			remoteInfo = TrendCore;
+		};
+		74BFE5B01C78221F001560A7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 74BFE5A91C78221F001560A7 /* TrendCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 747D00A61B5164AB00E6A46A;
+			remoteInfo = TrendCoreTests;
+		};
+		74BFE5B21C782226001560A7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 74BFE5A91C78221F001560A7 /* TrendCore.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 747D009A1B5164AB00E6A46A;
+			remoteInfo = TrendCore;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +51,7 @@
 		747D00FB1B51654E00E6A46A /* TrendViewModelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrendViewModelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		747D01011B51654E00E6A46A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		747D01021B51654E00E6A46A /* TrendViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendViewModelTests.swift; sourceTree = "<group>"; };
+		74BFE5A91C78221F001560A7 /* TrendCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TrendCore.xcodeproj; path = ../../TrendCore/TrendCore.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74BFE5B41C78222E001560A7 /* TrendCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,9 +121,19 @@
 		747D01001B51654E00E6A46A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				74BFE5A91C78221F001560A7 /* TrendCore.xcodeproj */,
 				747D01011B51654E00E6A46A /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		74BFE5AA1C78221F001560A7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				74BFE5AF1C78221F001560A7 /* TrendCore.framework */,
+				74BFE5B11C78221F001560A7 /* TrendCoreTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -128,6 +162,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				74BFE5B31C782226001560A7 /* PBXTargetDependency */,
 			);
 			name = TrendViewModel;
 			productName = TrendViewModel;
@@ -180,6 +215,12 @@
 			mainGroup = 747D00E61B51654E00E6A46A;
 			productRefGroup = 747D00F11B51654E00E6A46A /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 74BFE5AA1C78221F001560A7 /* Products */;
+					ProjectRef = 74BFE5A91C78221F001560A7 /* TrendCore.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				747D00EF1B51654E00E6A46A /* TrendViewModel */,
@@ -187,6 +228,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		74BFE5AF1C78221F001560A7 /* TrendCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TrendCore.framework;
+			remoteRef = 74BFE5AE1C78221F001560A7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		74BFE5B11C78221F001560A7 /* TrendCoreTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = TrendCoreTests.xctest;
+			remoteRef = 74BFE5B01C78221F001560A7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		747D00EE1B51654E00E6A46A /* Resources */ = {
@@ -228,6 +286,11 @@
 			isa = PBXTargetDependency;
 			target = 747D00EF1B51654E00E6A46A /* TrendViewModel */;
 			targetProxy = 747D00FD1B51654E00E6A46A /* PBXContainerItemProxy */;
+		};
+		74BFE5B31C782226001560A7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TrendCore;
+			targetProxy = 74BFE5B21C782226001560A7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
