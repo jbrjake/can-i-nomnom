@@ -1,0 +1,532 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		743077FD1B97EE4000558A3E /* DataFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743077FC1B97EE4000558A3E /* DataFilter.swift */; };
+		743077FF1B97F95200558A3E /* DataFilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743077FE1B97F95200558A3E /* DataFilterTests.swift */; };
+		744BB9981B9019E400DEE3FD /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744BB9971B9019E400DEE3FD /* DataStore.swift */; };
+		744BB99B1B916B3E00DEE3FD /* DataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744BB99A1B916B3E00DEE3FD /* DataStoreTests.swift */; };
+		744BB9A01B937F1C00DEE3FD /* TrendCoreModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 744BB99E1B937F1C00DEE3FD /* TrendCoreModel.xcdatamodeld */; };
+		747D00A11B5164AB00E6A46A /* TrendCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 747D00A01B5164AB00E6A46A /* TrendCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		747D00A71B5164AB00E6A46A /* TrendCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 747D009B1B5164AB00E6A46A /* TrendCore.framework */; };
+		747D00AE1B5164AB00E6A46A /* TrendCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747D00AD1B5164AB00E6A46A /* TrendCoreTests.swift */; };
+		747D01331B51875A00E6A46A /* TrendCoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747D01321B51875A00E6A46A /* TrendCoreController.swift */; };
+		747D01391B59F0A500E6A46A /* DataImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747D01381B59F0A500E6A46A /* DataImporter.swift */; };
+		747D013C1B5B4F1200E6A46A /* DataImporterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747D013B1B5B4F1200E6A46A /* DataImporterTests.swift */; };
+		749B21261C7054CE001B2C21 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 749B21251C7054CE001B2C21 /* PromiseKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		747D00A81B5164AB00E6A46A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 747D00921B5164AB00E6A46A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 747D009A1B5164AB00E6A46A;
+			remoteInfo = TrendCore;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		743077FC1B97EE4000558A3E /* DataFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataFilter.swift; sourceTree = "<group>"; };
+		743077FE1B97F95200558A3E /* DataFilterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataFilterTests.swift; sourceTree = "<group>"; };
+		744BB9971B9019E400DEE3FD /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		744BB99A1B916B3E00DEE3FD /* DataStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStoreTests.swift; sourceTree = "<group>"; };
+		744BB99F1B937F1C00DEE3FD /* TrendCoreModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TrendCoreModel.xcdatamodel; sourceTree = "<group>"; };
+		747D009B1B5164AB00E6A46A /* TrendCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrendCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		747D009F1B5164AB00E6A46A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		747D00A01B5164AB00E6A46A /* TrendCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrendCore.h; sourceTree = "<group>"; };
+		747D00A61B5164AB00E6A46A /* TrendCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrendCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		747D00AC1B5164AB00E6A46A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		747D00AD1B5164AB00E6A46A /* TrendCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendCoreTests.swift; sourceTree = "<group>"; };
+		747D01321B51875A00E6A46A /* TrendCoreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendCoreController.swift; sourceTree = "<group>"; };
+		747D01381B59F0A500E6A46A /* DataImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataImporter.swift; sourceTree = "<group>"; };
+		747D013B1B5B4F1200E6A46A /* DataImporterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataImporterTests.swift; sourceTree = "<group>"; };
+		749B21251C7054CE001B2C21 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = ../../Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		747D00971B5164AB00E6A46A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				749B21261C7054CE001B2C21 /* PromiseKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		747D00A31B5164AB00E6A46A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				747D00A71B5164AB00E6A46A /* TrendCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		743077FB1B97EE1400558A3E /* Data Filter */ = {
+			isa = PBXGroup;
+			children = (
+				743077FC1B97EE4000558A3E /* DataFilter.swift */,
+			);
+			name = "Data Filter";
+			sourceTree = "<group>";
+		};
+		744BB99C1B937E0300DEE3FD /* Data Importer */ = {
+			isa = PBXGroup;
+			children = (
+				747D01381B59F0A500E6A46A /* DataImporter.swift */,
+			);
+			name = "Data Importer";
+			sourceTree = "<group>";
+		};
+		744BB99D1B937E1400DEE3FD /* Data Store */ = {
+			isa = PBXGroup;
+			children = (
+				744BB9971B9019E400DEE3FD /* DataStore.swift */,
+				744BB99E1B937F1C00DEE3FD /* TrendCoreModel.xcdatamodeld */,
+			);
+			name = "Data Store";
+			sourceTree = "<group>";
+		};
+		747D00911B5164AB00E6A46A = {
+			isa = PBXGroup;
+			children = (
+				747D009D1B5164AB00E6A46A /* TrendCore */,
+				747D00AA1B5164AB00E6A46A /* TrendCoreTests */,
+				747D009C1B5164AB00E6A46A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		747D009C1B5164AB00E6A46A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				747D009B1B5164AB00E6A46A /* TrendCore.framework */,
+				747D00A61B5164AB00E6A46A /* TrendCoreTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		747D009D1B5164AB00E6A46A /* TrendCore */ = {
+			isa = PBXGroup;
+			children = (
+				747D00A01B5164AB00E6A46A /* TrendCore.h */,
+				747D01321B51875A00E6A46A /* TrendCoreController.swift */,
+				744BB99D1B937E1400DEE3FD /* Data Store */,
+				744BB99C1B937E0300DEE3FD /* Data Importer */,
+				743077FB1B97EE1400558A3E /* Data Filter */,
+				747D009E1B5164AB00E6A46A /* Supporting Files */,
+			);
+			path = TrendCore;
+			sourceTree = "<group>";
+		};
+		747D009E1B5164AB00E6A46A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				749B21251C7054CE001B2C21 /* PromiseKit.framework */,
+				747D009F1B5164AB00E6A46A /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		747D00AA1B5164AB00E6A46A /* TrendCoreTests */ = {
+			isa = PBXGroup;
+			children = (
+				747D00AD1B5164AB00E6A46A /* TrendCoreTests.swift */,
+				747D013B1B5B4F1200E6A46A /* DataImporterTests.swift */,
+				744BB99A1B916B3E00DEE3FD /* DataStoreTests.swift */,
+				743077FE1B97F95200558A3E /* DataFilterTests.swift */,
+				747D00AB1B5164AB00E6A46A /* Supporting Files */,
+			);
+			path = TrendCoreTests;
+			sourceTree = "<group>";
+		};
+		747D00AB1B5164AB00E6A46A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				747D00AC1B5164AB00E6A46A /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		747D00981B5164AB00E6A46A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				747D00A11B5164AB00E6A46A /* TrendCore.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		747D009A1B5164AB00E6A46A /* TrendCore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 747D00B11B5164AB00E6A46A /* Build configuration list for PBXNativeTarget "TrendCore" */;
+			buildPhases = (
+				747D00961B5164AB00E6A46A /* Sources */,
+				747D00971B5164AB00E6A46A /* Frameworks */,
+				747D00981B5164AB00E6A46A /* Headers */,
+				747D00991B5164AB00E6A46A /* Resources */,
+				74BFE5A71C7121A2001560A7 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TrendCore;
+			productName = TrendCore;
+			productReference = 747D009B1B5164AB00E6A46A /* TrendCore.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		747D00A51B5164AB00E6A46A /* TrendCoreTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 747D00B41B5164AB00E6A46A /* Build configuration list for PBXNativeTarget "TrendCoreTests" */;
+			buildPhases = (
+				747D00A21B5164AB00E6A46A /* Sources */,
+				747D00A31B5164AB00E6A46A /* Frameworks */,
+				747D00A41B5164AB00E6A46A /* Resources */,
+				74BFE5A81C718328001560A7 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				747D00A91B5164AB00E6A46A /* PBXTargetDependency */,
+			);
+			name = TrendCoreTests;
+			productName = TrendCoreTests;
+			productReference = 747D00A61B5164AB00E6A46A /* TrendCoreTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		747D00921B5164AB00E6A46A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Jonathon Rubin";
+				TargetAttributes = {
+					747D009A1B5164AB00E6A46A = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					747D00A51B5164AB00E6A46A = {
+						CreatedOnToolsVersion = 6.4;
+					};
+				};
+			};
+			buildConfigurationList = 747D00951B5164AB00E6A46A /* Build configuration list for PBXProject "TrendCore" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 747D00911B5164AB00E6A46A;
+			productRefGroup = 747D009C1B5164AB00E6A46A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				747D009A1B5164AB00E6A46A /* TrendCore */,
+				747D00A51B5164AB00E6A46A /* TrendCoreTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		747D00991B5164AB00E6A46A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		747D00A41B5164AB00E6A46A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		74BFE5A71C7121A2001560A7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/../Carthage/Build/iOS/PromiseKit.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		74BFE5A81C718328001560A7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/../Carthage/Build/iOS/PromiseKit.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		747D00961B5164AB00E6A46A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				743077FD1B97EE4000558A3E /* DataFilter.swift in Sources */,
+				747D01391B59F0A500E6A46A /* DataImporter.swift in Sources */,
+				744BB9981B9019E400DEE3FD /* DataStore.swift in Sources */,
+				747D01331B51875A00E6A46A /* TrendCoreController.swift in Sources */,
+				744BB9A01B937F1C00DEE3FD /* TrendCoreModel.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		747D00A21B5164AB00E6A46A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				747D013C1B5B4F1200E6A46A /* DataImporterTests.swift in Sources */,
+				747D00AE1B5164AB00E6A46A /* TrendCoreTests.swift in Sources */,
+				744BB99B1B916B3E00DEE3FD /* DataStoreTests.swift in Sources */,
+				743077FF1B97F95200558A3E /* DataFilterTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		747D00A91B5164AB00E6A46A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 747D009A1B5164AB00E6A46A /* TrendCore */;
+			targetProxy = 747D00A81B5164AB00E6A46A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		747D00AF1B5164AB00E6A46A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		747D00B01B5164AB00E6A46A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		747D00B21B5164AB00E6A46A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../Carthage/Build/iOS/";
+				INFOPLIST_FILE = TrendCore/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "us.ubiquit.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		747D00B31B5164AB00E6A46A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../Carthage/Build/iOS/";
+				INFOPLIST_FILE = TrendCore/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "us.ubiquit.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		747D00B51B5164AB00E6A46A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../Carthage/Build/iOS";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = TrendCoreTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "us.ubiquit.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		747D00B61B5164AB00E6A46A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../Carthage/Build/iOS";
+				INFOPLIST_FILE = TrendCoreTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "us.ubiquit.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		747D00951B5164AB00E6A46A /* Build configuration list for PBXProject "TrendCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				747D00AF1B5164AB00E6A46A /* Debug */,
+				747D00B01B5164AB00E6A46A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		747D00B11B5164AB00E6A46A /* Build configuration list for PBXNativeTarget "TrendCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				747D00B21B5164AB00E6A46A /* Debug */,
+				747D00B31B5164AB00E6A46A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		747D00B41B5164AB00E6A46A /* Build configuration list for PBXNativeTarget "TrendCoreTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				747D00B51B5164AB00E6A46A /* Debug */,
+				747D00B61B5164AB00E6A46A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		744BB99E1B937F1C00DEE3FD /* TrendCoreModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				744BB99F1B937F1C00DEE3FD /* TrendCoreModel.xcdatamodel */,
+			);
+			currentVersion = 744BB99F1B937F1C00DEE3FD /* TrendCoreModel.xcdatamodel */;
+			path = TrendCoreModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 747D00921B5164AB00E6A46A /* Project object */;
+}
