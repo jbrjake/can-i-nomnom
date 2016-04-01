@@ -11,6 +11,7 @@
 		747D00FC1B51654E00E6A46A /* TrendViewModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 747D00F01B51654E00E6A46A /* TrendViewModel.framework */; };
 		747D01031B51654E00E6A46A /* TrendViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747D01021B51654E00E6A46A /* TrendViewModelTests.swift */; };
 		74BFE5B41C78222E001560A7 /* TrendCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74BFE5AF1C78221F001560A7 /* TrendCore.framework */; };
+		74BFE5B61C783D79001560A7 /* TrendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BFE5B51C783D79001560A7 /* TrendViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		747D01011B51654E00E6A46A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		747D01021B51654E00E6A46A /* TrendViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendViewModelTests.swift; sourceTree = "<group>"; };
 		74BFE5A91C78221F001560A7 /* TrendCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TrendCore.xcodeproj; path = ../../TrendCore/TrendCore.xcodeproj; sourceTree = "<group>"; };
+		74BFE5B51C783D79001560A7 /* TrendViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				747D00F51B51654E00E6A46A /* TrendViewModel.h */,
+				74BFE5B51C783D79001560A7 /* TrendViewModel.swift */,
 				747D00F31B51654E00E6A46A /* Supporting Files */,
 			);
 			path = TrendViewModel;
@@ -193,7 +196,7 @@
 		747D00E71B51654E00E6A46A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "Jonathon Rubin";
 				TargetAttributes = {
@@ -268,6 +271,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74BFE5B61C783D79001560A7 /* TrendViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,6 +391,7 @@
 		747D01071B51654E00E6A46A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -396,12 +401,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		747D01081B51654E00E6A46A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;

@@ -12,8 +12,8 @@ import PromiseKit
 
 public struct DataSample {
     var value :Double
-    var trend :Double?
-    var dateSampled :NSDate
+    public var trend :Double?
+    public var dateSampled :NSDate
     var dateImported :NSDate
     var source :TrendCoreImporterType
 }
