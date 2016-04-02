@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		7423F9D11CAE244A00081AF9 /* TrendViewModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7423F9D01CAE244A00081AF9 /* TrendViewModel.framework */; };
+		7423F9DA1CB058A200081AF9 /* TrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7423F9D91CB058A200081AF9 /* TrendViewController.swift */; };
+		7423F9DC1CB058BF00081AF9 /* TrendViewStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7423F9DB1CB058BF00081AF9 /* TrendViewStoryboard.storyboard */; };
+		7423F9DE1CB05A4500081AF9 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7423F9DD1CB05A4500081AF9 /* Charts.framework */; };
 		747D011C1B51659500E6A46A /* TrendViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 747D011B1B51659500E6A46A /* TrendViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		747D01221B51659500E6A46A /* TrendViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 747D01161B51659500E6A46A /* TrendViewController.framework */; };
 		747D01291B51659500E6A46A /* TrendViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747D01281B51659500E6A46A /* TrendViewControllerTests.swift */; };
@@ -25,6 +28,9 @@
 
 /* Begin PBXFileReference section */
 		7423F9D01CAE244A00081AF9 /* TrendViewModel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TrendViewModel.framework; path = "../TrendViewModel/build/Debug-iphoneos/TrendViewModel.framework"; sourceTree = "<group>"; };
+		7423F9D91CB058A200081AF9 /* TrendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendViewController.swift; sourceTree = "<group>"; };
+		7423F9DB1CB058BF00081AF9 /* TrendViewStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TrendViewStoryboard.storyboard; sourceTree = "<group>"; };
+		7423F9DD1CB05A4500081AF9 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = ../../Carthage/Build/iOS/Charts.framework; sourceTree = "<group>"; };
 		747D01161B51659500E6A46A /* TrendViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrendViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		747D011A1B51659500E6A46A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		747D011B1B51659500E6A46A /* TrendViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrendViewController.h; sourceTree = "<group>"; };
@@ -38,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7423F9DE1CB05A4500081AF9 /* Charts.framework in Frameworks */,
 				7423F9D11CAE244A00081AF9 /* TrendViewModel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -76,6 +83,8 @@
 			isa = PBXGroup;
 			children = (
 				747D011B1B51659500E6A46A /* TrendViewController.h */,
+				7423F9D91CB058A200081AF9 /* TrendViewController.swift */,
+				7423F9DB1CB058BF00081AF9 /* TrendViewStoryboard.storyboard */,
 				747D01191B51659500E6A46A /* Supporting Files */,
 			);
 			path = TrendViewController;
@@ -84,6 +93,7 @@
 		747D01191B51659500E6A46A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7423F9DD1CB05A4500081AF9 /* Charts.framework */,
 				747D011A1B51659500E6A46A /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -162,7 +172,7 @@
 		747D010D1B51659500E6A46A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "Jonathon Rubin";
 				TargetAttributes = {
@@ -197,6 +207,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7423F9DC1CB058BF00081AF9 /* TrendViewStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,6 +225,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7423F9DA1CB058A200081AF9 /* TrendViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,25 +340,30 @@
 		747D012D1B51659500E6A46A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../Carthage/Build/iOS/";
 				INFOPLIST_FILE = TrendViewController/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		747D012E1B51659500E6A46A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../Carthage/Build/iOS/";
 				INFOPLIST_FILE = TrendViewController/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
