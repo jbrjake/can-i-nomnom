@@ -27,6 +27,7 @@ public class TrendViewModel {
     private(set) public var xValues = [NSDate]()
     private(set) public var yValues = [Double]()
     
+    public init() {}
     
     public var modelDelegate :TrendViewModelDelegate?
     private func refreshData() {
