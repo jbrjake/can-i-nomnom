@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7423F9D11CAE244A00081AF9 /* TrendViewModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7423F9D01CAE244A00081AF9 /* TrendViewModel.framework */; };
 		747D011C1B51659500E6A46A /* TrendViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 747D011B1B51659500E6A46A /* TrendViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		747D01221B51659500E6A46A /* TrendViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 747D01161B51659500E6A46A /* TrendViewController.framework */; };
 		747D01291B51659500E6A46A /* TrendViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747D01281B51659500E6A46A /* TrendViewControllerTests.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7423F9D01CAE244A00081AF9 /* TrendViewModel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TrendViewModel.framework; path = "../TrendViewModel/build/Debug-iphoneos/TrendViewModel.framework"; sourceTree = "<group>"; };
 		747D01161B51659500E6A46A /* TrendViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrendViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		747D011A1B51659500E6A46A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		747D011B1B51659500E6A46A /* TrendViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrendViewController.h; sourceTree = "<group>"; };
@@ -36,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7423F9D11CAE244A00081AF9 /* TrendViewModel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +56,7 @@
 		747D010C1B51659500E6A46A = {
 			isa = PBXGroup;
 			children = (
+				7423F9D01CAE244A00081AF9 /* TrendViewModel.framework */,
 				747D01181B51659500E6A46A /* TrendViewController */,
 				747D01251B51659500E6A46A /* TrendViewControllerTests */,
 				747D01171B51659500E6A46A /* Products */,

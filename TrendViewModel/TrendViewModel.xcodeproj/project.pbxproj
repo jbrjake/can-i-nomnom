@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7423F9D81CAF7E1800081AF9 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7423F9D41CAF7CA000081AF9 /* PromiseKit.framework */; };
 		747D00F61B51654E00E6A46A /* TrendViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 747D00F51B51654E00E6A46A /* TrendViewModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		747D00FC1B51654E00E6A46A /* TrendViewModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 747D00F01B51654E00E6A46A /* TrendViewModel.framework */; };
 		747D01031B51654E00E6A46A /* TrendViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747D01021B51654E00E6A46A /* TrendViewModelTests.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7423F9D41CAF7CA000081AF9 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = ../../Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
 		747D00F01B51654E00E6A46A /* TrendViewModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrendViewModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		747D00F41B51654E00E6A46A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		747D00F51B51654E00E6A46A /* TrendViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrendViewModel.h; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7423F9D81CAF7E1800081AF9 /* PromiseKit.framework in Frameworks */,
 				74BFE5B41C78222E001560A7 /* TrendCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,6 +110,7 @@
 		747D00F31B51654E00E6A46A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7423F9D41CAF7CA000081AF9 /* PromiseKit.framework */,
 				747D00F41B51654E00E6A46A /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -321,6 +325,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../Carthage/Build/iOS/";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -370,6 +375,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../Carthage/Build/iOS/";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
