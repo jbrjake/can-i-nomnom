@@ -9,6 +9,10 @@
 import Foundation
 import TrendCore
 
+public protocol TrendViewModelDelegate {
+    func modelDidChange()
+}
+
 public class TrendViewModel {
     
     private let core = TrendCoreController()
@@ -23,6 +27,8 @@ public class TrendViewModel {
     private(set) public var xValues = [NSDate]()
     private(set) public var yValues = [Double]()
     
+    
+    public var modelDelegate :TrendViewModelDelegate?
     private func refreshData() {
         core.fetchWeightsFrom(startDate, toDate: endDate)
         .then { records -> Void in
@@ -33,20 +39,7 @@ public class TrendViewModel {
                 return sample.trend ?? Double(0)
             })
             
-            for delegate in self.delegates {
-                delegate.modelDidChange()
-            }
+            self.modelDelegate?.modelDidChange()
         }
-    }
-    
-    protocol TrendViewModelDelegate {
-        func modelDidChange()
-    }
-    private var delegates = Set<TrendViewModelDelegate>()
-    public func register(delegate:TrendViewModelDelegate) {
-        delegates.insert(delegate)
-    }
-    public func unregister(delegate:TrendViewModelDelegate) {
-        delegates.remove(delegate)
     }
 }
