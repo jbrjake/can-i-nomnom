@@ -24,8 +24,14 @@ public class TrendViewModel {
         didSet { refreshData() }
     }
     
-    private(set) public var xValues = [NSDate]()
+    private(set) public var xValues = [String]()
     private(set) public var yValues = [Double]()
+    
+    private lazy var dateFormatter :NSDateFormatter =  { 
+        var formatter = NSDateFormatter()
+        formatter.dateStyle = .ShortStyle
+        return formatter
+    }()
     
     public init() {}
     
@@ -33,8 +39,8 @@ public class TrendViewModel {
     private func refreshData() {
         core.fetchWeightsFrom(startDate, toDate: endDate)
         .then { records -> Void in
-            self.xValues = records.map({ (sample) -> NSDate in
-                return sample.dateSampled
+            self.xValues = records.map({ (sample) -> String in
+                return self.dateFormatter.stringFromDate(sample.dateSampled)
             })
             self.yValues = records.map({ (sample) -> Double in
                 return sample.trend ?? Double(0)
