@@ -8,6 +8,9 @@
 
 import UIKit
 import XCTest
+import Charts
+@testable import TrendViewController
+@testable import TrendViewModel
 
 class TrendViewControllerTests: XCTestCase {
     
@@ -21,16 +24,25 @@ class TrendViewControllerTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock() {
-            // Put the code you want to measure the time of here.
-        }
+    func testLoadingTrendView() {
+        let storyboard = UIStoryboard(
+            name: "TrendViewStoryboard",
+            bundle: NSBundle(forClass: TrendViewController.self))
+        let viewController = storyboard.instantiateInitialViewController() as! TrendViewController
+        
+        XCTAssertNotNil(
+            viewController.view, 
+            "The view controller should instantiate its main view.")      
+        XCTAssertNotNil(
+            viewController.chartView, 
+            "The storyboard should load the chartView LineChartView")
+        
+        XCTAssertNotNil(
+            viewController.viewModel.modelDelegate, 
+            "The view controller should reach viewDidLoad(), which is when it should set the view model delegate.")
+        XCTAssertTrue(
+            viewController.viewModel.modelDelegate as? AnyObject === viewController, 
+            "The delegate for the view model should be the view controller.")
     }
     
 }

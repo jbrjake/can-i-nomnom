@@ -10,19 +10,19 @@ import UIKit
 import Charts
 import TrendViewModel
 
-class TrendViewController: UIViewController {
+public class TrendViewController: UIViewController {
 
     let viewModel = TrendViewModel()
     
     @IBOutlet weak var chartView :LineChartView?
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
         viewModel.modelDelegate = self
     }
 
-    override func didReceiveMemoryWarning() {
+    override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
