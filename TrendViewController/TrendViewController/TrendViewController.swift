@@ -20,6 +20,8 @@ public class TrendViewController: UIViewController {
         super.viewDidLoad()
 
         viewModel.modelDelegate = self
+        
+        self.configureChartView()
     }
 
     override public func didReceiveMemoryWarning() {
@@ -38,15 +40,38 @@ public class TrendViewController: UIViewController {
     }
     */
 
+    private func configureChartView() {
+        self.chartView?.delegate = self
+        self.chartView?.dragEnabled = true
+        self.chartView?.setScaleEnabled(true)
+        self.chartView?.pinchZoomEnabled = true
+        self.chartView?.drawGridBackgroundEnabled = true
+        
+        self.chartView?.viewPortHandler.setMaximumScaleX(2)
+        self.chartView?.viewPortHandler.setMaximumScaleY(2)
+    }
     
 }
 
 extension TrendViewController :TrendViewModelDelegate {
     
-    func modelDidChange() {
-
+    public func modelDidChange() {
+        var xIndex = 0
+        let yData = self.viewModel.yValues.map { (sample) -> ChartDataEntry in
+            let entry = ChartDataEntry(value: sample, xIndex: xIndex)
+            xIndex += 1
+            return entry
+            
+        }
+        let yDataSet = LineChartDataSet(yVals: yData, label:nil)
+        let data = LineChartData(xVals: self.viewModel.xValues, dataSets: [yDataSet])
         
+        chartView?.data = data
         
     }
 
+}
+
+extension TrendViewController :ChartViewDelegate {
+    
 }
